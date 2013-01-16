@@ -1,4 +1,4 @@
 angr
 ====
 
-Angry Birds clone
+An Angry Birds clone.
