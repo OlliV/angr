@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import fi.hbp.angr.Assets;
 import fi.hbp.angr.G;
 
 public class Level extends Actor {
@@ -25,8 +26,9 @@ public class Level extends Actor {
         BodyEditorLoader bel = new BodyEditorLoader(
                 Gdx.files.internal("data/levels.json"));
 
-        Texture texture = new Texture(
-                Gdx.files.internal("data/" + levelName + ".png"));
+        Texture texture = Assets.getAssetManager().get(
+                "data/" + levelName + ".png",
+                Texture.class);
 
         BodyDef bd = new BodyDef();
         bd.type = BodyType.StaticBody;

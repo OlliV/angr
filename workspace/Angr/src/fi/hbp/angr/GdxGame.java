@@ -9,7 +9,7 @@ import fi.hbp.angr.screens.SplashScreen;
 public class GdxGame extends Game {
     @Override
     public void create() {
-        Screen splash = new SplashScreen(this, GameScreen.class);
+        Screen splash = new SplashScreen(this, new GameScreen());
         setScreen(splash);
     }
 

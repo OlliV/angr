@@ -19,18 +19,15 @@ public class SplashScreen extends Timer.Task implements Screen {
     private Sprite sprite;
 
     private Timer splashTimer = new Timer();
-    private Game g;
-    private Class<? extends Screen> screen;
-    private Screen gs;
+    private ScreenLoader loader;
 
     /**
      *
      * @param g Main game.
      * @param gs Screen to be shown after this splash screen.
      */
-    public SplashScreen(Game g, Class<? extends Screen> screen) {
-        this.g = g;
-        this.screen = screen;
+    public SplashScreen(Game g, Screen gs) {
+        loader = new ScreenLoader(g, gs);
     }
 
     @Override
@@ -73,22 +70,8 @@ public class SplashScreen extends Timer.Task implements Screen {
         // Change to Screen gs given in constructor after a short delay
         splashTimer.scheduleTask(this, 1.5f);
 
-        // Render once now so we dont show blank screen
-        this.render(0);
-
-        /* We don't want to waste previously set delay so we load the
-         * next screen here and now. */
-        try {
-            gs = screen.newInstance();
-        } catch (InstantiationException ex) {
-            Gdx.app.error("Angr", ex.getMessage());
-            splashTimer.clear();
-            Gdx.app.exit();
-        } catch (IllegalAccessException ex) {
-            Gdx.app.error("Angr", ex.getMessage());
-            splashTimer.clear();
-            Gdx.app.exit();
-        }
+        // Start loading the next screen
+        loader.start();
     }
 
     @Override
@@ -117,6 +100,6 @@ public class SplashScreen extends Timer.Task implements Screen {
 
     @Override
     public void run() {
-        g.setScreen(gs);
+        loader.swap();
     }
 }
