@@ -1,5 +1,5 @@
 Tuntikirjanpito
 ===============
 
-2013-01-15	2 h	Git-repon ja eclipse-projektin luominen
-2013-01-16	1.5 h	Tutustumista libGDX:n rajapintoihin ja rakenteen suunnittelua
+2013-01-15	2.0 h	Git-repon ja eclipse-projektin luominen
+2013-01-16	6.5 h	Tutustumista libGDX:n rajapintoihin ja rakenteen suunnittelua
