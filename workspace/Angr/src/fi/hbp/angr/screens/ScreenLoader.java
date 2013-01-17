@@ -7,7 +7,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
-import fi.hbp.angr.Assets;
+import fi.hbp.angr.G;
 import fi.hbp.angr.Preloadable;
 
 /**
@@ -16,8 +16,6 @@ import fi.hbp.angr.Preloadable;
  * Creates an instance of a screen of given type and loads its assets. This
  * is useful and works only if constructor of the new screen class loads all
  * assets needed.
- * @author hbp
- *
  */
 public class ScreenLoader {
     private Game g;
@@ -56,7 +54,7 @@ public class ScreenLoader {
                         "swap() was called before preload was completed.");
                 Gdx.app.exit();
             }
-            Assets.getAssetManager().finishLoading();
+            G.getAssetManager().finishLoading();
             g.setScreen(gs);
         } finally {
             l.unlock();

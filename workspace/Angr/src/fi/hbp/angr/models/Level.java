@@ -11,22 +11,18 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import fi.hbp.angr.Assets;
 import fi.hbp.angr.G;
 
-public class Level extends Actor {
-
+public class Level extends Model {
     private Body body;
-
     private Sprite sprite;
 
     public Level(String levelName, World world) {
         BodyEditorLoader bel = new BodyEditorLoader(
                 Gdx.files.internal("data/levels.json"));
 
-        Texture texture = Assets.getAssetManager().get(
+        Texture texture = G.getAssetManager().get(
                 "data/" + levelName + ".png",
                 Texture.class);
 
@@ -44,11 +40,19 @@ public class Level extends Actor {
         sprite.setPosition(0, 0);
 
         body = world.createBody(bd);
-        bel.attachFixture(body, levelName, fd, sprite.getWidth() / G.BOX_TO_WORLD);
+        bel.attachFixture(body,
+                          levelName,
+                          fd,
+                          sprite.getWidth() / G.BOX_TO_WORLD);
     }
 
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         sprite.draw(batch, parentAlpha);
+    }
+
+    @Override
+    public Body getBody() {
+        return body;
     }
 }
