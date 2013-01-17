@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
 
+import fi.hbp.angr.Assets;
+
 public class SplashScreen extends Timer.Task implements Screen {
     private OrthographicCamera camera;
     private SpriteBatch batch;
@@ -39,6 +41,8 @@ public class SplashScreen extends Timer.Task implements Screen {
         batch.begin();
         sprite.draw(batch);
         batch.end();
+
+        Assets.getAssetManager().update();
     }
 
     @Override
