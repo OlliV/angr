@@ -63,7 +63,9 @@ public class GameScreen implements Screen, Preloadable {
     @Override
     public void show() {
         world = new World(new Vector2(0, -8), true);
-        stage = new GameStage(2500, 2500, false, world);
+        int xsize = Gdx.graphics.getWidth() * 4;
+        int ysize = Gdx.graphics.getHeight() * 4;
+        stage = new GameStage(xsize, ysize, false, world);
         Gdx.input.setInputProcessor(stage);
 
         // Add map/level actor
