@@ -24,7 +24,7 @@ public class Grenade extends Actor {
     private Sprite sprite;
 
     static void preload() {
-        G.preloadTextures.add(TEXTURE_PATH);
+        G.getAssetManager().load(TEXTURE_PATH, Texture.class);
     }
 
     static void initAssets(AssetContainer as, BodyEditorLoader bel) {
@@ -41,8 +41,6 @@ public class Grenade extends Actor {
         as.fd.density = 5.0f;
         as.fd.friction = 1.0f;
         as.fd.restitution = 0.5f;
-
-        G.preloadTextures.remove(TEXTURE_PATH);
 
         //as.fd.filter.categoryBits = CollisionFilterMasks.GRENADE;
         //as.fd.filter.maskBits = CollisionFilterMasks.ENEMY | CollisionFilterMasks.WALL | CollisionFilterMasks.GRENADE;

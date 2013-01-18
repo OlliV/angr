@@ -1,7 +1,5 @@
 package fi.hbp.angr.screens;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
@@ -30,13 +28,8 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void preload() {
-        G.preloadTextures.add("data/" + levelName + ".png");
+        G.getAssetManager().load("data/" + levelName + ".png", Texture.class);
         BodyFactory.preload();
-
-        Iterator<String> it = G.preloadTextures.iterator();
-        while (it.hasNext()) {
-            G.getAssetManager().load(it.next(), Texture.class);
-        }
     }
 
     @Override

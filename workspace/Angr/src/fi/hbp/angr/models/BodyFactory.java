@@ -10,9 +10,15 @@ public class BodyFactory {
     private BodyEditorLoader bel;
     private AssetContainer asGrenade = new AssetContainer();
 
+    /**
+     * Add assets of this class to a preload list
+     * TODO Should the map/level tell what assets it will need?
+     */
     public static void preload() {
         Grenade.preload();
     }
+
+    /* TODO We need a function to unload unneeded assets */
 
     public BodyFactory() {
         bel = new BodyEditorLoader(Gdx.files.internal("models.json"));
