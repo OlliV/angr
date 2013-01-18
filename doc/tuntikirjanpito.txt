@@ -4,4 +4,6 @@ Tuntikirjanpito
 2013-01-15	2.0 h	Git-repon ja eclipse-projektin luominen
 2013-01-16	6.5 h	Tutustumista libGDX:n rajapintoihin ja rakenteen suunnittelua
 2013-01-17	3.0 h	Asset managerin työstöä
-2013-01-17/19	6.0 h	Box2D:n palauttelua mieleen ja fysiikkmallien testailua
+2013-01-18/19	6.0 h	Box2D:n palauttelua mieleen ja fysiikkmallien testailua
+2013-01-19	4.0 h	Input processoriin tutustumista ja fysiikkamallinnuksen optimointia
+2013-01-19	2.5 h	HUD, Slingshot grenade-luokkaan, input multiplexer

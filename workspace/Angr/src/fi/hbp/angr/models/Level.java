@@ -35,7 +35,7 @@ public class Level extends Actor {
         fd.density = 0.6f;
         fd.friction = 0.7f;
         fd.restitution = 0.3f;
-        //fd.filter.categoryBits = CollisionFilterMasks.WALL;
+        fd.filter.categoryBits = CollisionFilterMasks.WALL;
 
         sprite = new Sprite(texture);
         sprite.setPosition(0, 0);

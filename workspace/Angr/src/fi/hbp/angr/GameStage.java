@@ -47,16 +47,16 @@ public class GameStage extends Stage {
         float dy = 0;
 
         if(moveLeft) {
-            dx -= 10;
+            dx -= 100;
         }
         if(moveRight) {
-            dx += 10;
+            dx += 100;
         }
         if(moveDown) {
-            dy -= 10;
+            dy -= 100;
         }
         if(moveUp) {
-            dy += 10;
+            dy += 100;
         }
 
         if(dx != 0 || dy != 0) {
@@ -68,7 +68,13 @@ public class GameStage extends Stage {
             this.getCamera().update();
             debugCamera.update();
         }
+
         renderer.render(world, debugCamera.combined);
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 
     @Override
@@ -113,5 +119,13 @@ public class GameStage extends Stage {
             break;
         }
         return false;
+    }
+
+    @Override
+    public void dispose () {
+        renderer.dispose();
+        world.dispose();
+
+        renderer = null;
     }
 }

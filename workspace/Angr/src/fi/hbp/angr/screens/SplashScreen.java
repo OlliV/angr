@@ -72,7 +72,7 @@ public class SplashScreen extends Timer.Task implements Screen {
         sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
 
         // Change to Screen gs given in constructor after a short delay
-        splashTimer.scheduleTask(this, 1.5f);
+        splashTimer.scheduleTask(this, 0.5f);
 
         // Start loading the next screen
         loader.start();
