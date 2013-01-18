@@ -31,6 +31,12 @@ public class GameStage extends Stage {
                 this.getHeight() * G.WORLD_TO_BOX);
         renderer.setDrawAABBs(false);
         renderer.setDrawJoints(true);
+        renderer.setDrawVelocities(true);
+        renderer.setDrawBodies(true);
+
+        Vector3 pos = this.getCamera().position;
+        debugCamera.position.set(pos.x*G.WORLD_TO_BOX, pos.y*G.WORLD_TO_BOX, 0);
+        debugCamera.update();
     }
 
     @Override
