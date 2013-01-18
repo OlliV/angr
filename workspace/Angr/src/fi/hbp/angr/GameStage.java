@@ -42,7 +42,11 @@ public class GameStage extends Stage {
     @Override
     public void draw() {
         super.draw();
+        updateDebugCamera();
+        renderer.render(world, debugCamera.combined);
+    }
 
+    private void updateDebugCamera() {
         float dx = 0;
         float dy = 0;
 
@@ -68,8 +72,6 @@ public class GameStage extends Stage {
             this.getCamera().update();
             debugCamera.update();
         }
-
-        renderer.render(world, debugCamera.combined);
     }
 
     @Override

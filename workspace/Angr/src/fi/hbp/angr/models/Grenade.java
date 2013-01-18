@@ -126,7 +126,7 @@ public class Grenade extends Actor implements InputProcessor {
 
         if (hitBody == null)
             return false;
-        // ignore kinematic bodies, they don't work with the mouse joint
+        // Ignore kinematic bodies, they don't work with the mouse joint
         if (hitBody.getType() == BodyType.KinematicBody)
             return false;
 
