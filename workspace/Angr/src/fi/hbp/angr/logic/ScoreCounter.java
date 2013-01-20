@@ -1,9 +1,11 @@
 package fi.hbp.angr.logic;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 
 import fi.hbp.angr.models.HudActor;
@@ -15,9 +17,13 @@ public class ScoreCounter implements endOfGameAction, HudActor {
     private int starScale = 1;
 
     public void loadAssets() {
-        font = new BitmapFont();
-        font.setColor(Color.BLACK);
-        font.setScale(1.4f);
+        FileHandle fontFile = Gdx.files.internal("fonts/BistroBlock.ttf");
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
+        font = generator.generateFont(45);
+        generator.dispose();
+
+        font.setColor(Color.WHITE);
+        font.setScale(1.0f);
     }
 
     public void addPoints(int value) {
@@ -64,6 +70,6 @@ public class ScoreCounter implements endOfGameAction, HudActor {
 
     @Override
     public void draw(SpriteBatch batch) {
-        font.draw(batch, "Score: " + score, Gdx.graphics.getWidth() - 180, Gdx.graphics.getHeight() - 20);
+        font.draw(batch, "Score: " + score, Gdx.graphics.getWidth() - font.getSpaceWidth() * 15, Gdx.graphics.getHeight() - 20);
     }
 }

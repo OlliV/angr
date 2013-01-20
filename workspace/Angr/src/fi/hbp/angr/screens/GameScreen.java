@@ -49,7 +49,7 @@ public class GameScreen implements Screen, Preloadable {
     @Override
     public void render(float delta) {
         world.step(delta, 30, 30);
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0.75f, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);
@@ -82,10 +82,11 @@ public class GameScreen implements Screen, Preloadable {
         Actor grenade = bdf.createGrenade(stage, world, 1000, 1500, 0);
         stage.addActor(grenade);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 11; i++) {
             Actor grenade2 = bdf.createGrenade(stage, world, 1000 + i * 110, 1000, 90);
             ((Grenade)grenade2).body.setLinearVelocity(new Vector2(0, 100));
             ((Grenade)grenade2).body.applyAngularImpulse(50);
+            score.addPoints(530);
             stage.addActor(grenade2);
         }
     }
