@@ -8,8 +8,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Angr";
 		cfg.useGL20 = true;
-		cfg.width = 640;
-		cfg.height = 480;
+		cfg.width = 1024;
+		cfg.height = 768;
 
 		new LwjglApplication(new GdxGame(), cfg);
 	}

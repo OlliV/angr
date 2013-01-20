@@ -126,6 +126,7 @@ public class Grenade extends Actor implements InputProcessor {
 
         if (hitBody == null)
             return false;
+
         // Ignore kinematic bodies, they don't work with the mouse joint
         if (hitBody.getType() == BodyType.KinematicBody)
             return false;
@@ -141,8 +142,9 @@ public class Grenade extends Actor implements InputProcessor {
                 startPoint.set(testPoint.x, testPoint.y);
                 mouseJoint = (MouseJoint)world.createJoint(def);
                 hitBody.setAwake(true);
-        }
 
+                return true;
+        }
         return false;
     }
     /** another temporary vector **/
@@ -158,6 +160,7 @@ public class Grenade extends Actor implements InputProcessor {
                 testPoint.x = MathUtils.clamp(testPoint.x * G.WORLD_TO_BOX, startPoint.x - 3, startPoint.x + 3);
                 testPoint.y = MathUtils.clamp(testPoint.y * G.WORLD_TO_BOX, startPoint.y - 3, startPoint.y + 3);
                 mouseJoint.setTarget(target.set(testPoint.x, testPoint.y));
+                return true;
             }
             return false;
     }
@@ -171,6 +174,8 @@ public class Grenade extends Actor implements InputProcessor {
                     float fx = (startPoint.x - testPoint.x) * 40;
                     float fy = (startPoint.y - testPoint.y) * 40;
                     hitBody.applyLinearImpulse(new Vector2(fx, fy), hitBody.getPosition());
+
+                    return true;
             }
             return false;
     }

@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class BodyFactory {
     private InputMultiplexer inputMultiplexer;
     private BodyEditorLoader bel;
-    private AssetContainer asGrenade = new AssetContainer();
+    protected AssetContainer asGrenade = new AssetContainer();
 
     /**
      * Add assets of this class to a preload list

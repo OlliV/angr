@@ -51,7 +51,6 @@ public class GameScreen implements Screen, Preloadable {
         stage.act(delta);
         stage.draw();
         hud.draw();
-
     }
 
     @Override
