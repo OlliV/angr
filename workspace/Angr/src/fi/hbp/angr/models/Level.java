@@ -15,6 +15,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fi.hbp.angr.G;
 
+/**
+ *
+ * TODO This class should be changed to abstract and actual levels would then
+ * extend this class
+ *
+ */
 public class Level extends Actor {
     private Body body;
     private Sprite sprite;
@@ -45,6 +51,14 @@ public class Level extends Actor {
                           levelName,
                           fd,
                           sprite.getWidth() / G.BOX_TO_WORLD);
+    }
+
+    public int getHighScore() {
+        return 100;
+    }
+
+    public int getStarScale() {
+        return 50;
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import fi.hbp.angr.G;
 import fi.hbp.angr.GameStage;
 import fi.hbp.angr.Preloadable;
+import fi.hbp.angr.logic.ScoreCounter;
 import fi.hbp.angr.models.BodyFactory;
 import fi.hbp.angr.models.Grenade;
 import fi.hbp.angr.models.Hud;
@@ -24,10 +25,13 @@ public class GameScreen implements Screen, Preloadable {
     private Stage stage;
     private String levelName;
     private BodyFactory bdf;
+    private ScoreCounter score = new ScoreCounter();
     private Hud hud = new Hud();
 
     public GameScreen(String levelName) {
         this.levelName = levelName;
+        score.loadAssets();
+        hud.addActor(score);
     }
 
     @Override
@@ -69,6 +73,8 @@ public class GameScreen implements Screen, Preloadable {
 
         // Add map/level actor
         Level level = new Level(levelName, world);
+        score.clear();
+        score.init(level.getHighScore(), level.getStarScale());
         stage.addActor(level);
 
         // Add player
