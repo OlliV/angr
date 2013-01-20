@@ -7,4 +7,4 @@ Tuntikirjanpito
 2013-01-18/19	6.0 h	Box2D:n palauttelua mieleen ja fysiikkmallien testailua
 2013-01-19	4.0 h	Input processoriin tutustumista ja fysiikkamallinnuksen optimointia
 2013-01-19	2.5 h	HUD, Slingshot grenade-luokkaan, input multiplexer
-2013-01-20	3.5 h	HUD:lle actor rajapinta, yksikkötestejä
+2013-01-20	4.5 h	HUD:lle actor rajapinta, yksikkötestejä, score counter
