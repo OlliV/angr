@@ -3,7 +3,6 @@ package fi.hbp.angr.models;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,13 +46,13 @@ public class BoxDamageModelTest {
 
     @Test
     public void testHit() {
-        dm.hit(10);
+        dm.hit(500);
         assertThat(dm.getHealth(), not(equalTo(1f)));
     }
 
     @Test
     public void testGetPoints() {
-        fail("Not yet implemented");
+        assertThat(dm.getPoints(), not(equalTo(0)));
     }
 
 }
