@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr.models.items;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.G;
+import fi.hbp.angr.models.AssetContainer;
 
 public class Grenade extends Actor implements InputProcessor {
     private static final String MODEL_NAME = "grenade";
@@ -39,11 +40,11 @@ public class Grenade extends Actor implements InputProcessor {
     private Body groundBody;
     private Body hitBody = null;
 
-    static void preload() {
+    public static void preload() {
         G.getAssetManager().load(TEXTURE_PATH, Texture.class);
     }
 
-    static void initAssets(AssetContainer as, BodyEditorLoader bel) {
+    public static void initAssets(AssetContainer as, BodyEditorLoader bel) {
         as.texture = G.getAssetManager().get(
                 bel.getImagePath(MODEL_NAME),
                 Texture.class);
@@ -68,6 +69,7 @@ public class Grenade extends Actor implements InputProcessor {
 
         as.bd.position.set(new Vector2(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX));
         body = world.createBody(as.bd);
+        body.setUserData(this);
         sprite = new Sprite(as.texture);
 
         bel.attachFixture(body,
@@ -75,7 +77,6 @@ public class Grenade extends Actor implements InputProcessor {
                           as.fd,
                           sprite.getWidth() * G.WORLD_TO_BOX);
         modelOrigin = bel.getOrigin(MODEL_NAME, sprite.getWidth()).cpy();
-        //body.setTransform(x, y, angle);
         sprite.setOrigin(modelOrigin.x, modelOrigin.y);
         sprite.setPosition(x, y);
         sprite.setRotation((float) Math.toDegrees(body.getAngle()));

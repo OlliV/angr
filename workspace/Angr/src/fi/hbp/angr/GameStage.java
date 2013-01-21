@@ -66,7 +66,7 @@ public class GameStage extends Stage {
         if(dx != 0 || dy != 0) {
             Vector3 pos = this.getCamera().position;
             float x = MathUtils.clamp(pos.x+dx, 0, this.getWidth()*3);
-            float y = MathUtils.clamp(pos.y+dy, -this.getHeight()*2, this.getHeight()*2);
+            float y = MathUtils.clamp(pos.y+dy, 0, this.getHeight()*2);
             this.getCamera().position.set(x, y, 0);
             debugCamera.position.set(x*G.WORLD_TO_BOX, y*G.WORLD_TO_BOX, 0);
             this.getCamera().update();

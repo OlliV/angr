@@ -8,3 +8,4 @@ Tuntikirjanpito
 2013-01-19	4.0 h	Input processoriin tutustumista ja fysiikkamallinnuksen optimointia
 2013-01-19	2.5 h	HUD, Slingshot grenade-luokkaan, input multiplexer
 2013-01-20	4.5 h	HUD:lle actor rajapinta, yksikkötestejä, score counter
+2013-01-21	6.0 h	Tuhottavien mallien rajapinnan suunnittelua ja kokeilua libgdx:n ympärille
