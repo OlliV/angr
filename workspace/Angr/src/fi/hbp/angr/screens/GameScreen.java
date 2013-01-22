@@ -24,12 +24,12 @@ import fi.hbp.angr.models.Hud;
 import fi.hbp.angr.models.Level;
 
 public class GameScreen implements Screen, Preloadable {
-    private InputMultiplexer inputMultiplexer = new InputMultiplexer();
+    private InputMultiplexer inputMultiplexer;
     private World world;
     private Stage stage;
     private String levelName;
     private BodyFactory bdf;
-    ItemDestructor itdes = new ItemDestructor();
+    ItemDestructor itdes;
     private ScoreCounter score = new ScoreCounter();
     private Hud hud = new Hud();
 
@@ -83,34 +83,35 @@ public class GameScreen implements Screen, Preloadable {
     @Override
     public void show() {
         world = new World(new Vector2(0, -8), true);
+
         int xsize = Gdx.graphics.getWidth() * 4;
         int ysize = Gdx.graphics.getHeight() * 4;
         stage = new GameStage(xsize, ysize, false, world);
+
+        inputMultiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.addProcessor(stage);
 
         ModelContactListener mcl = new ModelContactListener();
         world.setContactListener(mcl);
-        bdf = new BodyFactory(inputMultiplexer, itdes);
 
-        // Add map/level actor
+        itdes = new ItemDestructor();
+        bdf = new BodyFactory(stage, world, inputMultiplexer, itdes);
+
+        // Create and add map/level actor
         Level level = new Level(levelName, world);
         score.clear();
         score.init(level.getHighScore(), level.getStarScale());
         stage.addActor(level);
 
+        /* Testing *****/
+
         for (int i = 0; i < 10; i++) {
-            Actor box = bdf.createBox(world, 1000 + i * 40, 800, 0);
-            stage.addActor(box);
+            bdf.spawnBox(1000 + i * 40, 800, 0);
         }
 
-        // Add player
-        Actor grenade = bdf.createGrenade(stage, world, 1000, 1500, 0);
-        stage.addActor(grenade);
-
         for (int i = 0; i < 11; i++) {
-            Actor grenade2 = bdf.createGrenade(stage, world, 1000 + i * 110, 1000, 90);
-            stage.addActor(grenade2);
+            bdf.spawnGrenade(1000 + i * 110, 1000, 90);
         }
     }
 

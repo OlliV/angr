@@ -12,6 +12,8 @@ import fi.hbp.angr.models.items.Box;
 import fi.hbp.angr.models.items.Grenade;
 
 public class BodyFactory {
+    private Stage stage;
+    private World world;
     private InputMultiplexer inputMultiplexer;
     private ItemDestruction ides;
     private BodyEditorLoader bel;
@@ -29,7 +31,9 @@ public class BodyFactory {
 
     /* TODO We need a function to unload unneeded assets */
 
-    public BodyFactory(InputMultiplexer inputMultiplexer, ItemDestruction ides) {
+    public BodyFactory(Stage stage, World world, InputMultiplexer inputMultiplexer, ItemDestruction ides) {
+        this.stage = stage;
+        this.world = world;
         this.inputMultiplexer = inputMultiplexer;
         this.ides = ides;
 
@@ -38,14 +42,16 @@ public class BodyFactory {
         Box.initAssets(asBox, bel);
     }
 
-    public Actor createGrenade(Stage stage, World world, float x, float y, float angle) {
-        Grenade act = new Grenade(stage, world, bel, asGrenade, x, y, angle);
-        inputMultiplexer.addProcessor(act);
-        return act;
+    public Actor spawnGrenade(float x, float y, float angle) {
+        Grenade actor = new Grenade(stage, world, bel, asGrenade, x, y, angle);
+        inputMultiplexer.addProcessor(actor);
+        stage.addActor(actor);
+        return actor;
     }
 
-    public Actor createBox(World world, float x, float y, float angle) {
-        Box act = new Box(world, ides, bel, asBox, x, y, angle);
-        return act;
+    public Actor spawnBox(float x, float y, float angle) {
+        Box actor = new Box(world, ides, bel, asBox, x, y, angle);
+        stage.addActor(actor);
+        return actor;
     }
 }

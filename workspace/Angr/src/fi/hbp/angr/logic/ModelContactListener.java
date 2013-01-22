@@ -36,6 +36,8 @@ public class ModelContactListener implements ContactListener
     public void postSolve(Contact contact, ContactImpulse impulse) {
         if(impulse.getNormalImpulses()[0] > 10)
         {
+            // TODO don't damage if using slingshot?
+
             /* If A is the body that was hit */
             if(contact.getFixtureA() != null)
             {
