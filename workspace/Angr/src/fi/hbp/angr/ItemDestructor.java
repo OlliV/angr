@@ -9,8 +9,13 @@ public class ItemDestructor implements ItemDestruction {
     private ArrayList<Actor> items = new ArrayList<Actor>();
 
     @Override
-    public void add(Actor a) {
-        items.add(a);
+    public void add(Actor actor) {
+        items.add(actor);
+    }
+
+    @Override
+    public boolean contains(Actor actor) {
+        return items.contains(actor);
     }
 
     public boolean isEmpty() {

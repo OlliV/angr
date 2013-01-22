@@ -26,6 +26,10 @@ public abstract class Level extends Actor implements Preloadable {
     private String levelName;
     private Sprite sprite;
 
+    /**
+     * Constructor for Level
+     * @param levelName Texture filename without extension.
+     */
     public Level(String levelName) {
         this.levelName = levelName;
     }
@@ -69,10 +73,27 @@ public abstract class Level extends Actor implements Preloadable {
                           sprite.getWidth() / G.BOX_TO_WORLD);
     }
 
+    /**
+     * Get level highscore
+     * @return higscore
+     */
     public int getHighScore() {
         return 100;
+        // TODO
     }
 
+    /**
+     * Set level highscore
+     * @param score
+     */
+    public void setHighScore(int score) {
+        // TODO
+    }
+
+    /**
+     * Get level points needed per star ratio
+     * @return
+     */
     public int getStarScale() {
         return 50;
     }
@@ -80,5 +101,10 @@ public abstract class Level extends Actor implements Preloadable {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         sprite.draw(batch, parentAlpha);
+    }
+
+    @Override
+    public String toString() {
+        return "Level: " + levelName;
     }
 }

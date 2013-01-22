@@ -46,6 +46,6 @@ public abstract class DamageModel {
 
     @Override
     public String toString() {
-        return String.valueOf(health);
+        return String.format("%.2f", health);
     }
 }

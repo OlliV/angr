@@ -24,10 +24,18 @@ public class Grenade extends SlingshotActor {
     private Vector2 modelOrigin;
     private Sprite sprite;
 
+    /**
+     * Preload static data
+     */
     public static void preload() {
         G.getAssetManager().load(TEXTURE_PATH, Texture.class);
     }
 
+    /**
+     * Initialize assets of this object
+     * @param as
+     * @param bel
+     */
     public static void initAssets(AssetContainer as, BodyEditorLoader bel) {
         as.texture = G.getAssetManager().get(
                 bel.getImagePath(MODEL_NAME),
@@ -47,8 +55,18 @@ public class Grenade extends SlingshotActor {
         //as.fd.filter.maskBits = CollisionFilterMasks.ENEMY | CollisionFilterMasks.WALL | CollisionFilterMasks.GRENADE;
     }
 
+    /**
+     * TODO
+     * @param stage
+     * @param world
+     * @param bel
+     * @param as
+     * @param x
+     * @param y
+     * @param angle
+     */
     public Grenade(Stage stage, World world, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
-        super(stage, world);
+        super(stage, world, 50.0f, 40.0f);
 
         as.bd.position.set(new Vector2(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX));
         body = world.createBody(as.bd);

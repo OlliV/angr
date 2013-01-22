@@ -126,8 +126,6 @@ public class GameStage extends Stage {
     @Override
     public void dispose () {
         renderer.dispose();
-        world.dispose();
-
         renderer = null;
     }
 }

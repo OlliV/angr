@@ -15,7 +15,6 @@ public class BodyFactory {
     private Stage stage;
     private World world;
     private InputMultiplexer inputMultiplexer;
-    private ItemDestruction ides;
     private BodyEditorLoader bel;
     protected AssetContainer asGrenade = new AssetContainer();
     protected AssetContainer asBox = new AssetContainer();
@@ -31,21 +30,40 @@ public class BodyFactory {
 
     /* TODO We need a function to unload unneeded assets */
 
-    public BodyFactory(Stage stage, World world, InputMultiplexer inputMultiplexer, ItemDestruction ides) {
+    /**
+     * TODO
+     * @param stage
+     * @param world
+     * @param inputMultiplexer
+     * @param ides
+     */
+    public BodyFactory(Stage stage, World world, InputMultiplexer inputMultiplexer) {
         this.stage = stage;
         this.world = world;
         this.inputMultiplexer = inputMultiplexer;
-        this.ides = ides;
 
         bel = new BodyEditorLoader(Gdx.files.internal("models.json"));
+
+        /* Initialize assets */
         Grenade.initAssets(asGrenade, bel);
         Box.initAssets(asBox, bel);
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public World getWorld() {
         return world;
     }
 
+    /**
+     * TODO
+     * @param x
+     * @param y
+     * @param angle
+     * @return
+     */
     public Actor spawnGrenade(float x, float y, float angle) {
         Grenade actor = new Grenade(stage, world, bel, asGrenade, x, y, angle);
         inputMultiplexer.addProcessor(actor);
@@ -53,8 +71,15 @@ public class BodyFactory {
         return actor;
     }
 
+    /**
+     * TODO
+     * @param x
+     * @param y
+     * @param angle
+     * @return
+     */
     public Actor spawnBox(float x, float y, float angle) {
-        Box actor = new Box(world, ides, bel, asBox, x, y, angle);
+        Box actor = new Box(world, bel, asBox, x, y, angle);
         stage.addActor(actor);
         return actor;
     }

@@ -17,14 +17,28 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.G;
 
+/**
+ * Slingshot with mouse countrols
+ */
 public abstract class SlingshotActor extends Actor implements InputProcessor {
+    /**
+     * Game stage
+     */
     private Stage stage;
+
+    private float a_max;
+    private float F_impulse;
 
     /**
      * Body of the item
      * @note Body is not initialized by this abstract class
      */
     protected Body body;
+
+    /**
+     * Slingshot state
+     */
+    private boolean slingshotEnabled = true;
 
     /* Input processing/Controls */
     protected MouseJoint mouseJoint = null;
@@ -33,8 +47,15 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     private Body groundBody;
     private Body hitBody = null;
 
-    public SlingshotActor(Stage stage, World world) {
+    /**
+     * Constructor for SlingShotActor
+     * @param stage Game stage
+     * @param world Game (physics) world
+     */
+    public SlingshotActor(Stage stage, World world, float a_max, float F_impulse) {
         this.stage = stage;
+        this.a_max = a_max;
+        this.F_impulse = F_impulse;
 
         /* We also need an invisible zero size ground body
          * to which we can connect the mouse joint */
@@ -57,6 +78,9 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (slingshotEnabled == false)
+            return false;
+
         // Translate the mouse coordinates to world coordinates
         stage.getCamera().unproject(testPoint.set(screenX, screenY, 0));
         testPoint.x *= G.WORLD_TO_BOX;
@@ -83,7 +107,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
                 def.bodyB = hitBody;
                 def.collideConnected = true;
                 def.target.set(testPoint.x, testPoint.y);
-                def.maxForce = 1000.0f * hitBody.getMass();
+                def.maxForce = a_max * hitBody.getMass();
 
                 startPoint.set(testPoint.x, testPoint.y);
                 mouseJoint = (MouseJoint)((body.getWorld()).createJoint(def));
@@ -117,8 +141,8 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
                     body.getWorld().destroyJoint(mouseJoint);
                     mouseJoint = null;
 
-                    float fx = (startPoint.x - testPoint.x) * 40;
-                    float fy = (startPoint.y - testPoint.y) * 40;
+                    float fx = (startPoint.x - testPoint.x) * F_impulse;
+                    float fy = (startPoint.y - testPoint.y) * F_impulse;
                     hitBody.applyLinearImpulse(new Vector2(fx, fy), hitBody.getPosition());
 
                     return true;
@@ -154,5 +178,21 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     public boolean scrolled(int amount) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    /**
+     * Get slingshot state
+     * @return true = slingshot enabled, false = slingshot disabled
+     */
+    public boolean getState() {
+        return slingshotEnabled;
+    }
+
+    /**
+     * Set slingshot state
+     * @param state true = slingshot enabled, false = slingshot disabled
+     */
+    public void setState(boolean state) {
+        slingshotEnabled = state;
     }
 }

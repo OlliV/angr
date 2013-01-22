@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
-import fi.hbp.angr.ItemDestruction;
 import fi.hbp.angr.models.BoxDamageModel;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
@@ -25,17 +24,24 @@ import fi.hbp.angr.models.Destructible;
 public class Box extends Actor implements Destructible {
     private static final String MODEL_NAME = "box";
     private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
-    private ItemDestruction des;
     private Body body;
     private Vector2 modelOrigin;
     private Sprite sprite;
     private DamageModel damageModel = new BoxDamageModel();
     private BitmapFont font = new BitmapFont();
 
+    /**
+     * Preload static data
+     */
     public static void preload() {
         G.getAssetManager().load(TEXTURE_PATH, Texture.class);
     }
 
+    /**
+     * Initialize assets of this object
+     * @param as
+     * @param bel
+     */
     public static void initAssets(AssetContainer as, BodyEditorLoader bel) {
         as.texture = G.getAssetManager().get(
                 bel.getImagePath(MODEL_NAME),
@@ -55,9 +61,17 @@ public class Box extends Actor implements Destructible {
         //as.fd.filter.maskBits = CollisionFilterMasks.ENEMY | CollisionFilterMasks.WALL | CollisionFilterMasks.GRENADE;
     }
 
-    public Box(World world, ItemDestruction des, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
-        this.des = des;
-
+    /**
+     * TODO
+     * @param world
+     * @param des
+     * @param bel
+     * @param as
+     * @param x
+     * @param y
+     * @param angle
+     */
+    public Box(World world, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
         as.bd.position.set(new Vector2(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX));
         body = world.createBody(as.bd);
         body.setUserData(this);
@@ -86,10 +100,6 @@ public class Box extends Actor implements Destructible {
 
         /* Debug print healt status */
         font.draw(batch, this.getDatamageModel().toString(), pos.x * G.BOX_TO_WORLD - modelOrigin.x, pos.y * G.BOX_TO_WORLD - modelOrigin.y);
-
-        /* Push this item to the stack of destroyed items if health < 0 */
-        if (damageModel.getHealth() < 0)
-            des.add(this);
     }
 
     @Override

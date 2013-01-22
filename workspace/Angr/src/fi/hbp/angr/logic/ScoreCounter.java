@@ -72,4 +72,9 @@ public class ScoreCounter implements endOfGameAction, HudActor {
     public void draw(SpriteBatch batch) {
         font.draw(batch, "Score: " + score, Gdx.graphics.getWidth() - font.getSpaceWidth() * 15, Gdx.graphics.getHeight() - 20);
     }
+
+    @Override
+    public String toString() {
+        return "Score: " + score;
+    }
 }

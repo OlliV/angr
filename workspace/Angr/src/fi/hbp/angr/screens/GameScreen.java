@@ -27,10 +27,14 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
     private Stage stage;
     private World world;
     Level level;
-    ItemDestructor itdes;
+    ItemDestructor itemDestructor;
     private ScoreCounter score = new ScoreCounter();
     private Hud hud = new Hud();
 
+    /**
+     * Start game
+     * @param level Game level
+     */
     public GameScreen(Level level) {
         this.level = level;
         score.loadAssets();
@@ -51,8 +55,8 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
     @Override
     public void render(float delta) {
         destroyActors();
-
         world.step(delta, 30, 30);
+
         Gdx.gl.glClearColor(0, 0.75f, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
@@ -61,21 +65,19 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
         hud.draw();
     }
 
+    /**
+     * Remove destroyed actors/items.
+     */
     private void destroyActors() {
-        /* Remove destroyed actors/items and add points to a score counter. */
-        if (!itdes.isEmpty()) {
-            Iterator<Actor> it = itdes.getIterator();
+        if (!itemDestructor.isEmpty()) {
+            Iterator<Actor> it = itemDestructor.getIterator();
             while(it.hasNext()) {
                 Actor a = it.next();
-
-                /* Update score counter */
-                score.addPoints(((Destructible)a).getDatamageModel().getPoints());
-
                 ((Destructible)a).getBody().setUserData(null);
                 world.destroyBody(((Destructible)a).getBody());
                 a.remove();
             }
-            itdes.clear();
+            itemDestructor.clear();
         }
     }
 
@@ -96,13 +98,12 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.addProcessor(stage);
 
-        ModelContactListener mcl = new ModelContactListener();
+        itemDestructor = new ItemDestructor();
+        ModelContactListener mcl = new ModelContactListener(itemDestructor, score);
         world.setContactListener(mcl);
 
-        itdes = new ItemDestructor();
-
         // Create and add map/level actor
-        BodyFactory bf = new BodyFactory(stage, world, inputMultiplexer, itdes);
+        BodyFactory bf = new BodyFactory(stage, world, inputMultiplexer);
         level.show(bf);
         score.clear();
         score.init(level.getHighScore(), level.getStarScale());
@@ -127,6 +128,7 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
     @Override
     public void dispose() {
         stage.dispose();
+        world.dispose();
         this.unload();
     }
 
