@@ -144,11 +144,17 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
                     float fx = (startPoint.x - testPoint.x) * F_impulse;
                     float fy = (startPoint.y - testPoint.y) * F_impulse;
                     hitBody.applyLinearImpulse(new Vector2(fx, fy), hitBody.getPosition());
+                    slingshotRelease();
 
                     return true;
             }
             return false;
     }
+
+    /**
+     * Optional tasks to be done after releasing slingshot
+     */
+    protected abstract void slingshotRelease();
 
     @Override
     public boolean keyDown(int keycode) {
@@ -184,7 +190,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
      * Get slingshot state
      * @return true = slingshot enabled, false = slingshot disabled
      */
-    public boolean getState() {
+    public boolean getSlingshotState() {
         return slingshotEnabled;
     }
 
@@ -192,7 +198,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
      * Set slingshot state
      * @param state true = slingshot enabled, false = slingshot disabled
      */
-    public void setState(boolean state) {
+    public void setSlingshotState(boolean state) {
         slingshotEnabled = state;
     }
 }

@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
 import fi.hbp.angr.actors.SlingshotActor;
+import fi.hbp.angr.models.Explosion;
 
 public class Grenade extends SlingshotActor {
     private static final String MODEL_NAME = "grenade";
@@ -23,6 +24,7 @@ public class Grenade extends SlingshotActor {
 
     private Vector2 modelOrigin;
     private Sprite sprite;
+    Explosion explosion;
 
     /**
      * Preload static data
@@ -47,7 +49,7 @@ public class Grenade extends SlingshotActor {
         as.bd.position.set(0, 0);
 
         as.fd = new FixtureDef();
-        as.fd.density = 3.0f;
+        as.fd.density = 1.0f;
         as.fd.friction = 0.3f;
         as.fd.restitution = 0.3f;
 
@@ -81,6 +83,15 @@ public class Grenade extends SlingshotActor {
         sprite.setOrigin(modelOrigin.x, modelOrigin.y);
         sprite.setPosition(x, y);
         sprite.setRotation((float) Math.toDegrees(body.getAngle()));
+
+        explosion = new Explosion(body);
+    }
+
+    @Override
+    protected void slingshotRelease() {
+        //this.setSlingshotState(false);
+        explosion.doExplosion();
+        // TODO add timer for explosion
     }
 
     @Override

@@ -53,7 +53,7 @@ public class Box extends Actor implements Destructible {
         as.bd.position.set(0, 0);
 
         as.fd = new FixtureDef();
-        as.fd.density = 3.0f;
+        as.fd.density = 4.5f;
         as.fd.friction = 0.3f;
         as.fd.restitution = 0.3f;
 

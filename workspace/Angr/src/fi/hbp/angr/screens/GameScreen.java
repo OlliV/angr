@@ -55,7 +55,7 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
     @Override
     public void render(float delta) {
         destroyActors();
-        world.step(delta, 30, 30);
+        world.step(delta, 6, 2);
 
         Gdx.gl.glClearColor(0, 0.75f, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -90,8 +90,8 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
     public void show() {
         world = new World(new Vector2(0, -8), true);
 
-        int xsize = Gdx.graphics.getWidth() * 4;
-        int ysize = Gdx.graphics.getHeight() * 4;
+        int xsize = Gdx.graphics.getWidth() * 2;
+        int ysize = Gdx.graphics.getHeight() * 2;
         stage = new GameStage(xsize, ysize, false, world);
 
         inputMultiplexer = new InputMultiplexer();

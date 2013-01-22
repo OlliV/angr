@@ -31,11 +31,11 @@ public class TestLevel extends Level {
         /* Testing *****/
 
         for (int i = 0; i < 10; i++) {
-            bf.spawnBox(1000 + i * 40, 800, 0);
+            bf.spawnBox(1000 + i * 400, 400, 0);
         }
 
         for (int i = 0; i < 11; i++) {
-            bf.spawnGrenade(1000 + i * 110, 1000, 90);
+            bf.spawnGrenade(1000 + i * 450, 1000, 90);
         }
     }
 }

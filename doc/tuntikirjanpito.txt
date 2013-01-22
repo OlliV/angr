@@ -12,3 +12,4 @@ Tuntikirjanpito
 2013-01-22	2.0 h	Refaktorointia ja suunnittelua
 2013-01-22	1.0 h	Levelin lautauksen kehittelyä
 2013-01-22	2.5 h	Erinäistä kehittelyä, mm. räjähdysluokan toteuttelua
+2013-01-22	3.0 h	Fysiikan tunausta ja vapaiden tekstuurien etsimistä

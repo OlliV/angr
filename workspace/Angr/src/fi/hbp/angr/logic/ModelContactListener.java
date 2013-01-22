@@ -29,7 +29,7 @@ public class ModelContactListener implements ContactListener
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-        if(impulse.getNormalImpulses()[0] > 10)
+        if(impulse.getNormalImpulses()[0] > 0.01)
         {
             /* If body A was hit */
             if(contact.getFixtureA() != null)
@@ -37,6 +37,7 @@ public class ModelContactListener implements ContactListener
                 if (Actor.class.isInstance(contact.getFixtureA().getBody().getUserData())) {
                     Actor a = (Actor) contact.getFixtureA().getBody().getUserData();
                     evalDamage(a, impulse);
+
                 }
             }
 
