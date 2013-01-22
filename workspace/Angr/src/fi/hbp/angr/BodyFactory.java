@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import fi.hbp.angr.ItemDestruction;
 import fi.hbp.angr.models.items.Box;
 import fi.hbp.angr.models.items.Grenade;
 

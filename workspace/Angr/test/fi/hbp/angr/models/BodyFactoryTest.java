@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import com.badlogic.gdx.InputMultiplexer;
 
+import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
 
 /**
@@ -58,7 +59,7 @@ public class BodyFactoryTest {
     }
 
     /**
-     * Test method for {@link fi.hbp.angr.models.BodyFactory#preload()}.
+     * Test method for {@link fi.hbp.angr.BodyFactory#preload()}.
      */
     @Test
     public void testPreload() {

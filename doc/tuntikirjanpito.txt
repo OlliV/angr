@@ -9,3 +9,4 @@ Tuntikirjanpito
 2013-01-19	2.5 h	HUD, Slingshot grenade-luokkaan, input multiplexer
 2013-01-20	4.5 h	HUD:lle actor rajapinta, yksikkötestejä, score counter
 2013-01-21	6.0 h	Tuhottavien mallien rajapinnan suunnittelua ja kokeilua libgdx:n ympärille
+2013-01-22	2.0 h	Refaktorointia ja suunnittelua

@@ -15,9 +15,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
 import fi.hbp.angr.ItemDestruction;
-import fi.hbp.angr.models.AssetContainer;
 import fi.hbp.angr.models.BoxDamageModel;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;

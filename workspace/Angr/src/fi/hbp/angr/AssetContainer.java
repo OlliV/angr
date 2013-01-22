@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.BodyDef;

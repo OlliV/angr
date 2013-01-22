@@ -12,17 +12,16 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
 import fi.hbp.angr.GameStage;
 import fi.hbp.angr.ItemDestructor;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.logic.ScoreCounter;
-import fi.hbp.angr.models.BodyFactory;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.Hud;
 import fi.hbp.angr.models.Level;
-import fi.hbp.angr.models.items.Grenade;
 
 public class GameScreen implements Screen, Preloadable {
     private InputMultiplexer inputMultiplexer = new InputMultiplexer();
@@ -111,8 +110,6 @@ public class GameScreen implements Screen, Preloadable {
 
         for (int i = 0; i < 11; i++) {
             Actor grenade2 = bdf.createGrenade(stage, world, 1000 + i * 110, 1000, 90);
-            ((Grenade)grenade2).body.setLinearVelocity(new Vector2(0, 100));
-            ((Grenade)grenade2).body.applyAngularImpulse(50);
             stage.addActor(grenade2);
         }
     }
