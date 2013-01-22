@@ -12,24 +12,10 @@ public class ModelContactListener implements ContactListener
 {
     @Override
     public void beginContact(Contact arg0) {
-        // TODO Auto-generated method stub
-        if (!arg0.isTouching())
-            return;
-        if ((arg0.getFixtureA().getUserData() == null) || (arg0.getFixtureB() == null))
-            return;
-
-        Actor a = (Actor) arg0.getFixtureA().getUserData();
-        Actor b = (Actor) arg0.getFixtureB().getUserData();
-        if (!Destructible.class.isInstance(a) && !Destructible.class.isInstance(b))
-            return;
-
-
     }
 
     @Override
     public void endContact(Contact arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override

@@ -27,6 +27,12 @@ public abstract class DamageModel {
     }
 
     /**
+     * Enemy
+     * @return true if this body is enemy
+     */
+    public abstract boolean isEnemy();
+
+    /**
      * Collision force
      * @param Force Force value in Box2D scale.
      */

@@ -16,4 +16,9 @@ public class BoxDamageModel extends DamageModel {
     public int getPoints() {
         return 100;
     }
+
+    @Override
+    public boolean isEnemy() {
+        return false;
+    }
 }

@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr.models.levels;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
@@ -10,10 +10,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
+import fi.hbp.angr.Preloadable;
 
 /**
  *
@@ -21,11 +22,32 @@ import fi.hbp.angr.G;
  * extend this class
  *
  */
-public class Level extends Actor {
-    private Body body;
+public abstract class Level extends Actor implements Preloadable {
+    private String levelName;
     private Sprite sprite;
 
-    public Level(String levelName, World world) {
+    public Level(String levelName) {
+        this.levelName = levelName;
+    }
+
+    @Override
+    public void preload() {
+        G.getAssetManager().load("data/" + levelName + ".png", Texture.class);
+    }
+
+    @Override
+    public void unload() {
+        G.getAssetManager().unload("data/" + levelName + ".png");
+    }
+
+    public abstract void show(BodyFactory bf);
+
+    /**
+     * Internal show method that should be called by public show method
+     * @param bf Body factory for creating the map body and sprite.
+     * @param mapFd
+     */
+    protected void show(BodyFactory bf, FixtureDef mapFd) {
         BodyEditorLoader bel = new BodyEditorLoader(
                 Gdx.files.internal("levels.json"));
 
@@ -37,19 +59,13 @@ public class Level extends Actor {
         bd.type = BodyType.StaticBody;
         bd.position.set(0, 0);
 
-        FixtureDef fd = new FixtureDef();
-        fd.density = 0.6f;
-        fd.friction = 0.7f;
-        fd.restitution = 0.3f;
-        fd.filter.categoryBits = CollisionFilterMasks.WALL;
-
         sprite = new Sprite(texture);
         sprite.setPosition(0, 0);
 
-        body = world.createBody(bd);
+        Body body = bf.getWorld().createBody(bd);
         bel.attachFixture(body,
                           levelName,
-                          fd,
+                          mapFd,
                           sprite.getWidth() / G.BOX_TO_WORLD);
     }
 

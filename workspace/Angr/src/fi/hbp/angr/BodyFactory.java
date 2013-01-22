@@ -42,6 +42,10 @@ public class BodyFactory {
         Box.initAssets(asBox, bel);
     }
 
+    public World getWorld() {
+        return world;
+    }
+
     public Actor spawnGrenade(float x, float y, float angle) {
         Grenade actor = new Grenade(stage, world, bel, asGrenade, x, y, angle);
         inputMultiplexer.addProcessor(actor);
