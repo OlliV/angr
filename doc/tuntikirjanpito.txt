@@ -11,3 +11,4 @@ Tuntikirjanpito
 2013-01-21	6.0 h	Tuhottavien mallien rajapinnan suunnittelua ja kokeilua libgdx:n ympärille
 2013-01-22	2.0 h	Refaktorointia ja suunnittelua
 2013-01-22	1.0 h	Levelin lautauksen kehittelyä
+2013-01-22	2.5 h	Erinäistä kehittelyä, mm. räjähdysluokan toteuttelua
