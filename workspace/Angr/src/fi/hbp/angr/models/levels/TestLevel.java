@@ -1,5 +1,7 @@
 package fi.hbp.angr.models.levels;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import fi.hbp.angr.BodyFactory;
@@ -7,6 +9,7 @@ import fi.hbp.angr.models.CollisionFilterMasks;
 
 public class TestLevel extends Level {
     private BodyFactory bf;
+    private Music music;
 
     public TestLevel() {
         super("mappi");
@@ -25,6 +28,10 @@ public class TestLevel extends Level {
 
         /* Testing *****/
         testCode();
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("data/march.mp3"));
+        music.setLooping(true);
+        music.play();
     }
 
     private void testCode() {

@@ -2,6 +2,8 @@ package fi.hbp.angr.models.items;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,6 +27,7 @@ public class Grenade extends SlingshotActor {
     private Vector2 modelOrigin;
     private Sprite sprite;
     Explosion explosion;
+    static Sound explosionSound;
 
     /**
      * Preload static data
@@ -55,6 +58,8 @@ public class Grenade extends SlingshotActor {
 
         //as.fd.filter.categoryBits = CollisionFilterMasks.GRENADE;
         //as.fd.filter.maskBits = CollisionFilterMasks.ENEMY | CollisionFilterMasks.WALL | CollisionFilterMasks.GRENADE;
+
+        explosionSound = Gdx.audio.newSound(Gdx.files.internal("data/grenade.wav"));
     }
 
     /**
@@ -91,6 +96,7 @@ public class Grenade extends SlingshotActor {
     protected void slingshotRelease() {
         //this.setSlingshotState(false);
         explosion.doExplosion();
+        explosionSound.play();
         // TODO add timer for explosion
     }
 
