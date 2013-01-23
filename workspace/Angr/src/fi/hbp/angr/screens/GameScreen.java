@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.GameStage;
-import fi.hbp.angr.ItemDestructor;
+import fi.hbp.angr.ItemDestructionList;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.logic.ScoreCounter;
@@ -27,7 +27,7 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
     private Stage stage;
     private World world;
     Level level;
-    ItemDestructor itemDestructor;
+    ItemDestructionList itemDestructor;
     private ScoreCounter score = new ScoreCounter();
     private Hud hud = new Hud();
 
@@ -98,7 +98,7 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.addProcessor(stage);
 
-        itemDestructor = new ItemDestructor();
+        itemDestructor = new ItemDestructionList();
         ModelContactListener mcl = new ModelContactListener(itemDestructor, score);
         world.setContactListener(mcl);
 

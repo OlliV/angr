@@ -14,7 +14,7 @@ import org.junit.Test;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ItemDestructorTest {
-    ItemDestructor itdes;
+    ItemDestructionList itdes;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -26,7 +26,7 @@ public class ItemDestructorTest {
 
     @Before
     public void setUp() throws Exception {
-        itdes = new ItemDestructor();
+        itdes = new ItemDestructionList();
     }
 
     @After
