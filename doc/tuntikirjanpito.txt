@@ -14,4 +14,5 @@ Tuntikirjanpito
 2013-01-22	2.5 h	Erinäistä kehittelyä, mm. räjähdysluokan toteuttelua
 2013-01-22	3.0 h	Fysiikan tunausta ja vapaiden tekstuurien etsimistä
 2013-01-22	2.0 h	Ääniä :-)
-2013-01-23	3.0 h	Kranaateille partikkeliefekti, viive ja tuhoutuminen
+2013-01-23	4.0 h	- Kranaateille partikkeliefekti, viive ja tuhoutuminen
+			- Testejä
