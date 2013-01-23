@@ -16,6 +16,7 @@ public class BodyFactory {
     private World world;
     private InputMultiplexer inputMultiplexer;
     private BodyEditorLoader bel;
+    private ItemDestruction itdes;
     protected AssetContainer asGrenade = new AssetContainer();
     protected AssetContainer asBox = new AssetContainer();
 
@@ -37,9 +38,10 @@ public class BodyFactory {
      * @param inputMultiplexer
      * @param ides
      */
-    public BodyFactory(Stage stage, World world, InputMultiplexer inputMultiplexer) {
+    public BodyFactory(Stage stage, World world, ItemDestruction itdes, InputMultiplexer inputMultiplexer) {
         this.stage = stage;
         this.world = world;
+        this.itdes = itdes;
         this.inputMultiplexer = inputMultiplexer;
 
         bel = new BodyEditorLoader(Gdx.files.internal("models.json"));
@@ -65,7 +67,7 @@ public class BodyFactory {
      * @return
      */
     public Actor spawnGrenade(float x, float y, float angle) {
-        Grenade actor = new Grenade(stage, world, bel, asGrenade, x, y, angle);
+        Grenade actor = new Grenade(stage, world, itdes, bel, asGrenade, x, y, angle);
         inputMultiplexer.addProcessor(actor);
         stage.addActor(actor);
         return actor;

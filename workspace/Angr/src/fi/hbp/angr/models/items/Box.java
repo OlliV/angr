@@ -29,6 +29,7 @@ public class Box extends Actor implements Destructible {
     private Sprite sprite;
     private DamageModel damageModel = new BoxDamageModel();
     private BitmapFont font = new BitmapFont();
+    private boolean destroyed;
 
     /**
      * Preload static data
@@ -91,15 +92,17 @@ public class Box extends Actor implements Destructible {
 
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
-        Vector2 pos = body.getPosition();
-        sprite.setPosition(pos.x * G.BOX_TO_WORLD - modelOrigin.x,
-                           pos.y * G.BOX_TO_WORLD - modelOrigin.y);
-        sprite.setOrigin(modelOrigin.x, modelOrigin.y);
-        sprite.setRotation((float)(body.getAngle() * MathUtils.radiansToDegrees));
-        sprite.draw(batch, parentAlpha);
+        if (!destroyed) {
+            Vector2 pos = body.getPosition();
+            sprite.setPosition(pos.x * G.BOX_TO_WORLD - modelOrigin.x,
+                               pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+            sprite.setOrigin(modelOrigin.x, modelOrigin.y);
+            sprite.setRotation((float)(body.getAngle() * MathUtils.radiansToDegrees));
+            sprite.draw(batch, parentAlpha);
 
-        /* Debug print healt status */
-        font.draw(batch, this.getDatamageModel().toString(), pos.x * G.BOX_TO_WORLD - modelOrigin.x, pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+            /* Debug print healt status */
+            font.draw(batch, this.getDatamageModel().toString(), pos.x * G.BOX_TO_WORLD - modelOrigin.x, pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+        }
     }
 
     @Override
@@ -110,5 +113,15 @@ public class Box extends Actor implements Destructible {
     @Override
     public Body getBody() {
         return body;
+    }
+
+    @Override
+    public void setDestroyed() {
+        this.destroyed = true;
+    }
+
+    @Override
+    public boolean getDestroyed() {
+        return this.destroyed;
     }
 }

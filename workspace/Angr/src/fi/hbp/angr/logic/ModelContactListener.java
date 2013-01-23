@@ -60,6 +60,8 @@ public class ModelContactListener implements ContactListener
     private void evalDamage(Actor actor, ContactImpulse impulse) {
         if (Destructible.class.isInstance(actor)) {
             /* Hit and check final health status */
+            if (((Destructible)actor).getDatamageModel() == null)
+                return;
             ((Destructible)actor).getDatamageModel().hit(impulse.getNormalImpulses()[0]);
             if (((Destructible)actor).getDatamageModel().getHealth() < 0.01f) {
 
@@ -69,6 +71,7 @@ public class ModelContactListener implements ContactListener
 
                     /* Destroy actor */
                     itdes.add(actor);
+                    ((Destructible)actor).setDestroyed();
                 }
             }
         }

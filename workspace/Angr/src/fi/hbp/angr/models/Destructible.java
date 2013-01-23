@@ -14,6 +14,18 @@ public interface Destructible {
     DamageModel getDatamageModel();
 
     /**
+     * Set body as destroyed
+     *
+     * This information can be used for sprite rendering.
+     */
+    void setDestroyed();
+
+    /**
+     * Get destroyed status
+     */
+    boolean getDestroyed();
+
+    /**
      * Get Box2D body
      *
      * This is used to remove body from the world

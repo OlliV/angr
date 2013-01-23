@@ -57,7 +57,7 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
         destroyActors();
         world.step(delta, 6, 2);
 
-        Gdx.gl.glClearColor(0, 0.75f, 1, 1);
+        Gdx.gl.glClearColor(0f, 0.75f, 1f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);
@@ -103,7 +103,7 @@ public class GameScreen implements Screen, Preloadable, endOfGameAction {
         world.setContactListener(mcl);
 
         // Create and add map/level actor
-        BodyFactory bf = new BodyFactory(stage, world, inputMultiplexer);
+        BodyFactory bf = new BodyFactory(stage, world, itemDestructor, inputMultiplexer);
         level.show(bf);
         score.clear();
         score.init(level.getHighScore(), level.getStarScale());
