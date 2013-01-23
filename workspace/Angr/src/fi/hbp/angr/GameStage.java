@@ -20,6 +20,7 @@ public class GameStage extends Stage {
     private boolean moveRight;
     private boolean moveUp;
     private boolean moveDown;
+    private boolean enableDebugCamera = false;
 
     public GameStage(float width, float height, boolean stretch, World world) {
         super(width, height, stretch);
@@ -42,8 +43,10 @@ public class GameStage extends Stage {
     @Override
     public void draw() {
         super.draw();
-        updateDebugCamera();
-        renderer.render(world, debugCamera.combined);
+        if (enableDebugCamera) {
+            updateDebugCamera();
+            renderer.render(world, debugCamera.combined);
+        }
     }
 
     private void updateDebugCamera() {
@@ -96,6 +99,9 @@ public class GameStage extends Stage {
             break;
         case Keys.DOWN:
             moveDown = true;
+            break;
+        case Keys.D:
+            enableDebugCamera = enableDebugCamera ? false : true;
             break;
         }
         return false;

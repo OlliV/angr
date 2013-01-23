@@ -6,16 +6,13 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import fi.hbp.angr.ItemDestruction;
 import fi.hbp.angr.models.Destructible;
 
 public class ModelContactListener implements ContactListener
 {
-    private ItemDestruction itdes;
     private ScoreCounter score;
 
-    public ModelContactListener(ItemDestruction itdes, ScoreCounter score) {
-        this.itdes = itdes;
+    public ModelContactListener(ScoreCounter score) {;
         this.score = score;
     }
 
@@ -65,12 +62,11 @@ public class ModelContactListener implements ContactListener
             ((Destructible)actor).getDatamageModel().hit(impulse.getNormalImpulses()[0]);
             if (((Destructible)actor).getDatamageModel().getHealth() < 0.01f) {
 
-                if (!itdes.contains(actor)) {
+                if (!((Destructible)actor).isDestroyed()) {
                     /* Update score counter */
                     score.addPoints(((Destructible)actor).getDatamageModel().getPoints());
 
                     /* Destroy actor */
-                    itdes.add(actor);
                     ((Destructible)actor).setDestroyed();
                 }
             }

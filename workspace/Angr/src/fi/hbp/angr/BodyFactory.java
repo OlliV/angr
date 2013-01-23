@@ -81,7 +81,7 @@ public class BodyFactory {
      * @return
      */
     public Actor spawnBox(float x, float y, float angle) {
-        Box actor = new Box(world, bel, asBox, x, y, angle);
+        Box actor = new Box(world, itdes, bel, asBox, x, y, angle);
         stage.addActor(actor);
         return actor;
     }

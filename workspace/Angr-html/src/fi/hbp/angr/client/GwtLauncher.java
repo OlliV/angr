@@ -1,7 +1,7 @@
 package fi.hbp.angr.client;
 
-import fi.hbp.angr.MyGdxGame;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.LifecycleListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 
@@ -16,4 +16,16 @@ public class GwtLauncher extends GwtApplication {
 	public ApplicationListener getApplicationListener () {
 		return new MyGdxGame();
 	}
+
+    @Override
+    public void addLifecycleListener(LifecycleListener arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void removeLifecycleListener(LifecycleListener arg0) {
+        // TODO Auto-generated method stub
+
+    }
 }

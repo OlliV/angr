@@ -2,8 +2,10 @@ package fi.hbp.angr.models.items;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -17,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
+import fi.hbp.angr.ItemDestruction;
 import fi.hbp.angr.models.BoxDamageModel;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
@@ -24,11 +27,13 @@ import fi.hbp.angr.models.Destructible;
 public class Box extends Actor implements Destructible {
     private static final String MODEL_NAME = "box";
     private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
+    private ItemDestruction itdes;
     private Body body;
     private Vector2 modelOrigin;
     private Sprite sprite;
     private DamageModel damageModel = new BoxDamageModel();
     private BitmapFont font = new BitmapFont();
+    private ParticleEffect particleEffect;
     private boolean destroyed;
 
     /**
@@ -72,7 +77,9 @@ public class Box extends Actor implements Destructible {
      * @param y
      * @param angle
      */
-    public Box(World world, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
+    public Box(World world, ItemDestruction itdes, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
+        this.itdes = itdes;
+
         as.bd.position.set(new Vector2(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX));
         body = world.createBody(as.bd);
         body.setUserData(this);
@@ -87,7 +94,12 @@ public class Box extends Actor implements Destructible {
         sprite.setPosition(x, y);
         sprite.setRotation((float) Math.toDegrees(body.getAngle()));
 
+        /* Debug */
         font.setScale(4);
+
+        particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal("data/boxdestruction.p"),
+                            Gdx.files.internal("data"));
     }
 
     @Override
@@ -100,8 +112,18 @@ public class Box extends Actor implements Destructible {
             sprite.setRotation((float)(body.getAngle() * MathUtils.radiansToDegrees));
             sprite.draw(batch, parentAlpha);
 
-            /* Debug print healt status */
-            font.draw(batch, this.getDatamageModel().toString(), pos.x * G.BOX_TO_WORLD - modelOrigin.x, pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+            /* Debug print health status */
+            font.draw(batch, this.getDatamageModel().toString(),
+                    pos.x * G.BOX_TO_WORLD - modelOrigin.x,
+                    pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+        } else {
+            if (particleEffect.isComplete()) {
+                /* NOTE: Adding this body to a list of destroyed bodies
+                 * doesn't remove it immediately from the world. */
+                body.setType(BodyType.StaticBody);
+                itdes.add(this);
+            }
+            particleEffect.draw(batch, Gdx.graphics.getDeltaTime());
         }
     }
 
@@ -118,10 +140,14 @@ public class Box extends Actor implements Destructible {
     @Override
     public void setDestroyed() {
         this.destroyed = true;
+        particleEffect.reset();
+        particleEffect.setPosition(sprite.getX() - modelOrigin.x,
+                                   sprite.getY() - modelOrigin.y);
+        particleEffect.start();
     }
 
     @Override
-    public boolean getDestroyed() {
+    public boolean isDestroyed() {
         return this.destroyed;
     }
 }

@@ -174,7 +174,7 @@ public class Grenade extends SlingshotActor implements Destructible {
     }
 
     @Override
-    public boolean getDestroyed() {
+    public boolean isDestroyed() {
         return this.destroyed;
     }
 }

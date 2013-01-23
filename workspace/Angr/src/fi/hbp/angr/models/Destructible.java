@@ -23,7 +23,7 @@ public interface Destructible {
     /**
      * Get destroyed status
      */
-    boolean getDestroyed();
+    boolean isDestroyed();
 
     /**
      * Get Box2D body
