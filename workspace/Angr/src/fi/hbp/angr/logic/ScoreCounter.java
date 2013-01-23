@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 
-import fi.hbp.angr.models.HudActor;
+import fi.hbp.angr.actors.HudActor;
 
 public class ScoreCounter implements EndOfGameAction, HudActor {
     private BitmapFont font;

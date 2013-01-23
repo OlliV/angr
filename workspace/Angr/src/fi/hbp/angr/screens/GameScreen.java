@@ -13,13 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.GameStage;
+import fi.hbp.angr.Hud;
 import fi.hbp.angr.ItemDestructionList;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.logic.ScoreCounter;
 import fi.hbp.angr.logic.EndOfGameAction;
 import fi.hbp.angr.models.Destructible;
-import fi.hbp.angr.models.Hud;
 import fi.hbp.angr.models.levels.Level;
 
 public class GameScreen implements Screen, Preloadable, EndOfGameAction {

@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import fi.hbp.angr.actors.HudActor;
 
 public class Hud {
     private BitmapFont font = new BitmapFont();

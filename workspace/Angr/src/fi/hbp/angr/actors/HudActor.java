@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr.actors;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
