@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import fi.hbp.angr.models.HudActor;
 
-public class ScoreCounter implements endOfGameAction, HudActor {
+public class ScoreCounter implements EndOfGameAction, HudActor {
     private BitmapFont font;
     private int score = 0;
     private int highScore = 0;

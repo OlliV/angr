@@ -17,12 +17,12 @@ import fi.hbp.angr.ItemDestructionList;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.logic.ScoreCounter;
-import fi.hbp.angr.logic.endOfGameAction;
+import fi.hbp.angr.logic.EndOfGameAction;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.Hud;
 import fi.hbp.angr.models.levels.Level;
 
-public class GameScreen implements Screen, Preloadable, endOfGameAction {
+public class GameScreen implements Screen, Preloadable, EndOfGameAction {
     private InputMultiplexer inputMultiplexer;
     private Stage stage;
     private World world;
