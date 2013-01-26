@@ -2,13 +2,16 @@ Tuntikirjanpito
 ===============
 
 2013-01-15	2.0 h	Git-repon ja eclipse-projektin luominen
-2013-01-16	6.5 h	Tutustumista libGDX:n rajapintoihin ja rakenteen suunnittelua
+2013-01-16	6.5 h	Tutustumista libGDX:n rajapintoihin ja rakenteen
+			suunnittelua
 2013-01-17	3.0 h	Asset managerin työstöä
 2013-01-18/19	6.0 h	Box2D:n palauttelua mieleen ja fysiikkmallien testailua
-2013-01-19	4.0 h	Input processoriin tutustumista ja fysiikkamallinnuksen optimointia
+2013-01-19	4.0 h	Input processoriin tutustumista ja fysiikkamallinnuksen
+			optimointia
 2013-01-19	2.5 h	HUD, Slingshot grenade-luokkaan, input multiplexer
 2013-01-20	4.5 h	HUD:lle actor rajapinta, yksikkötestejä, score counter
-2013-01-21	6.0 h	Tuhottavien mallien rajapinnan suunnittelua ja kokeilua libgdx:n ympärille
+2013-01-21	6.0 h	Tuhottavien mallien rajapinnan suunnittelua ja kokeilua
+			libgdx:n ympärille
 2013-01-22	2.0 h	Refaktorointia ja suunnittelua
 2013-01-22	1.0 h	Levelin lautauksen kehittelyä
 2013-01-22	2.5 h	Erinäistä kehittelyä, mm. räjähdysluokan toteuttelua
@@ -17,3 +20,6 @@ Tuntikirjanpito
 2013-01-23	4.0 h	- Kranaateille partikkeliefekti, viive ja tuhoutuminen
 			- Testejä
 2013-01-26	8.0 h	- Pelaajalle jonkinlainen mallinnus ja tekstuurit
+2013-01-27	4.0 h	- Lisää yksikkötestejä
+			- Refaktorointia ja grafiikan ja logiikan erottelua
+			  toisistaan
