@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
 import fi.hbp.angr.Preloadable;
+import fi.hbp.angr.logic.GameState;
 
 /**
  * Abstract Level class
@@ -41,7 +42,7 @@ public abstract class Level extends Actor implements Preloadable {
         G.getAssetManager().unload("data/" + levelName + ".png");
     }
 
-    public abstract void show(BodyFactory bf);
+    public abstract void show(BodyFactory bf, GameState gs);
 
     /**
      * Internal show method that should be called by public show method
@@ -49,6 +50,7 @@ public abstract class Level extends Actor implements Preloadable {
      * @param mapFd
      */
     protected void show(BodyFactory bf, FixtureDef mapFd) {
+
         BodyEditorLoader bel = new BodyEditorLoader(
                 Gdx.files.internal("levels.json"));
 
@@ -85,14 +87,6 @@ public abstract class Level extends Actor implements Preloadable {
      */
     public void setHighScore(int score) {
         // TODO
-    }
-
-    /**
-     * Get level points needed per star ratio
-     * @return
-     */
-    public int getStarScale() {
-        return 50;
     }
 
     @Override

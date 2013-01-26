@@ -9,14 +9,18 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Explosion {
     Body body;
+    private static final float maxDistance = 9.0f;
+    private static final float maxForce = 55.0f;
+    private Vector2 bdPos = new Vector2();
 
     public Explosion(Body body) {
         this.body = body;
     }
 
     public void doExplosion() {
-        float maxDistance = 9;
-        int maxForce = 50;
+        float distance;
+        float force;
+        float angle;
 
         /* Set exploding body as static so it won't fly away */
         BodyType origBdType = body.getType();
@@ -24,25 +28,23 @@ public class Explosion {
 
         Vector2 bodyPos = body.getPosition();
 
-        /* Explosion code */
+        /* Actual Explosion */
         Iterator<Body> bodies = body.getWorld().getBodies();
         Body bd;
         while (bodies.hasNext()) {
             bd = bodies.next();
-            Vector2 bdPos = bd.getPosition();
-
-            float distance;
-            float force;
-            float angle;
+            bdPos.set(bd.getPosition());
 
             distance = bodyPos.dst(bdPos);
-            if(distance > maxDistance) distance = maxDistance - 0.01f;
+            if(distance > maxDistance)
+                continue;
+                //distance = maxDistance - 0.01f;
 
             /* Closer objects should feel greater force */
             force = ((maxDistance - distance) / maxDistance) * maxForce;
 
             angle = MathUtils.atan2(bdPos.y - bodyPos.y, bdPos.x - bodyPos.x);
-            // Apply an impulse to the body, using the angle
+            /* Apply an impulse to the body, using the angle */
             bd.applyLinearImpulse(new Vector2(MathUtils.cos(angle) * force,
                                               MathUtils.sin(angle) * force),
                                   bdPos);

@@ -52,11 +52,11 @@ public class Hans extends Actor implements InputProcessor {
     private Joint palmJoint;
 
     /* Input processing/Controls */
-    Stage stage;
+    private Stage stage;
     private Vector3 testPoint = new Vector3();
     private Body groundBody;
     private Body hitBody = null;
-    boolean dragging;
+    private boolean dragging;
 
     /**
      * Preload static data

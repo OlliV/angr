@@ -10,10 +10,10 @@ import fi.hbp.angr.models.Destructible;
 
 public class ModelContactListener implements ContactListener
 {
-    private ScoreCounter score;
+    protected GameState gameState;
 
-    public ModelContactListener(ScoreCounter score) {;
-        this.score = score;
+    public ModelContactListener(GameState gameState) {;
+        this.gameState = gameState;
     }
 
     @Override
@@ -64,7 +64,8 @@ public class ModelContactListener implements ContactListener
 
                 if (!((Destructible)actor).isDestroyed()) {
                     /* Update score counter */
-                    score.addPoints(((Destructible)actor).getDatamageModel().getPoints());
+                    gameState.addPoints(((Destructible)actor).getDatamageModel().getPoints(),
+                            ((Destructible)actor).getDatamageModel().isEnemy());
 
                     /* Destroy actor */
                     ((Destructible)actor).setDestroyed();

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
 import fi.hbp.angr.actors.SlingshotActor;
+import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.models.CollisionFilterMasks;
 import fi.hbp.angr.models.Hans;
 
@@ -16,8 +17,8 @@ public class TestLevel extends Level {
 
     private BodyFactory bf;
     private Music music;
-    Hans hans;
-    float grenadeSpawnDelay = 0.0f;
+    private Hans hans;
+    private float grenadeSpawnDelay = 0.0f;
 
     public TestLevel() {
         super("mappi");
@@ -36,8 +37,9 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void show(BodyFactory bf) {
+    public void show(BodyFactory bf, GameState gs) {
         this.bf = bf;
+        gs.init(getHighScore(), 50, 10);
 
         FixtureDef fd = new FixtureDef();
         fd.density = 0.6f;

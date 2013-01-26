@@ -16,20 +16,21 @@ import fi.hbp.angr.GameStage;
 import fi.hbp.angr.Hud;
 import fi.hbp.angr.ItemDestructionList;
 import fi.hbp.angr.Preloadable;
-import fi.hbp.angr.logic.EndOfGameAction;
+import fi.hbp.angr.actors.HudScoreCounter;
+import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.logic.ModelContactListener;
-import fi.hbp.angr.logic.ScoreCounter;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.levels.Level;
 
-public class GameScreen implements Screen, Preloadable, EndOfGameAction {
+public class GameScreen implements Screen, Preloadable {
     private InputMultiplexer inputMultiplexer;
     private Stage stage;
     private World world;
     Level level;
     ItemDestructionList itemDestructor;
-    private ScoreCounter score = new ScoreCounter();
+    private GameState gameState = new GameState();
     private Hud hud = new Hud();
+    private HudScoreCounter score;
 
     /**
      * Start game
@@ -37,6 +38,7 @@ public class GameScreen implements Screen, Preloadable, EndOfGameAction {
      */
     public GameScreen(Level level) {
         this.level = level;
+        score = new HudScoreCounter(gameState);
         score.loadAssets();
         hud.addActor(score);
     }
@@ -88,7 +90,7 @@ public class GameScreen implements Screen, Preloadable, EndOfGameAction {
 
     @Override
     public void show() {
-        world = new World(new Vector2(0, -8), true);
+        world = new World(new Vector2(0.0f, -9.8f), true);
 
         int xsize = Gdx.graphics.getWidth() * 2;
         int ysize = Gdx.graphics.getHeight() * 2;
@@ -100,14 +102,13 @@ public class GameScreen implements Screen, Preloadable, EndOfGameAction {
 
         itemDestructor = new ItemDestructionList();
 
-        ModelContactListener mcl = new ModelContactListener(score);
+        ModelContactListener mcl = new ModelContactListener(gameState);
         world.setContactListener(mcl);
 
         // Create and add map/level actor
         BodyFactory bf = new BodyFactory(stage, world, itemDestructor, inputMultiplexer);
-        level.show(bf);
-        score.clear();
-        score.init(level.getHighScore(), level.getStarScale());
+        gameState.clear();
+        level.show(bf, gameState);
         stage.addActor(level);
     }
 
@@ -131,17 +132,5 @@ public class GameScreen implements Screen, Preloadable, EndOfGameAction {
         stage.dispose();
         world.dispose();
         this.unload();
-    }
-
-    @Override
-    public void gameOverAction() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void gameWinAction() {
-        // TODO Auto-generated method stub
-
     }
 }

@@ -19,6 +19,6 @@ public class BoxDamageModel extends DamageModel {
 
     @Override
     public boolean isEnemy() {
-        return false;
+        return true;
     }
 }
