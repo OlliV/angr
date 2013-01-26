@@ -32,7 +32,7 @@ public class BodyFactory {
         Hans.preload();
     }
 
-    /* TODO We need a function to unload unneeded assets */
+    /* TODO Add a function to unload unneeded assets */
 
     /**
      * TODO

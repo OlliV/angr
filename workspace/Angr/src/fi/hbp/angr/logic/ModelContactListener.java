@@ -75,7 +75,5 @@ public class ModelContactListener implements ContactListener
 
     @Override
     public void preSolve(Contact arg0, Manifold arg1) {
-        // TODO Auto-generated method stub
-
     }
 }

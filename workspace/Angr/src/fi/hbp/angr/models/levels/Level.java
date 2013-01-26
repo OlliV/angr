@@ -17,10 +17,7 @@ import fi.hbp.angr.G;
 import fi.hbp.angr.Preloadable;
 
 /**
- *
- * TODO This class should be changed to abstract and actual levels would then
- * extend this class
- *
+ * Abstract Level class
  */
 public abstract class Level extends Actor implements Preloadable {
     private String levelName;
