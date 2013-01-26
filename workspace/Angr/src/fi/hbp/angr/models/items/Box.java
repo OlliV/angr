@@ -112,10 +112,12 @@ public class Box extends Actor implements Destructible {
             sprite.setRotation((float)(body.getAngle() * MathUtils.radiansToDegrees));
             sprite.draw(batch, parentAlpha);
 
-            /* Debug print health status */
-            font.draw(batch, this.getDatamageModel().toString(),
-                    pos.x * G.BOX_TO_WORLD - modelOrigin.x,
-                    pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+            if (G.DEBUG) {
+                /* Debug print health status */
+                font.draw(batch, this.getDatamageModel().toString(),
+                        pos.x * G.BOX_TO_WORLD - modelOrigin.x,
+                        pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+            }
         } else {
             if (particleEffect.isComplete()) {
                 /* NOTE: Adding this body to a list of destroyed bodies
@@ -141,8 +143,8 @@ public class Box extends Actor implements Destructible {
     public void setDestroyed() {
         this.destroyed = true;
         particleEffect.reset();
-        particleEffect.setPosition(sprite.getX() - modelOrigin.x,
-                                   sprite.getY() - modelOrigin.y);
+        particleEffect.setPosition(sprite.getX(),
+                                   sprite.getY());
         particleEffect.start();
     }
 

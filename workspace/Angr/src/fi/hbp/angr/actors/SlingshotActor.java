@@ -66,13 +66,16 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     QueryCallback callback = new QueryCallback() {
         @Override
         public boolean reportFixture (Fixture fixture) {
-            // if the hit point is inside the fixture of the body
-            // we report it
+            /* If the hit point is inside the fixture of the body
+            /* we report it
+             */
             if (fixture.testPoint(testPoint.x, testPoint.y)) {
                 hitBody = fixture.getBody();
-                return false;
-            } else
-                return true;
+                if (hitBody.equals(body)) {
+                    return false;
+                }
+            }
+            return true; /* Keep going until all bodies in the are are checked. */
         }
     };
 
@@ -81,7 +84,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
         if (slingshotEnabled == false)
             return false;
 
-        // Translate the mouse coordinates to world coordinates
+        /* Translate the mouse coordinates to world coordinates */
         stage.getCamera().unproject(testPoint.set(screenX, screenY, 0));
         testPoint.x *= G.WORLD_TO_BOX;
         testPoint.y *= G.WORLD_TO_BOX;
@@ -97,23 +100,21 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
         if (hitBody == null)
             return false;
 
-        // Ignore kinematic bodies, they don't work with the mouse joint
+        /* Ignore kinematic bodies, they don't work with the mouse joint */
         if (hitBody.getType() == BodyType.KinematicBody)
             return false;
 
         if (hitBody.equals(this.body)) {
-                MouseJointDef def = new MouseJointDef();
-                def.bodyA = groundBody;
-                def.bodyB = hitBody;
-                def.collideConnected = true;
-                def.target.set(testPoint.x, testPoint.y);
-                def.maxForce = a_max * hitBody.getMass();
+            MouseJointDef def = new MouseJointDef();
+            def.bodyA = groundBody;
+            def.bodyB = hitBody;
+            def.collideConnected = true;
+            def.target.set(testPoint.x, testPoint.y);
+            def.maxForce = a_max * hitBody.getMass();
 
-                startPoint.set(testPoint.x, testPoint.y);
-                mouseJoint = (MouseJoint)((body.getWorld()).createJoint(def));
-                hitBody.setAwake(true);
-
-                return true;
+            startPoint.set(testPoint.x, testPoint.y);
+            mouseJoint = (MouseJoint)((body.getWorld()).createJoint(def));
+            hitBody.setAwake(true);
         }
         return false;
     }
@@ -121,34 +122,32 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     Vector2 target = new Vector2();
 
     @Override
-    public boolean touchDragged (int x, int y, int pointer) {
-            // If a mouse joint exists we simply update
-            // the target of the joint based on the new
-            // mouse coordinates
-            if (mouseJoint != null) {
-                stage.getCamera().unproject(testPoint.set(x, y, 0));
-                testPoint.x = MathUtils.clamp(testPoint.x * G.WORLD_TO_BOX, startPoint.x - 3, startPoint.x + 3);
-                testPoint.y = MathUtils.clamp(testPoint.y * G.WORLD_TO_BOX, startPoint.y - 3, startPoint.y + 3);
-                mouseJoint.setTarget(target.set(testPoint.x, testPoint.y));
-                return true;
-            }
-            return false;
+    public boolean touchDragged(int x, int y, int pointer) {
+        /* If a mouse joint exists we simply update
+         * the target of the joint based on the new
+         * mouse coordinates
+         * */
+        if (mouseJoint != null) {
+            stage.getCamera().unproject(testPoint.set(x, y, 0));
+            testPoint.x = MathUtils.clamp(testPoint.x * G.WORLD_TO_BOX, startPoint.x - 3, startPoint.x + 3);
+            testPoint.y = MathUtils.clamp(testPoint.y * G.WORLD_TO_BOX, startPoint.y - 3, startPoint.y + 3);
+            mouseJoint.setTarget(target.set(testPoint.x, testPoint.y));
+        }
+        return false;
     }
 
-    @Override public boolean touchUp (int x, int y, int pointer, int button) {
-            // If a mouse joint exists we simply destroy it
-            if (mouseJoint != null) {
-                    body.getWorld().destroyJoint(mouseJoint);
-                    mouseJoint = null;
+    @Override public boolean touchUp(int x, int y, int pointer, int button) {
+        /* If a mouse joint exists we simply destroy it */
+        if (mouseJoint != null) {
+            body.getWorld().destroyJoint(mouseJoint);
+            mouseJoint = null;
 
-                    float fx = (startPoint.x - testPoint.x) * F_impulse;
-                    float fy = (startPoint.y - testPoint.y) * F_impulse;
-                    hitBody.applyLinearImpulse(new Vector2(fx, fy), hitBody.getPosition());
-                    slingshotRelease();
-
-                    return true;
-            }
-            return false;
+            float fx = (startPoint.x - testPoint.x) * F_impulse;
+            float fy = (startPoint.y - testPoint.y) * F_impulse;
+            hitBody.applyLinearImpulse(new Vector2(fx, fy), hitBody.getPosition());
+            slingshotRelease();
+        }
+        return false;
     }
 
     /**
@@ -200,5 +199,9 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
      */
     public void setSlingshotState(boolean state) {
         slingshotEnabled = state;
+    }
+
+    public Body getBody() {
+        return body;
     }
 }

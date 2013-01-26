@@ -100,7 +100,7 @@ public abstract class Level extends Actor implements Preloadable {
 
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
-        sprite.draw(batch, parentAlpha);
+        sprite.draw(batch);
     }
 
     @Override

@@ -21,6 +21,7 @@ import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
 import fi.hbp.angr.ItemDestruction;
 import fi.hbp.angr.actors.SlingshotActor;
+import fi.hbp.angr.models.CollisionFilterMasks;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.Explosion;
@@ -71,9 +72,7 @@ public class Grenade extends SlingshotActor implements Destructible {
         as.fd.density = 1.0f;
         as.fd.friction = 0.3f;
         as.fd.restitution = 0.3f;
-
-        //as.fd.filter.categoryBits = CollisionFilterMasks.GRENADE;
-        //as.fd.filter.maskBits = CollisionFilterMasks.ENEMY | CollisionFilterMasks.WALL | CollisionFilterMasks.GRENADE;
+        as.fd.filter.categoryBits = CollisionFilterMasks.GRENADE;
 
         explosionSound = G.getAssetManager().get(SOUND_FX_PATH);
     }
@@ -116,6 +115,7 @@ public class Grenade extends SlingshotActor implements Destructible {
 
     @Override
     protected void slingshotRelease() {
+        this.setSlingshotState(false);
         particleEffect.reset();
         bExplosionTimer = true;
     }

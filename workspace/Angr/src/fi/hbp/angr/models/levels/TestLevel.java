@@ -1,17 +1,23 @@
 package fi.hbp.angr.models.levels;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
+import fi.hbp.angr.actors.SlingshotActor;
 import fi.hbp.angr.models.CollisionFilterMasks;
+import fi.hbp.angr.models.Hans;
 
 public class TestLevel extends Level {
     private static final String MUSIC_PATH = "data/march.mp3";
 
     private BodyFactory bf;
     private Music music;
+    Hans hans;
+    float grenadeSpawnDelay = 0.0f;
 
     public TestLevel() {
         super("mappi");
@@ -43,6 +49,10 @@ public class TestLevel extends Level {
         /* Testing *****/
         testCode();
 
+        /* Spawn player */
+        hans = (Hans)bf.spawnHans(555, 378, 0);
+        hans.setPalmJoint(((SlingshotActor)bf.spawnGrenade(555, 390, 0)).getBody());
+
         music = G.getAssetManager().get(MUSIC_PATH);
         music.setLooping(true);
         music.play();
@@ -55,8 +65,21 @@ public class TestLevel extends Level {
             bf.spawnBox(1000 + i * 300, 400, 0);
         }
 
-        for (int i = 0; i < 5; i++) {
+        /*for (int i = 0; i < 5; i++) {
             bf.spawnGrenade(1000 + i * 450, 500, 90);
+        }*/
+    }
+
+    @Override
+    public void draw(SpriteBatch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+
+        if (hans.isPalmJointActive() == false) {
+            grenadeSpawnDelay += Gdx.graphics.getDeltaTime();
+            if (grenadeSpawnDelay >= 2.0f) {
+                hans.setPalmJoint(((SlingshotActor)bf.spawnGrenade(555, 390, 0)).getBody());
+                grenadeSpawnDelay = 0.0f;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import fi.hbp.angr.models.Hans;
 import fi.hbp.angr.models.items.Box;
 import fi.hbp.angr.models.items.Grenade;
 
@@ -19,6 +20,7 @@ public class BodyFactory {
     private ItemDestruction itdes;
     protected AssetContainer asGrenade = new AssetContainer();
     protected AssetContainer asBox = new AssetContainer();
+    protected Hans.HansAssetContainer hac = new Hans.HansAssetContainer();
 
     /**
      * Add assets of this class to a preload list
@@ -27,6 +29,7 @@ public class BodyFactory {
     public static void preload() {
         Grenade.preload();
         Box.preload();
+        Hans.preload();
     }
 
     /* TODO We need a function to unload unneeded assets */
@@ -49,6 +52,7 @@ public class BodyFactory {
         /* Initialize assets */
         Grenade.initAssets(asGrenade, bel);
         Box.initAssets(asBox, bel);
+        Hans.initAssets(hac, bel);
     }
 
     /**
@@ -82,6 +86,13 @@ public class BodyFactory {
      */
     public Actor spawnBox(float x, float y, float angle) {
         Box actor = new Box(world, itdes, bel, asBox, x, y, angle);
+        stage.addActor(actor);
+        return actor;
+    }
+
+    public Actor spawnHans(float x, float y, float angle) {
+        Hans actor = new Hans(stage, world, bel, hac, x, y, angle);
+        inputMultiplexer.addProcessor(actor);
         stage.addActor(actor);
         return actor;
     }

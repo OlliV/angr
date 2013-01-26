@@ -26,18 +26,20 @@ public class GameStage extends Stage {
         super(width, height, stretch);
 
         this.world = world;
-        renderer = new Box2DDebugRenderer(true, true, true, true, true);
-        debugCamera = new OrthographicCamera(
-                this.getWidth() * G.WORLD_TO_BOX,
-                this.getHeight() * G.WORLD_TO_BOX);
-        renderer.setDrawAABBs(false);
-        renderer.setDrawJoints(true);
-        renderer.setDrawVelocities(true);
-        renderer.setDrawBodies(true);
+        if (G.DEBUG) {
+            renderer = new Box2DDebugRenderer(true, true, true, true, true);
+            debugCamera = new OrthographicCamera(
+                    this.getWidth() * G.WORLD_TO_BOX,
+                    this.getHeight() * G.WORLD_TO_BOX);
+            renderer.setDrawAABBs(false);
+            renderer.setDrawJoints(true);
+            renderer.setDrawVelocities(true);
+            renderer.setDrawBodies(true);
 
-        Vector3 pos = this.getCamera().position;
-        debugCamera.position.set(pos.x*G.WORLD_TO_BOX, pos.y*G.WORLD_TO_BOX, 0);
-        debugCamera.update();
+            Vector3 pos = this.getCamera().position;
+            debugCamera.position.set(pos.x*G.WORLD_TO_BOX, pos.y*G.WORLD_TO_BOX, 0);
+            debugCamera.update();
+        }
     }
 
     @Override
@@ -87,6 +89,9 @@ public class GameStage extends Stage {
         if(Gdx.app.getType().equals(ApplicationType.Android)) {
             return false;
         }
+        if (!G.DEBUG)
+            return false;
+
         switch(keycode) {
         case Keys.LEFT:
             moveLeft = true;
