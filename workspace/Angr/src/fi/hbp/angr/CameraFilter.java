@@ -1,7 +1,9 @@
 package fi.hbp.angr;
 
 
-
+/**
+ * Camera position filter.
+ */
 public class CameraFilter {
     private float xout;
     private float yout;
