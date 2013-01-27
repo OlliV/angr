@@ -121,7 +121,8 @@ public class ExplosionTest {
         /* Spawn actors */
         TestActor actor1 = spawnBox(1.0f, 1.1f, BodyType.DynamicBody, false);
         TestActor actor2 = spawnBox(3.0f, 1.1f, BodyType.DynamicBody, true);
-        TestActor actor3 = spawnBox(45.0f, 1.1f, BodyType.DynamicBody, true);
+        TestActor actor3 = spawnBox(6.0f, 1.1f, BodyType.DynamicBody, true);
+        TestActor actor4 = spawnBox(45.0f, 1.1f, BodyType.DynamicBody, true);
 
         Explosion ex = new Explosion(actor1.getBody());
         ex.doExplosion();
@@ -132,16 +133,18 @@ public class ExplosionTest {
         /* Assert health status */
         assertThat(((Destructible)actor2).getDatamageModel().getHealth(), lessThan(0.0f));
         assertThat(((Destructible)actor2).isDestroyed(), equalTo(true));
-        assertThat(((Destructible)actor3).getDatamageModel().getHealth(), greaterThan(0.3f));
-        assertThat(((Destructible)actor3).isDestroyed(), not(equalTo(true)));
+        assertThat(((Destructible)actor4).getDatamageModel().getHealth(), greaterThan(0.3f));
+        assertThat(((Destructible)actor4).isDestroyed(), not(equalTo(true)));
 
         /* Assert positions */
         assertThat("Explosion source keeps its position",
                 (double)actor1.getBody().getPosition().x, closeTo(1.0f, 0.01f));
         assertThat("Fixture body close to explosion is moved by explosion force",
                 (double)actor2.getBody().getPosition().x, not(closeTo(3.0f, 0.1f)));
+        assertThat("Fixture body close to explosion is moved by explosion force",
+                (double)actor3.getBody().getPosition().x, not(closeTo(6.0f, 0.1f)));
         assertThat("Bodies far away are still in original position",
-                (double)actor3.getBody().getPosition().x, closeTo(45.0f, 0.01f));
+                (double)actor4.getBody().getPosition().x, closeTo(45.0f, 0.01f));
     }
 
 }
