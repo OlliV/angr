@@ -1,5 +1,13 @@
 package fi.hbp.angr.models;
 
+/**
+ * Collision filter masks.
+ *
+ * These masks are used to mask out collision physics
+ * eg. when body is destroyed but not yet removed from the
+ * world or when player model should not collide with other
+ * objects.
+ */
 public class CollisionFilterMasks {
     public static final short GROUND = 0x01;
     public static final short HANS_BODY = 0x02;
