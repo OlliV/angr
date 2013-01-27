@@ -8,8 +8,11 @@ public class BoxDamageModel extends DamageModel {
 
     @Override
     public void hit(float force) {
-        if (force > 1)
+        if (force > 15) {
+            System.out.println(force);
             this.health -= force / 100f;
+        }
+
     }
 
     @Override

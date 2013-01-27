@@ -91,6 +91,7 @@ public class GameScreen implements Screen, Preloadable {
     @Override
     public void show() {
         world = new World(new Vector2(0.0f, -9.8f), true);
+        world.setWarmStarting(true);
 
         int xsize = Gdx.graphics.getWidth() * 2;
         int ysize = Gdx.graphics.getHeight() * 2;

@@ -45,7 +45,7 @@ public class TestLevel extends Level {
         fd.density = 0.6f;
         fd.friction = 0.7f;
         fd.restitution = 0.3f;
-        fd.filter.categoryBits = CollisionFilterMasks.WALL;
+        fd.filter.categoryBits = CollisionFilterMasks.GROUND;
         super.show(bf, fd);
 
         /* Testing *****/

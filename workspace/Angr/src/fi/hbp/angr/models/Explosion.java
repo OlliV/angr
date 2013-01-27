@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.QueryCallback;
 public class Explosion {
     Body body;
     private static final float maxDistance = 9.0f;
-    private static final float maxForce = 55.0f;
+    private static final float maxForce = 80.0f;
     private Vector2 bodyPos = new Vector2();
     private Vector2 hitBodyPos = new Vector2();
 

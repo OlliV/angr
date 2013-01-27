@@ -24,3 +24,5 @@ Tuntikirjanpito
 			- Refaktorointia ja grafiikan ja logiikan erottelua
 			  toisistaan
 2013-01-27	2.0 h	Kommentointia ja räjähdysluokan optimointia
+2013-01-27	1.0h	- Räjähdykseen liittyvän fysiikan korjailua
+			- Laatikon fysiikan korjailua tuhoutumistilanteessa

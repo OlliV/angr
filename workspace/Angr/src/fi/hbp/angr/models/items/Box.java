@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,6 +22,7 @@ import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
 import fi.hbp.angr.ItemDestruction;
 import fi.hbp.angr.models.BoxDamageModel;
+import fi.hbp.angr.models.CollisionFilterMasks;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
 
@@ -59,12 +61,11 @@ public class Box extends Actor implements Destructible {
         as.bd.position.set(0, 0);
 
         as.fd = new FixtureDef();
-        as.fd.density = 4.5f;
+        as.fd.density = 8.0f;
         as.fd.friction = 0.3f;
         as.fd.restitution = 0.3f;
-
-        //as.fd.filter.categoryBits = CollisionFilterMasks.GRENADE;
-        //as.fd.filter.maskBits = CollisionFilterMasks.ENEMY | CollisionFilterMasks.WALL | CollisionFilterMasks.GRENADE;
+        as.fd.filter.categoryBits = CollisionFilterMasks.OTHER;
+        as.fd.filter.maskBits = CollisionFilterMasks.ALL;
     }
 
     /**
@@ -115,8 +116,8 @@ public class Box extends Actor implements Destructible {
             if (G.DEBUG) {
                 /* Debug print health status */
                 font.draw(batch, this.getDatamageModel().toString(),
-                        pos.x * G.BOX_TO_WORLD - modelOrigin.x,
-                        pos.y * G.BOX_TO_WORLD - modelOrigin.y);
+                        pos.x * G.BOX_TO_WORLD,
+                        pos.y * G.BOX_TO_WORLD + 100f);
             }
         } else {
             if (particleEffect.isComplete()) {
@@ -142,6 +143,12 @@ public class Box extends Actor implements Destructible {
     @Override
     public void setDestroyed() {
         this.destroyed = true;
+
+        /* Box should not collide with other game objects anymore */
+        Filter filter = body.getFixtureList().get(0).getFilterData();
+        filter.maskBits = CollisionFilterMasks.GROUND; /* But with ground */
+        body.getFixtureList().get(0).setFilterData(filter);
+
         particleEffect.reset();
         particleEffect.setPosition(sprite.getX(),
                                    sprite.getY());
