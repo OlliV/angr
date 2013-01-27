@@ -83,9 +83,6 @@ public class GameStage extends Stage {
                 destructibleCameraFollowBody = true;
             }
         }
-
-        float x = body.getPosition().x * G.BOX_TO_WORLD;
-        float y = body.getPosition().y * G.BOX_TO_WORLD;
     }
 
     private void updateCameraFollow() {
