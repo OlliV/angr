@@ -77,6 +77,7 @@ public class BodyFactory {
         Grenade actor = new Grenade(stage, world, itdes, bel, asGrenade, x, y, angle);
         inputMultiplexer.addProcessor(actor);
         stage.addActor(actor);
+        ((GameStage)stage).setCameraFollow(((Grenade)actor).getBody());
         return actor;
     }
 

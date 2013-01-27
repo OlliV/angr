@@ -6,9 +6,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+
+import fi.hbp.angr.models.Destructible;
 
 /**
  * Game stage
@@ -18,11 +21,16 @@ public class GameStage extends Stage {
     private Box2DDebugRenderer renderer;
     private OrthographicCamera debugCamera;
 
+    /* Variables for key commands */
     private boolean moveLeft;
     private boolean moveRight;
     private boolean moveUp;
     private boolean moveDown;
     private boolean enableDebugCamera = false;
+
+    private CameraFilter camFilt = new CameraFilter(0.04f);
+    private Body cameraFollowBody;
+    private boolean destructibleCameraFollowBody = false;
 
     /**
      * Constructor for GameStage
@@ -53,10 +61,53 @@ public class GameStage extends Stage {
     @Override
     public void draw() {
         super.draw();
-        if (enableDebugCamera) {
+
+        if (!enableDebugCamera) {
+            updateCameraFollow();
+        }
+        else {
             updateDebugCamera();
             renderer.render(world, debugCamera.combined);
         }
+    }
+
+    public void setCameraFollow(Body body) {
+        this.cameraFollowBody = body;
+        this.destructibleCameraFollowBody = false;
+
+        if (body == null)
+            return;
+
+        if (body.getUserData() != null) {
+            if (Destructible.class.isInstance(cameraFollowBody)) {
+                destructibleCameraFollowBody = true;
+            }
+        }
+
+        float x = body.getPosition().x * G.BOX_TO_WORLD;
+        float y = body.getPosition().y * G.BOX_TO_WORLD;
+    }
+
+    private void updateCameraFollow() {
+        if (cameraFollowBody == null) {
+            return;
+        }
+
+        if (destructibleCameraFollowBody) {
+            if (((Destructible)cameraFollowBody.getUserData()).isDestroyed()) {
+                this.cameraFollowBody = null;
+                return;
+            }
+        }
+
+        float x = cameraFollowBody.getPosition().x * G.BOX_TO_WORLD;
+        float y = cameraFollowBody.getPosition().y * G.BOX_TO_WORLD;
+        float dt = Gdx.graphics.getDeltaTime();
+        camFilt.updateX(x, dt);
+        camFilt.updateY(y, dt);
+
+        this.getCamera().position.x = clampX(camFilt.getX());
+        this.getCamera().position.y = clampY(camFilt.getY());
     }
 
     /**
@@ -81,13 +132,21 @@ public class GameStage extends Stage {
 
         if(dx != 0 || dy != 0) {
             Vector3 pos = this.getCamera().position;
-            float x = MathUtils.clamp(pos.x+dx, this.getWidth()/2, this.getWidth()*2);
-            float y = MathUtils.clamp(pos.y+dy, this.getHeight()/2, this.getHeight()*1);
+            float x = clampX(pos.x + dx);
+            float y = clampY(pos.y + dy);
             this.getCamera().position.set(x, y, 0);
-            debugCamera.position.set(x*G.WORLD_TO_BOX, y*G.WORLD_TO_BOX, 0);
+            debugCamera.position.set(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX, 0);
             this.getCamera().update();
             debugCamera.update();
         }
+    }
+
+    private float clampX(float x) {
+        return MathUtils.clamp(x, this.getWidth()/2, this.getWidth()*2);
+    }
+
+    private float clampY(float y) {
+        return MathUtils.clamp(y, this.getHeight()/2, this.getHeight()*1);
     }
 
     @Override

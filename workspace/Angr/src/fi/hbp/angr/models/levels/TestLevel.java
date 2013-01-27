@@ -78,7 +78,7 @@ public class TestLevel extends Level {
 
         if (hans.isPalmJointActive() == false) {
             grenadeSpawnDelay += Gdx.graphics.getDeltaTime();
-            if (grenadeSpawnDelay >= 2.0f) {
+            if (grenadeSpawnDelay >= 5.0f) {
                 hans.setPalmJoint(((SlingshotActor)bf.spawnGrenade(555, 390, 0)).getBody());
                 grenadeSpawnDelay = 0.0f;
             }

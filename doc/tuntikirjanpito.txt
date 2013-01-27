@@ -24,5 +24,6 @@ Tuntikirjanpito
 			- Refaktorointia ja grafiikan ja logiikan erottelua
 			  toisistaan
 2013-01-27	2.0 h	Kommentointia ja räjähdysluokan optimointia
-2013-01-27	1.0h	- Räjähdykseen liittyvän fysiikan korjailua
+2013-01-27	1.0 h	- Räjähdykseen liittyvän fysiikan korjailua
 			- Laatikon fysiikan korjailua tuhoutumistilanteessa
+213-01-27	4.0 h	Filtteröity kranaatteja seuraava kamera
