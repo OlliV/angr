@@ -71,6 +71,10 @@ public class GameStage extends Stage {
         }
     }
 
+    /**
+     * Set camera follow body.
+     * @param body body to follow.
+     */
     public void setCameraFollow(Body body) {
         this.cameraFollowBody = body;
         this.destructibleCameraFollowBody = false;
@@ -85,6 +89,9 @@ public class GameStage extends Stage {
         }
     }
 
+    /**
+     * Update camera position if camera follow body is set
+     */
     private void updateCameraFollow() {
         if (cameraFollowBody == null) {
             return;
@@ -138,10 +145,20 @@ public class GameStage extends Stage {
         }
     }
 
+    /**
+     * Calculate clamp for x axis.
+     * @param x position on x axis.
+     * @return Clamped value of x axis position.
+     */
     private float clampX(float x) {
         return MathUtils.clamp(x, this.getWidth()/2, this.getWidth()*2);
     }
 
+    /**
+     * Calculate clamp for y axis.
+     * @param y position on y axis.
+     * @return Clamped value of y axis position.
+     */
     private float clampY(float y) {
         return MathUtils.clamp(y, this.getHeight()/2, this.getHeight()*1);
     }
