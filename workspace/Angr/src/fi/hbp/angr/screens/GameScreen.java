@@ -13,10 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.GameStage;
-import fi.hbp.angr.Hud;
 import fi.hbp.angr.ItemDestructionList;
 import fi.hbp.angr.Preloadable;
-import fi.hbp.angr.actors.HudScoreCounter;
+import fi.hbp.angr.hud.Hud;
+import fi.hbp.angr.hud.HudScoreCounter;
 import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.models.Destructible;
@@ -94,7 +94,7 @@ public class GameScreen implements Screen, Preloadable {
 
         int xsize = Gdx.graphics.getWidth() * 2;
         int ysize = Gdx.graphics.getHeight() * 2;
-        stage = new GameStage(xsize, ysize, false, world);
+        stage = new GameStage(xsize, ysize, world);
 
         inputMultiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(inputMultiplexer);

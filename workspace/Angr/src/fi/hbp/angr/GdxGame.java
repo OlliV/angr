@@ -11,7 +11,7 @@ public class GdxGame extends Game {
     @Override
     public void create() {
         Screen gs = new GameScreen(new TestLevel());
-        Screen splash = new SplashScreen(this, gs);
+        Screen splash = new SplashScreen(this, gs, 0.1f);
         setScreen(splash);
     }
 

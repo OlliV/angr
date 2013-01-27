@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import fi.hbp.angr.G;
 
 /**
- * Slingshot with mouse countrols
+ * Slingshot with mouse controls.
  */
 public abstract class SlingshotActor extends Actor implements InputProcessor {
     /**

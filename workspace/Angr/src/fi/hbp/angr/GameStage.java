@@ -10,7 +10,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-
+/**
+ * Game stage
+ */
 public class GameStage extends Stage {
     private World world;
     private Box2DDebugRenderer renderer;
@@ -22,8 +24,14 @@ public class GameStage extends Stage {
     private boolean moveDown;
     private boolean enableDebugCamera = false;
 
-    public GameStage(float width, float height, boolean stretch, World world) {
-        super(width, height, stretch);
+    /**
+     * Constructor for GameStage
+     * @param width width of the game stage viewport in pixels
+     * @param height height of the game stage viewport in pixels
+     * @param world Box2D physics world
+     */
+    public GameStage(float width, float height, World world) {
+        super(width, height, false);
 
         this.world = world;
         if (G.DEBUG) {
@@ -51,6 +59,9 @@ public class GameStage extends Stage {
         }
     }
 
+    /**
+     * Updates position of the debug camera
+     */
     private void updateDebugCamera() {
         float dx = 0;
         float dy = 0;

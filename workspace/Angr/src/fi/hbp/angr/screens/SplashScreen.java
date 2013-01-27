@@ -14,12 +14,19 @@ import com.badlogic.gdx.utils.Timer;
 
 import fi.hbp.angr.G;
 
+/**
+ * Splash screen/Loading screen
+ *
+ * This screen will preload the assets of the next screen
+ * while showing its own graphics.
+ */
 public class SplashScreen extends Timer.Task implements Screen {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Texture texture;
     private Sprite sprite;
 
+    private float delay;
     private Timer splashTimer = new Timer();
     private ScreenLoader loader;
 
@@ -27,8 +34,12 @@ public class SplashScreen extends Timer.Task implements Screen {
      *
      * @param g Main game.
      * @param gs Screen to be shown after this splash screen.
+     * @param delay Minimum time used to show this splash screen.
+     * Actual timing may vary depending on the time needed for preloading
+     * all the assets of the following screen.
      */
-    public SplashScreen(Game g, Screen gs) {
+    public SplashScreen(Game g, Screen gs, float delay) {
+        this.delay = delay;
         loader = new ScreenLoader(g, gs);
     }
 
@@ -72,7 +83,7 @@ public class SplashScreen extends Timer.Task implements Screen {
         sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
 
         // Change to Screen gs given in constructor after a short delay
-        splashTimer.scheduleTask(this, 0.5f);
+        splashTimer.scheduleTask(this, delay);
 
         // Start loading the next screen
         loader.start();

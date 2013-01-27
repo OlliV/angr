@@ -12,6 +12,9 @@ import fi.hbp.angr.models.Hans;
 import fi.hbp.angr.models.items.Box;
 import fi.hbp.angr.models.items.Grenade;
 
+/**
+ * Body factory used to spawn objects during the game.
+ */
 public class BodyFactory {
     private Stage stage;
     private World world;
@@ -23,7 +26,7 @@ public class BodyFactory {
     protected Hans.HansAssetContainer hac = new Hans.HansAssetContainer();
 
     /**
-     * Add assets of this class to a preload list
+     * Add assets of this class to a preload list.
      * TODO Should the map/level tell what assets it will need?
      */
     public static void preload() {
@@ -35,11 +38,11 @@ public class BodyFactory {
     /* TODO Add a function to unload unneeded assets */
 
     /**
-     * TODO
-     * @param stage
-     * @param world
-     * @param inputMultiplexer
-     * @param ides
+     * Constructor for body factory.
+     * @param stage game stage.
+     * @param world game world (Box2D physics world).
+     * @param itdes item destruction object to allow game objects to destroy them selves safely.
+     * @param inputMultiplexer input multiplexer for adding new input processor.
      */
     public BodyFactory(Stage stage, World world, ItemDestruction itdes, InputMultiplexer inputMultiplexer) {
         this.stage = stage;
@@ -56,19 +59,19 @@ public class BodyFactory {
     }
 
     /**
-     * TODO
-     * @return
+     * Get world used by body factory
+     * @return Box2D world.
      */
     public World getWorld() {
         return world;
     }
 
     /**
-     * TODO
-     * @param x
-     * @param y
-     * @param angle
-     * @return
+     * Spawns a new grenade to the game stage
+     * @param x position on x axis.
+     * @param y position on y axis.
+     * @param angle body angle.
+     * @return actor of the new game object.
      */
     public Actor spawnGrenade(float x, float y, float angle) {
         Grenade actor = new Grenade(stage, world, itdes, bel, asGrenade, x, y, angle);
@@ -78,11 +81,11 @@ public class BodyFactory {
     }
 
     /**
-     * TODO
-     * @param x
-     * @param y
-     * @param angle
-     * @return
+     * Spawns a new box t othe game stage
+     * @param x Position on x axis.
+     * @param y Position on y axis.
+     * @param angle Body angle.
+     * @return Actor of the new game object.
      */
     public Actor spawnBox(float x, float y, float angle) {
         Box actor = new Box(world, itdes, bel, asBox, x, y, angle);
@@ -90,6 +93,13 @@ public class BodyFactory {
         return actor;
     }
 
+    /**
+     * Spawns a new Hans player model to the game stage
+     * @param x Position on x axis.
+     * @param y Position on y axis.
+     * @param angle Body angle.
+     * @return Actor of the new game object.
+     */
     public Actor spawnHans(float x, float y, float angle) {
         Hans actor = new Hans(stage, world, bel, hac, x, y, angle);
         inputMultiplexer.addProcessor(actor);
