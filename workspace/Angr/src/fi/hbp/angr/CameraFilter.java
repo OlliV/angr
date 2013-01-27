@@ -1,5 +1,7 @@
 package fi.hbp.angr;
 
+import com.badlogic.gdx.math.MathUtils;
+
 
 /**
  * Camera position filter.
@@ -63,7 +65,7 @@ public class CameraFilter {
      * @return point on x axis.
      */
     public float getX() {
-        return xout;
+        return MathUtils.round(xout);
     }
 
     /**
@@ -71,6 +73,6 @@ public class CameraFilter {
      * @return point on y axis.
      */
     public float getY() {
-        return yout;
+        return MathUtils.round(yout);
     }
 }
