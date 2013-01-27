@@ -30,7 +30,6 @@ public class GameScreen implements Screen, Preloadable {
     ItemDestructionList itemDestructor;
     private GameState gameState = new GameState();
     private Hud hud = new Hud();
-    private HudScoreCounter score;
 
     /**
      * Start game
@@ -38,6 +37,7 @@ public class GameScreen implements Screen, Preloadable {
      */
     public GameScreen(Level level) {
         this.level = level;
+        HudScoreCounter score;
         score = new HudScoreCounter(gameState);
         score.loadAssets();
         hud.addActor(score);
