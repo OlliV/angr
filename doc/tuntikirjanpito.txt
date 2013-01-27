@@ -23,3 +23,4 @@ Tuntikirjanpito
 2013-01-27	4.0 h	- Lisää yksikkötestejä
 			- Refaktorointia ja grafiikan ja logiikan erottelua
 			  toisistaan
+2013-01-27	2.0 h	Kommentointia ja räjähdysluokan optimointia

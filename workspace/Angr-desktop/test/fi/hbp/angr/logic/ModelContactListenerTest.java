@@ -145,6 +145,7 @@ public class ModelContactListenerTest {
             }
         } while (world.getContactCount() == 0);
 
+        assertThat(actor.isDestroyed(), equalTo(false));
         assertThat(listener.gameState.getScore(), equalTo(100));
     }
 }

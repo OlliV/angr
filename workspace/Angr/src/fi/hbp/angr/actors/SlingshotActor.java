@@ -75,7 +75,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
                     return false;
                 }
             }
-            return true; /* Keep going until all bodies in the are are checked. */
+            return true; /* Keep going until all bodies in the area are checked. */
         }
     };
 
