@@ -72,13 +72,17 @@ public class CameraFilterTest {
     public void testDt() {
         float setpoint = 5000.0f;
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             filt.updateX(setpoint, 0.05f);
+            setpoint += 200.0f;
         }
 
+        setpoint = 5000.0f;
+        filt.updateY(setpoint, 0.05f);
+        setpoint += 600.0f;
         filt.updateY(setpoint, 0.1f);
 
-        assertThat((double)filt.getX(), closeTo(700.0f, 180.0f));
-        assertThat((double)filt.getY(), closeTo(700.0f, 180.0f));
+        assertThat((double)filt.getX(), closeTo(1200.0f, 180.0f));
+        assertThat((double)filt.getY(), closeTo(1200.0f, 180.0f));
     }
 }
