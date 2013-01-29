@@ -3,20 +3,27 @@ package fi.hbp.angr;
 import com.badlogic.gdx.math.MathUtils;
 
 
+
 /**
  * Camera position filter.
  */
 public class CameraFilter {
+    private float itx = 0;
+    private float ity = 0;
+
     private float xout;
     private float yout;
+
     private final float kp;
+    private final float ki;
 
     /**
      * Constructor for CameraFilter.
      * @param kp proportional gain.
      */
-    CameraFilter(float kp) {
+    CameraFilter(float kp, float ki) {
         this.kp = kp;
+        this.ki = ki;
     }
 
     /**
@@ -35,7 +42,9 @@ public class CameraFilter {
      * @param dt delta time.
      */
     public void updateX(float x, float dt) {
-        xout = calcFiltOut(xout, x, dt);
+        float error = (x - xout);
+        itx += error * dt;
+        xout = kp * error + ki * itx;
     }
 
     /**
@@ -44,20 +53,9 @@ public class CameraFilter {
      * @param dt delta time.
      */
     public void updateY(float y, float dt) {
-        yout = calcFiltOut(yout, y, dt);
-    }
-
-    /**
-     * Calculate filter output.
-     * @param out current output value.
-     * @param setpoint current setpoint.
-     * @param dt delta time.
-     * @return new output value.
-     */
-    private float calcFiltOut(float out, float setpoint, float dt) {
-        float error = (setpoint - out);
-        float integral = out + error * dt;
-        return kp * error + integral;
+        float error = (y - yout);
+        ity += error * dt;
+        yout = kp * error + ki * ity;
     }
 
     /**
@@ -65,7 +63,7 @@ public class CameraFilter {
      * @return point on x axis.
      */
     public float getX() {
-        return MathUtils.round(xout);
+        return MathUtils.round(xout / 2.0f) * 2.0f;
     }
 
     /**
@@ -73,6 +71,6 @@ public class CameraFilter {
      * @return point on y axis.
      */
     public float getY() {
-        return MathUtils.round(yout);
+        return MathUtils.round(yout / 2.0f) * 2.0f;
     }
 }

@@ -13,7 +13,7 @@ public class CameraFilterTest {
 
     @Before
     public void setUp() throws Exception {
-        filt = new CameraFilter(0.04f);
+        filt = new CameraFilter(0.1f, 2.5f);
     }
 
     @After
@@ -82,7 +82,7 @@ public class CameraFilterTest {
         setpoint += 600.0f;
         filt.updateY(setpoint, 0.1f);
 
-        assertThat((double)filt.getX(), closeTo(1200.0f, 180.0f));
-        assertThat((double)filt.getY(), closeTo(1200.0f, 180.0f));
+        assertThat((double)filt.getX(), closeTo(2000.0f, 200.0f));
+        assertThat((double)filt.getY(), closeTo(2000.0f, 200.0f));
     }
 }
