@@ -29,3 +29,5 @@ Tuntikirjanpito
 2013-01-27	4.0 h	Filtteröity kranaatteja seuraava kamera
 2013-01-27	1.0 h	Filtterin kommentointi ja oskilloinin poisto
 2013-01-27	3.0 h	Sekalaista devausta ja luokkakaavion piirtelyä
+2013-01-30	3.0 h	Kamerafiltterin virittelyä, refaktorointia ja
+			koodin kommentointia.

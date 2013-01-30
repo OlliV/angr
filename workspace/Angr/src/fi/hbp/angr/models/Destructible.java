@@ -4,7 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 
 /**
- * Interface for destructible models/items
+ * Interface for destructible models/items.
  */
 public interface Destructible {
     /**

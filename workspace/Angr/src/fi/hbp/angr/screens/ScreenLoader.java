@@ -11,7 +11,7 @@ import fi.hbp.angr.G;
 import fi.hbp.angr.Preloadable;
 
 /**
- * Preload a given Screen
+ * Preload a given Screen.
  *
  * Creates an instance of a screen of given type and loads its assets. This
  * is useful and works only if constructor of the new screen class loads all

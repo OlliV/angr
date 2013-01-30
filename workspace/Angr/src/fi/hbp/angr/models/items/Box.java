@@ -26,6 +26,9 @@ import fi.hbp.angr.models.CollisionFilterMasks;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
 
+/**
+ * A box for level decoration.
+ */
 public class Box extends Actor implements Destructible {
     private static final String MODEL_NAME = "box";
     private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
@@ -47,8 +50,8 @@ public class Box extends Actor implements Destructible {
 
     /**
      * Initialize assets of this object
-     * @param as
-     * @param bel
+     * @param as storage location for assets of this item.
+     * @param bel Body editor loader.
      */
     public static void initAssets(AssetContainer as, BodyEditorLoader bel) {
         as.texture = G.getAssetManager().get(
@@ -69,14 +72,14 @@ public class Box extends Actor implements Destructible {
     }
 
     /**
-     * TODO
-     * @param world
-     * @param des
-     * @param bel
-     * @param as
-     * @param x
-     * @param y
-     * @param angle
+     * Class constructor.
+     * @param world the game physics simulation world (of Box2d).
+     * @param itdes the item destruction object.
+     * @param bel a body editor loader object.
+     * @param as preloaded assets for this class.
+     * @param x spawn coordinate.
+     * @param y spawn coordinate.
+     * @param angle spawn angle.
      */
     public Box(World world, ItemDestruction itdes, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
         this.itdes = itdes;

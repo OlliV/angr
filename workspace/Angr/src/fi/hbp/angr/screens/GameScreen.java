@@ -22,6 +22,9 @@ import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.levels.Level;
 
+/**
+ * Screen used to show the actual game contents.
+ */
 public class GameScreen implements Screen, Preloadable {
     private InputMultiplexer inputMultiplexer;
     private Stage stage;
@@ -32,8 +35,8 @@ public class GameScreen implements Screen, Preloadable {
     private Hud hud = new Hud();
 
     /**
-     * Start game
-     * @param level Game level
+     * Start the game
+     * @param level the game level to be shown.
      */
     public GameScreen(Level level) {
         this.level = level;

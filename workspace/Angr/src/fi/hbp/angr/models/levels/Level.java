@@ -18,7 +18,7 @@ import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.logic.GameState;
 
 /**
- * Abstract Level class
+ * Abstract Level class.
  */
 public abstract class Level extends Actor implements Preloadable {
     private String levelName;

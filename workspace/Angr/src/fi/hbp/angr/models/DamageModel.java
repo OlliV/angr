@@ -1,5 +1,8 @@
 package fi.hbp.angr.models;
 
+/**
+ * Damage model abstract class for game objects/items.
+ */
 public abstract class DamageModel {
     protected float health;
 
@@ -27,7 +30,7 @@ public abstract class DamageModel {
     }
 
     /**
-     * Enemy
+     * Enemy status
      * @return true if this body is enemy
      */
     public abstract boolean isEnemy();

@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.Timer;
 import fi.hbp.angr.G;
 
 /**
- * Splash screen/Loading screen
+ * Splash screen/Loading screen.
  *
  * This screen will preload the assets of the next screen
  * while showing its own graphics.

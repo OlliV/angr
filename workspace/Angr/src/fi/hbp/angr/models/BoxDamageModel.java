@@ -1,7 +1,12 @@
 package fi.hbp.angr.models;
 
-
+/**
+ * Box damage model.
+ */
 public class BoxDamageModel extends DamageModel {
+    /**
+     * Class constructor.
+     */
     public BoxDamageModel() {
         resetHealth();
     }

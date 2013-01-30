@@ -7,17 +7,41 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.QueryCallback;
 
+/**
+ * Explosion model.
+ */
 public class Explosion {
     Body body;
-    private static final float maxDistance = 9.0f;
-    private static final float maxForce = 80.0f;
+    private final float maxDistance;
+    private final float maxForce;
     private Vector2 bodyPos = new Vector2();
     private Vector2 hitBodyPos = new Vector2();
 
+    /**
+     * Class constructor.
+     * @param body the body that sends the shock.
+     */
     public Explosion(Body body) {
+        this.maxDistance = 9.0f;
+        this.maxForce = 80.0f;
         this.body = body;
     }
 
+    /**
+     * Class constructor with configurable maximum distance and force.
+     * @param body the body that sends the shock.
+     * @param maxDist the maximum distance of shock wave.
+     * @param maxForce the maximum force applied.
+     */
+    public Explosion(Body body, float maxDist, float maxForce) {
+        this.maxDistance = maxDist;
+        this.maxForce = maxForce;
+        this.body = body;
+    }
+
+    /**
+     * Emits a shock impulse to the nearby bodies.
+     */
     public void doExplosion() {
         /* Set exploding body as static so it won't fly away */
         BodyType origBdType = body.getType();

@@ -26,6 +26,9 @@ import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.Explosion;
 
+/**
+ * A Throwable and explodable grenade model.
+ */
 public class Grenade extends SlingshotActor implements Destructible {
     private static final String MODEL_NAME = "grenade";
     private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
@@ -55,8 +58,8 @@ public class Grenade extends SlingshotActor implements Destructible {
 
     /**
      * Initialize assets of this object
-     * @param as
-     * @param bel
+     * @param as storage location for assets of this item.
+     * @param bel Body editor loader.
      */
     public static void initAssets(AssetContainer as, BodyEditorLoader bel) {
         as.texture = G.getAssetManager().get(
@@ -78,14 +81,15 @@ public class Grenade extends SlingshotActor implements Destructible {
     }
 
     /**
-     * TODO
-     * @param stage
-     * @param world
-     * @param bel
-     * @param as
-     * @param x
-     * @param y
-     * @param angle
+     * Class constructor.
+     * @param stage the game stage.
+     * @param world the game physics simulation world (of Box2d).
+     * @param itdes the item destruction object.
+     * @param bel a body editor loader object.
+     * @param as preloaded assets for this class.
+     * @param x spawn coordinate.
+     * @param y spawn coordinate.
+     * @param angle spawn angle.
      */
     public Grenade(Stage stage, World world, ItemDestruction itdes, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
         super(stage, world, 50.0f, 0.5f);

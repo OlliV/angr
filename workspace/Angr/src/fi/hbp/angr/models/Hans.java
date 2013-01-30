@@ -24,16 +24,43 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
 
+/**
+ * Hans the player model.
+ */
 public class Hans extends Actor implements InputProcessor {
+    /**
+     * Specific asset container for Hans.
+     */
     public static class HansAssetContainer {
+        /**
+         * Body assets.
+         */
         public AssetContainer acBody = new AssetContainer();
+        /**
+         * Upper part of hand.
+         */
         public AssetContainer acHand_u = new AssetContainer();
+        /**
+         * Lower part of hand.
+         */
         public AssetContainer acHand_l = new AssetContainer();
     }
 
+    /**
+     * Model data for Hans.
+     */
     protected class _ModelData {
+        /**
+         * Body.
+         */
         public Body body;
+        /**
+         * Origin coordinates of the body.
+         */
         public Vector2 bodyOrigin;
+        /**
+         * Sprite.
+         */
         public Sprite sprite;
     }
 
@@ -69,8 +96,8 @@ public class Hans extends Actor implements InputProcessor {
 
     /**
      * Initialize assets of this object
-     * @param as
-     * @param bel
+     * @param hac storage location for assets of this model.
+     * @param bel Body editor loader.
      */
     public static void initAssets(HansAssetContainer hac, BodyEditorLoader bel) {
         /* Textures */
@@ -116,6 +143,16 @@ public class Hans extends Actor implements InputProcessor {
         hac.acHand_l.fd = hac.acHand_u.fd;
     }
 
+    /**
+     * Class constructor.
+     * @param stage the game stage.
+     * @param world the game physics simulation world (of Box2d).
+     * @param bel a Body editor loader object.
+     * @param hac preloaded assets for this class.
+     * @param x spawn coordinate.
+     * @param y spawn coordinate.
+     * @param angle spawn angle.
+     */
     public Hans(Stage stage, World world, BodyEditorLoader bel, HansAssetContainer hac, float x, float y, float angle) {
         this.stage = stage;
 
