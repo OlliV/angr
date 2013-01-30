@@ -28,7 +28,7 @@ public class GameStage extends Stage {
     private boolean moveDown;
     private boolean enableDebugCamera = false;
 
-    private CameraFilter camFilt = new CameraFilter(0.1f, 2.5f);
+    private CameraFilter camFilt = new CameraFilter(0.1f, 2.5f, 0.001f);
     private Body cameraFollowBody;
     private boolean destructibleCameraFollowBody = false;
 

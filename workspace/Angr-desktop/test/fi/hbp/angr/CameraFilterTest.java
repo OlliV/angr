@@ -13,7 +13,7 @@ public class CameraFilterTest {
 
     @Before
     public void setUp() throws Exception {
-        filt = new CameraFilter(0.1f, 2.5f);
+        filt = new CameraFilter(0.1f, 2.5f, 0.001f);
     }
 
     @After
@@ -23,10 +23,23 @@ public class CameraFilterTest {
 
     @Test
     public void testInit() {
+        for (int i = 0; i < 100; i++) {
+            filt.updateX(100.0f, 0.03f);
+            filt.updateY(500.0f, 0.03f);
+        }
+
         filt.init(10.0f, 20.0f);
 
         assertThat(filt.getX(), equalTo(10.0f));
         assertThat(filt.getY(), equalTo(20.0f));
+
+        for (int i = 0; i < 100; i++) {
+            filt.updateX(10.0f, 0.03f);
+            filt.updateY(20.0f, 0.03f);
+        }
+
+        assertThat((double)filt.getX(), closeTo(10.0f, 5.0f));
+        assertThat((double)filt.getY(), closeTo(20.0f, 5.0f));
     }
 
     @Test
@@ -82,7 +95,7 @@ public class CameraFilterTest {
         setpoint += 600.0f;
         filt.updateY(setpoint, 0.1f);
 
-        assertThat((double)filt.getX(), closeTo(2000.0f, 200.0f));
-        assertThat((double)filt.getY(), closeTo(2000.0f, 200.0f));
+        assertThat((double)filt.getX(), closeTo(2000.0f, 150.0f));
+        assertThat((double)filt.getY(), closeTo(2000.0f, 150.0f));
     }
 }
