@@ -19,10 +19,10 @@ import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
+import fi.hbp.angr.stage.GameStage;
 
 /**
  * Hans the player model.
@@ -79,7 +79,7 @@ public class Hans extends Actor implements InputProcessor {
     private Joint palmJoint;
 
     /* Input processing/Controls */
-    private Stage stage;
+    private GameStage stage;
     private Vector3 testPoint = new Vector3();
     private Body groundBody;
     private Body hitBody = null;
@@ -153,8 +153,9 @@ public class Hans extends Actor implements InputProcessor {
      * @param y spawn coordinate.
      * @param angle spawn angle.
      */
-    public Hans(Stage stage, World world, BodyEditorLoader bel, HansAssetContainer hac, float x, float y, float angle) {
+    public Hans(GameStage stage, BodyEditorLoader bel, HansAssetContainer hac, float x, float y, float angle) {
         this.stage = stage;
+        World world = stage.getWorld();
 
         /* Attach body */
         hac.acBody.bd.position.set(new Vector2(x * G.WORLD_TO_BOX,

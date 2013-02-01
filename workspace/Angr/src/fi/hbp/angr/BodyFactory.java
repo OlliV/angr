@@ -6,18 +6,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.models.Hans;
 import fi.hbp.angr.models.items.Box;
 import fi.hbp.angr.models.items.Grenade;
+import fi.hbp.angr.stage.GameStage;
 
 /**
  * Body factory used to spawn objects during the game.
  */
 public class BodyFactory {
-    private Stage stage;
-    private World world;
+    private GameStage stage;
     private InputMultiplexer inputMultiplexer;
     private BodyEditorLoader bel;
     private ItemDestruction itdes;
@@ -44,9 +43,8 @@ public class BodyFactory {
      * @param itdes item destruction object to allow game objects to destroy them selves safely.
      * @param inputMultiplexer input multiplexer for adding new input processor.
      */
-    public BodyFactory(Stage stage, World world, ItemDestruction itdes, InputMultiplexer inputMultiplexer) {
+    public BodyFactory(GameStage stage, ItemDestruction itdes, InputMultiplexer inputMultiplexer) {
         this.stage = stage;
-        this.world = world;
         this.itdes = itdes;
         this.inputMultiplexer = inputMultiplexer;
 
@@ -59,11 +57,11 @@ public class BodyFactory {
     }
 
     /**
-     * Get world used by body factory
+     * Get world used by body factory and game stage
      * @return Box2D world.
      */
     public World getWorld() {
-        return world;
+        return stage.getWorld();
     }
 
     /**
@@ -74,7 +72,7 @@ public class BodyFactory {
      * @return actor of the new game object.
      */
     public Actor spawnGrenade(float x, float y, float angle) {
-        Grenade actor = new Grenade(stage, world, itdes, bel, asGrenade, x, y, angle);
+        Grenade actor = new Grenade(stage, itdes, bel, asGrenade, x, y, angle);
         inputMultiplexer.addProcessor(actor);
         stage.addActor(actor);
         ((GameStage)stage).setCameraFollow(((Grenade)actor).getBody());
@@ -89,7 +87,7 @@ public class BodyFactory {
      * @return Actor of the new game object.
      */
     public Actor spawnBox(float x, float y, float angle) {
-        Box actor = new Box(world, itdes, bel, asBox, x, y, angle);
+        Box actor = new Box(stage.getWorld(), itdes, bel, asBox, x, y, angle);
         stage.addActor(actor);
         return actor;
     }
@@ -102,7 +100,7 @@ public class BodyFactory {
      * @return Actor of the new game object.
      */
     public Actor spawnHans(float x, float y, float angle) {
-        Hans actor = new Hans(stage, world, bel, hac, x, y, angle);
+        Hans actor = new Hans(stage, bel, hac, x, y, angle);
         inputMultiplexer.addProcessor(actor);
         stage.addActor(actor);
         return actor;

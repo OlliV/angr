@@ -9,10 +9,8 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.BodyFactory;
-import fi.hbp.angr.GameStage;
 import fi.hbp.angr.ItemDestructionList;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.hud.Hud;
@@ -21,13 +19,14 @@ import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.levels.Level;
+import fi.hbp.angr.stage.GameStage;
 
 /**
  * Screen used to show the actual game contents.
  */
 public class GameScreen implements Screen, Preloadable {
     private InputMultiplexer inputMultiplexer;
-    private Stage stage;
+    private GameStage stage;
     private World world;
     Level level;
     ItemDestructionList itemDestructor;
@@ -110,7 +109,7 @@ public class GameScreen implements Screen, Preloadable {
         world.setContactListener(mcl);
 
         // Create and add map/level actor
-        BodyFactory bf = new BodyFactory(stage, world, itemDestructor, inputMultiplexer);
+        BodyFactory bf = new BodyFactory(stage, itemDestructor, inputMultiplexer);
         gameState.clear();
         level.show(bf, gameState);
         stage.addActor(level);

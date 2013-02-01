@@ -14,8 +14,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
@@ -25,6 +23,7 @@ import fi.hbp.angr.models.CollisionFilterMasks;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.Explosion;
+import fi.hbp.angr.stage.GameStage;
 
 /**
  * A Throwable and explodable grenade model.
@@ -91,12 +90,12 @@ public class Grenade extends SlingshotActor implements Destructible {
      * @param y spawn coordinate.
      * @param angle spawn angle.
      */
-    public Grenade(Stage stage, World world, ItemDestruction itdes, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
-        super(stage, world, 50.0f, 0.5f);
+    public Grenade(GameStage stage, ItemDestruction itdes, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
+        super(stage, stage.getWorld(), 50.0f, 0.5f);
         this.itdes = itdes;
 
         as.bd.position.set(new Vector2(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX));
-        body = world.createBody(as.bd);
+        body = stage.getWorld().createBody(as.bd);
         body.setUserData(this);
         sprite = new Sprite(as.texture);
 

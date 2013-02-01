@@ -1,4 +1,4 @@
-package fi.hbp.angr;
+package fi.hbp.angr.stage;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import fi.hbp.angr.G;
 import fi.hbp.angr.models.Destructible;
 
 /**
@@ -22,12 +23,16 @@ public class GameStage extends Stage {
     private OrthographicCamera debugCamera;
 
     /* Variables for key commands */
-    private boolean moveLeft;
-    private boolean moveRight;
-    private boolean moveUp;
-    private boolean moveDown;
-    private boolean enableDebugCamera = false;
+    private class KeyCommands {
+        public boolean moveLeft;
+        public boolean moveRight;
+        public boolean moveUp;
+        public boolean moveDown;
+        public boolean enableDebugCamera;
+    }
+    KeyCommands keyCommands = new KeyCommands();
 
+    /* Camera Follow */
     private CameraFilter camFilt = new CameraFilter(0.1f, 2.5f, 0.001f);
     private Body cameraFollowBody;
     private boolean destructibleCameraFollowBody = false;
@@ -62,7 +67,7 @@ public class GameStage extends Stage {
     public void draw() {
         super.draw();
 
-        if (!enableDebugCamera) {
+        if (!keyCommands.enableDebugCamera) {
             updateCameraFollow();
         }
         else {
@@ -121,16 +126,16 @@ public class GameStage extends Stage {
         float dx = 0;
         float dy = 0;
 
-        if(moveLeft) {
+        if(keyCommands.moveLeft) {
             dx -= 50;
         }
-        if(moveRight) {
+        if(keyCommands.moveRight) {
             dx += 50;
         }
-        if(moveDown) {
+        if(keyCommands.moveDown) {
             dy -= 50;
         }
-        if(moveUp) {
+        if(keyCommands.moveUp) {
             dy += 50;
         }
 
@@ -163,6 +168,10 @@ public class GameStage extends Stage {
         return MathUtils.clamp(y, this.getHeight()/2, this.getHeight()*1);
     }
 
+    public World getWorld() {
+        return this.world;
+    }
+
     @Override
     public boolean scrolled(int amount) {
         return false;
@@ -178,19 +187,19 @@ public class GameStage extends Stage {
 
         switch(keycode) {
         case Keys.LEFT:
-            moveLeft = true;
+            keyCommands.moveLeft = true;
             break;
         case Keys.RIGHT:
-            moveRight = true;
+            keyCommands.moveRight = true;
             break;
         case Keys.UP:
-            moveUp = true;
+            keyCommands.moveUp = true;
             break;
         case Keys.DOWN:
-            moveDown = true;
+            keyCommands.moveDown = true;
             break;
         case Keys.D:
-            enableDebugCamera = enableDebugCamera ? false : true;
+            keyCommands.enableDebugCamera = keyCommands.enableDebugCamera ? false : true;
             break;
         }
         return false;
@@ -203,16 +212,16 @@ public class GameStage extends Stage {
         }
         switch(keycode) {
         case Keys.LEFT:
-            moveLeft = false;
+            keyCommands.moveLeft = false;
             break;
         case Keys.RIGHT:
-            moveRight = false;
+            keyCommands.moveRight = false;
             break;
         case Keys.UP:
-            moveUp = false;
+            keyCommands.moveUp = false;
             break;
         case Keys.DOWN:
-            moveDown = false;
+            keyCommands.moveDown = false;
             break;
         }
         return false;

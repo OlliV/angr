@@ -50,7 +50,6 @@ public abstract class Level extends Actor implements Preloadable {
      * @param mapFd
      */
     protected void show(BodyFactory bf, FixtureDef mapFd) {
-
         BodyEditorLoader bel = new BodyEditorLoader(
                 Gdx.files.internal("levels.json"));
 
