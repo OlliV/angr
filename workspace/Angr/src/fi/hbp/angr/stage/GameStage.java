@@ -1,17 +1,25 @@
 package fi.hbp.angr.stage;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fi.hbp.angr.G;
+import fi.hbp.angr.ItemDestruction;
+import fi.hbp.angr.ItemDestructionList;
+import fi.hbp.angr.logic.GameState;
+import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.models.Destructible;
 
 /**
@@ -19,6 +27,10 @@ import fi.hbp.angr.models.Destructible;
  */
 public class GameStage extends Stage {
     private World world;
+    ItemDestructionList itemDestructor;
+    private GameState gameState = new GameState();
+
+    /* Debug */
     private Box2DDebugRenderer renderer;
     private OrthographicCamera debugCamera;
 
@@ -43,10 +55,15 @@ public class GameStage extends Stage {
      * @param height height of the game stage viewport in pixels
      * @param world Box2D physics world
      */
-    public GameStage(float width, float height, World world) {
+    public GameStage(float width, float height) {
         super(width, height, false);
+        world = new World(new Vector2(0.0f, -9.8f), true);
+        world.setWarmStarting(true);
+        itemDestructor = new ItemDestructionList();
 
-        this.world = world;
+        ModelContactListener mcl = new ModelContactListener(gameState);
+        world.setContactListener(mcl);
+
         if (G.DEBUG) {
             renderer = new Box2DDebugRenderer(true, true, true, true, true);
             debugCamera = new OrthographicCamera(
@@ -61,6 +78,29 @@ public class GameStage extends Stage {
             debugCamera.position.set(pos.x*G.WORLD_TO_BOX, pos.y*G.WORLD_TO_BOX, 0);
             debugCamera.update();
         }
+    }
+
+    /**
+     * Remove destroyed actors/items.
+     */
+    public void destroyActors() {
+        if (!itemDestructor.isEmpty()) {
+            Iterator<Actor> it = itemDestructor.getIterator();
+            while(it.hasNext()) {
+                Actor a = it.next();
+                ((Destructible)a).getBody().setUserData(null);
+                world.destroyBody(((Destructible)a).getBody());
+                a.remove();
+            }
+            itemDestructor.clear();
+        }
+    }
+
+    @Override
+    public void act(float delta) {
+        destroyActors();
+        world.step(delta, 6, 2);
+        super.act(delta);
     }
 
     @Override
@@ -169,7 +209,15 @@ public class GameStage extends Stage {
     }
 
     public World getWorld() {
-        return this.world;
+        return world;
+    }
+
+    public ItemDestruction getItemDestructionObject() {
+        return itemDestructor;
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 
     @Override
@@ -231,5 +279,6 @@ public class GameStage extends Stage {
     public void dispose () {
         renderer.dispose();
         renderer = null;
+        world.dispose();
     }
 }

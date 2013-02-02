@@ -1,23 +1,14 @@
 package fi.hbp.angr.screens;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fi.hbp.angr.BodyFactory;
-import fi.hbp.angr.ItemDestructionList;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.hud.Hud;
 import fi.hbp.angr.hud.HudScoreCounter;
-import fi.hbp.angr.logic.GameState;
-import fi.hbp.angr.logic.ModelContactListener;
-import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.models.levels.Level;
 import fi.hbp.angr.stage.GameStage;
 
@@ -25,12 +16,8 @@ import fi.hbp.angr.stage.GameStage;
  * Screen used to show the actual game contents.
  */
 public class GameScreen implements Screen, Preloadable {
-    private InputMultiplexer inputMultiplexer;
     private GameStage stage;
-    private World world;
     Level level;
-    ItemDestructionList itemDestructor;
-    private GameState gameState = new GameState();
     private Hud hud = new Hud();
 
     /**
@@ -39,10 +26,6 @@ public class GameScreen implements Screen, Preloadable {
      */
     public GameScreen(Level level) {
         this.level = level;
-        HudScoreCounter score;
-        score = new HudScoreCounter(gameState);
-        score.loadAssets();
-        hud.addActor(score);
     }
 
     @Override
@@ -58,31 +41,12 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void render(float delta) {
-        destroyActors();
-        world.step(delta, 6, 2);
-
         Gdx.gl.glClearColor(0f, 0.75f, 1f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);
         stage.draw();
         hud.draw();
-    }
-
-    /**
-     * Remove destroyed actors/items.
-     */
-    private void destroyActors() {
-        if (!itemDestructor.isEmpty()) {
-            Iterator<Actor> it = itemDestructor.getIterator();
-            while(it.hasNext()) {
-                Actor a = it.next();
-                ((Destructible)a).getBody().setUserData(null);
-                world.destroyBody(((Destructible)a).getBody());
-                a.remove();
-            }
-            itemDestructor.clear();
-        }
     }
 
     @Override
@@ -92,26 +56,23 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void show() {
-        world = new World(new Vector2(0.0f, -9.8f), true);
-        world.setWarmStarting(true);
-
         int xsize = Gdx.graphics.getWidth() * 2;
         int ysize = Gdx.graphics.getHeight() * 2;
-        stage = new GameStage(xsize, ysize, world);
+        stage = new GameStage(xsize, ysize);
 
-        inputMultiplexer = new InputMultiplexer();
+        /* Create input multiplexer */
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.addProcessor(stage);
 
-        itemDestructor = new ItemDestructionList();
-
-        ModelContactListener mcl = new ModelContactListener(gameState);
-        world.setContactListener(mcl);
+        /* Create score counter for HUD */
+        HudScoreCounter score;
+        score = new HudScoreCounter(stage.getGameState());
+        hud.addActor(score);
 
         // Create and add map/level actor
-        BodyFactory bf = new BodyFactory(stage, itemDestructor, inputMultiplexer);
-        gameState.clear();
-        level.show(bf, gameState);
+        BodyFactory bf = new BodyFactory(stage, stage.getItemDestructionObject(), inputMultiplexer);
+        level.show(bf, stage.getGameState());
         stage.addActor(level);
     }
 
@@ -133,7 +94,6 @@ public class GameScreen implements Screen, Preloadable {
     @Override
     public void dispose() {
         stage.dispose();
-        world.dispose();
         this.unload();
     }
 }

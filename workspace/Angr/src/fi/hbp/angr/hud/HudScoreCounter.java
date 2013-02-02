@@ -23,12 +23,8 @@ public class HudScoreCounter implements HudActor {
      */
     public HudScoreCounter(GameState gameState) {
         this.gameState = gameState;
-    }
 
-    /**
-     * Load assets of this score counter.
-     */
-    public void loadAssets() {
+        /* Load assets */
         FileHandle fontFile = Gdx.files.internal("fonts/BistroBlock.ttf");
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
         font = generator.generateFont(45);

@@ -4,8 +4,6 @@ import com.badlogic.gdx.math.MathUtils;
 
 import fi.hbp.angr.PID;
 
-
-
 /**
  * Camera position filter.
  */
@@ -17,7 +15,7 @@ public class CameraFilter {
      * Constructor for CameraFilter.
      * @param kp proportional gain.
      */
-    CameraFilter(float kp, float ki, float kd) {
+    public CameraFilter(float kp, float ki, float kd) {
         xpid = new PID(kp, ki, kd);
         ypid = new PID(kp, ki, kd);
     }
