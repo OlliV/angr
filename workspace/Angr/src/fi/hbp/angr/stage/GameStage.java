@@ -212,7 +212,7 @@ public class GameStage extends Stage {
         return world;
     }
 
-    public ItemDestruction getItemDestructionObject() {
+    public ItemDestruction getItemDestructionList() {
         return itemDestructor;
     }
 

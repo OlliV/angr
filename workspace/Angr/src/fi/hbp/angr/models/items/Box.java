@@ -25,6 +25,7 @@ import fi.hbp.angr.models.BoxDamageModel;
 import fi.hbp.angr.models.CollisionFilterMasks;
 import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
+import fi.hbp.angr.stage.GameStage;
 
 /**
  * A box for level decoration.
@@ -81,8 +82,9 @@ public class Box extends Actor implements Destructible {
      * @param y spawn coordinate.
      * @param angle spawn angle.
      */
-    public Box(World world, ItemDestruction itdes, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
-        this.itdes = itdes;
+    public Box(GameStage stage, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
+        this.itdes = stage.getItemDestructionList();
+        World world = stage.getWorld();
 
         as.bd.position.set(new Vector2(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX));
         body = world.createBody(as.bd);

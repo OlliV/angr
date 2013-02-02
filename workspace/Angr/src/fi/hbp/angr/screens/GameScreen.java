@@ -71,7 +71,7 @@ public class GameScreen implements Screen, Preloadable {
         hud.addActor(score);
 
         // Create and add map/level actor
-        BodyFactory bf = new BodyFactory(stage, stage.getItemDestructionObject(), inputMultiplexer);
+        BodyFactory bf = new BodyFactory(stage, inputMultiplexer);
         level.show(bf, stage.getGameState());
         stage.addActor(level);
     }

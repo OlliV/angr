@@ -19,7 +19,6 @@ public class BodyFactory {
     private GameStage stage;
     private InputMultiplexer inputMultiplexer;
     private BodyEditorLoader bel;
-    private ItemDestruction itdes;
     protected AssetContainer asGrenade = new AssetContainer();
     protected AssetContainer asBox = new AssetContainer();
     protected Hans.HansAssetContainer hac = new Hans.HansAssetContainer();
@@ -43,9 +42,8 @@ public class BodyFactory {
      * @param itdes item destruction object to allow game objects to destroy them selves safely.
      * @param inputMultiplexer input multiplexer for adding new input processor.
      */
-    public BodyFactory(GameStage stage, ItemDestruction itdes, InputMultiplexer inputMultiplexer) {
+    public BodyFactory(GameStage stage, InputMultiplexer inputMultiplexer) {
         this.stage = stage;
-        this.itdes = itdes;
         this.inputMultiplexer = inputMultiplexer;
 
         bel = new BodyEditorLoader(Gdx.files.internal("models.json"));
@@ -72,7 +70,7 @@ public class BodyFactory {
      * @return actor of the new game object.
      */
     public Actor spawnGrenade(float x, float y, float angle) {
-        Grenade actor = new Grenade(stage, itdes, bel, asGrenade, x, y, angle);
+        Grenade actor = new Grenade(stage, bel, asGrenade, x, y, angle);
         inputMultiplexer.addProcessor(actor);
         stage.addActor(actor);
         ((GameStage)stage).setCameraFollow(((Grenade)actor).getBody());
@@ -87,7 +85,7 @@ public class BodyFactory {
      * @return Actor of the new game object.
      */
     public Actor spawnBox(float x, float y, float angle) {
-        Box actor = new Box(stage.getWorld(), itdes, bel, asBox, x, y, angle);
+        Box actor = new Box(stage, bel, asBox, x, y, angle);
         stage.addActor(actor);
         return actor;
     }
