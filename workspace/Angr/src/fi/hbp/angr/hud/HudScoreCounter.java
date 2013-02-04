@@ -14,7 +14,7 @@ import fi.hbp.angr.logic.GameState;
  */
 public class HudScoreCounter implements HudActor {
     private BitmapFont font;
-    private GameState gameState;
+    private final GameState gameState;
 
     /**
      * Constructor for HudScoreCounter.

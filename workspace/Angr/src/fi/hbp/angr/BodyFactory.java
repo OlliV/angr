@@ -16,9 +16,9 @@ import fi.hbp.angr.stage.GameStage;
  * Body factory used to spawn objects during the game.
  */
 public class BodyFactory {
-    private GameStage stage;
-    private InputMultiplexer inputMultiplexer;
-    private BodyEditorLoader bel;
+    private final GameStage stage;
+    private final InputMultiplexer inputMultiplexer;
+    private final BodyEditorLoader bel;
     protected AssetContainer asGrenade = new AssetContainer();
     protected AssetContainer asBox = new AssetContainer();
     protected Hans.HansAssetContainer hac = new Hans.HansAssetContainer();

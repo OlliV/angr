@@ -36,3 +36,7 @@ Tuntikirjanpito
 			  pelin kulkuun liittyvän
 			- GameScreen vastaa ainoastaan renderöintiin
 			  liittyvistä tehtävistä
+2013-02-03	6.0 h	- Luokkakaavion päivittelyä (ei vielä commitissa)
+			- Refaktorointia ja oliorakenteen viilailua
+			- Screenien hallinnan muutoksia
+			- Pelin loppuscreeni ja badget

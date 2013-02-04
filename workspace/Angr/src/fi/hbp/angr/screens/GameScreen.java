@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 
 import fi.hbp.angr.BodyFactory;
+import fi.hbp.angr.GdxGame;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.hud.Hud;
 import fi.hbp.angr.hud.HudScoreCounter;
@@ -16,16 +17,17 @@ import fi.hbp.angr.stage.GameStage;
  * Screen used to show the actual game contents.
  */
 public class GameScreen implements Screen, Preloadable {
+    private final GdxGame game;
     private GameStage stage;
-    Level level;
+    private Level level;
     private Hud hud = new Hud();
 
     /**
      * Start the game
-     * @param level the game level to be shown.
+     * @param level first level to be loaded.
      */
-    public GameScreen(Level level) {
-        this.level = level;
+    public GameScreen(GdxGame game) {
+        this.game = game;
     }
 
     @Override
@@ -39,6 +41,12 @@ public class GameScreen implements Screen, Preloadable {
         level.unload();
     }
 
+    public void loadLevel(Level level) {
+        this.level = level;
+        Screen splash = new SplashScreen(game, this, 0.2f);
+        game.setScreen(splash);
+    }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0.75f, 1f, 1);
@@ -47,6 +55,10 @@ public class GameScreen implements Screen, Preloadable {
         stage.act(delta);
         stage.draw();
         hud.draw();
+
+        if (stage.hasGameEnded()) {
+            game.endOfGame(stage.getGameState());
+        }
     }
 
     @Override

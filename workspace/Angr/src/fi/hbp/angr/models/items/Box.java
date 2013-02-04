@@ -33,13 +33,13 @@ import fi.hbp.angr.stage.GameStage;
 public class Box extends Actor implements Destructible {
     private static final String MODEL_NAME = "box";
     private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
-    private ItemDestruction itdes;
-    private Body body;
-    private Vector2 modelOrigin;
-    private Sprite sprite;
-    private DamageModel damageModel = new BoxDamageModel();
+    private final ItemDestruction itdes;
+    private final Body body;
+    private final Vector2 modelOrigin;
+    private final Sprite sprite;
+    private final DamageModel damageModel = new BoxDamageModel();
     private BitmapFont font = new BitmapFont();
-    private ParticleEffect particleEffect;
+    private final ParticleEffect particleEffect;
     private boolean destroyed;
 
     /**

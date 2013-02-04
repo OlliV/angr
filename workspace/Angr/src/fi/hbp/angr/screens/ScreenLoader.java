@@ -18,14 +18,14 @@ import fi.hbp.angr.Preloadable;
  * assets needed.
  */
 public class ScreenLoader {
-    private Game g;
-    private Screen gs;
+    private final Game game;
+    private final Screen screen;
     private Lock l = new ReentrantLock();
     private boolean loaded = false;
 
-    public ScreenLoader(Game g, Screen gs) {
-        this.g = g;
-        this.gs = gs;
+    public ScreenLoader(Game game, Screen screen) {
+        this.game = game;
+        this.screen = screen;
     }
 
     /**
@@ -34,8 +34,8 @@ public class ScreenLoader {
     public void start() {
         l.lock();
         try {
-            if (Preloadable.class.isInstance(gs)) {
-                ((Preloadable)gs).preload();
+            if (Preloadable.class.isInstance(screen)) {
+                ((Preloadable)screen).preload();
             }
             loaded = true;
         } finally {
@@ -55,7 +55,7 @@ public class ScreenLoader {
                 Gdx.app.exit();
             }
             G.getAssetManager().finishLoading();
-            g.setScreen(gs);
+            game.setScreen(screen);
         } finally {
             l.unlock();
         }

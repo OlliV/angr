@@ -26,9 +26,9 @@ import fi.hbp.angr.models.Destructible;
  * Game stage
  */
 public class GameStage extends Stage {
-    private World world;
+    private final World world;
     ItemDestructionList itemDestructor;
-    private GameState gameState = new GameState();
+    private final GameState gameState = new GameState();
 
     /* Debug */
     private Box2DDebugRenderer renderer;
@@ -48,6 +48,13 @@ public class GameStage extends Stage {
     private CameraFilter camFilt = new CameraFilter(0.1f, 2.5f, 0.001f);
     private Body cameraFollowBody;
     private boolean destructibleCameraFollowBody = false;
+
+    /* Game state relate */
+    /** Game state update interval */
+    private final int gsUpdateInterval = 100;
+    /** Game state update counter */
+    private int gsCounter = gsUpdateInterval;
+    private boolean endOfGame = false;
 
     /**
      * Constructor for GameStage
@@ -113,6 +120,13 @@ public class GameStage extends Stage {
         else {
             updateDebugCamera();
             renderer.render(world, debugCamera.combined);
+        }
+
+        if (--gsCounter <= 0) {
+            gsCounter = gsUpdateInterval;
+            if(!gameState.update()) {
+                this.endOfGame = true;
+            }
         }
     }
 
@@ -220,6 +234,10 @@ public class GameStage extends Stage {
         return gameState;
     }
 
+    public boolean hasGameEnded() {
+        return this.endOfGame;
+    }
+
     @Override
     public boolean scrolled(int amount) {
         return false;
@@ -248,6 +266,9 @@ public class GameStage extends Stage {
             break;
         case Keys.D:
             keyCommands.enableDebugCamera = keyCommands.enableDebugCamera ? false : true;
+            break;
+        case Keys.E:
+            endOfGame = true;
             break;
         }
         return false;

@@ -29,15 +29,15 @@ import fi.hbp.angr.stage.GameStage;
  * A Throwable and explodable grenade model.
  */
 public class Grenade extends SlingshotActor implements Destructible {
-    private static final String MODEL_NAME = "grenade";
-    private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
-    private static final String SOUND_FX_PATH = "data/grenade.wav";
-    private static final float EXPLOSION_DELAY = 3.0f;
+    private final static String MODEL_NAME = "grenade";
+    private final static String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
+    private final static String SOUND_FX_PATH = "data/grenade.wav";
+    private final static float EXPLOSION_DELAY = 3.0f;
 
     private ItemDestruction itdes;
 
-    private Vector2 modelOrigin;
-    private Sprite sprite;
+    private final Vector2 modelOrigin;
+    private final Sprite sprite;
 
     /* Explosion and destruction */
     private boolean bExplosionTimer = false;

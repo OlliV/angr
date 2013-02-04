@@ -79,8 +79,8 @@ public class SplashScreen extends Timer.Task implements Screen {
 
         sprite = new Sprite(region);
         sprite.setSize(0.7f, 0.7f * sprite.getHeight() / sprite.getWidth());
-        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-        sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight() / 2);
+        sprite.setOrigin(sprite.getWidth() / 2f, sprite.getHeight() / 2f);
+        sprite.setPosition(-sprite.getWidth() / 2f, -sprite.getHeight() / 2f);
 
         // Change to Screen gs given in constructor after a short delay
         splashTimer.scheduleTask(this, delay);
@@ -110,5 +110,6 @@ public class SplashScreen extends Timer.Task implements Screen {
     @Override
     public void run() {
         loader.swap();
+        loader = null;
     }
 }
