@@ -5,7 +5,7 @@ import com.badlogic.gdx.Game;
 import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.models.levels.TestLevel;
 import fi.hbp.angr.screens.GameScreen;
-import fi.hbp.angr.screens.summary.SummaryScreen;
+import fi.hbp.angr.screens.SummaryScreen;
 
 public class GdxGame extends Game {
     private GameScreen gameScreen;

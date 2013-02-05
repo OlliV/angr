@@ -100,7 +100,7 @@ public abstract class Level extends Actor implements Preloadable {
      */
     public int getHighScore() {
         return 100;
-        // TODO
+        // TODO get high score
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class Level extends Actor implements Preloadable {
      * @param score
      */
     public void setHighScore(int score) {
-        // TODO
+        // TODO Set high score.
     }
 
     @Override

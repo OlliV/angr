@@ -63,7 +63,6 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
         stage.setViewport(width * 2, height * 2, true);
         hud.resize(width, height);
     }

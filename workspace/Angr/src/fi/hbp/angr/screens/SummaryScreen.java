@@ -1,4 +1,4 @@
-package fi.hbp.angr.screens.summary;
+package fi.hbp.angr.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -19,6 +19,7 @@ import fi.hbp.angr.logic.GameState;
 
 /**
  * Screen that is shown when the game ends due to either win or game over.
+ * TODO UI Buttons
  */
 public class SummaryScreen implements Screen {
     private OrthographicCamera camera;
@@ -124,7 +125,6 @@ public class SummaryScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
