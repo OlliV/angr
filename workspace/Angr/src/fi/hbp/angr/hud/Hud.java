@@ -47,4 +47,14 @@ public class Hud {
         }
         hudBatch.end();
     }
+
+    /**
+     * Resize HUD.
+     * @param width of screen.
+     * @param height of screen.
+     */
+    public void resize(int width, int height) {
+        /* There must be a clever way to transform the matrix instead of this. */
+        hudBatch = new SpriteBatch();
+    }
 }

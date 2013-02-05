@@ -6,22 +6,63 @@ import com.badlogic.gdx.math.MathUtils;
  * Game state.
  */
 public class GameState {
+    /**
+     * Grenade counter.
+     */
+    public class Grenades {
+        /**
+         * Amount of grenades at the beginning.
+         */
+        public final int originalCount;
+        /**
+         * Current count.
+         */
+        private int count;
+
+        /**
+         * Constructor for Grenades class.
+         * @param amount Amount of grenades available.
+         */
+        public Grenades(int amount) {
+            this.originalCount = amount;
+            this.count = amount;
+        }
+
+        /**
+         * Decrement amount of grenades by one.
+         */
+        public void decrement() {
+            if (count > 0)
+                count--;
+        }
+
+        /**
+         * Returns current grenade count.
+         * @return current grenade count.
+         */
+        public int getCount() {
+            return count;
+        }
+    }
+
     private int score = 0;
     private int highScore = 0;
-    private int starScale = 1;
+    private int badgeScale = 1;
     private int enemyCount = 0;
+    private Grenades grenades = new Grenades(0);
 
     /**
      * Initialize game state object.
      * @param highScore high score on the current level.
-     * @param starScale star scaling, points needed per star.
-     * @param enemies count of enemies on the current level at the beginning
-     * of the game.
+     * @param badgeScale points needed to achieve one badge.
+     * @param enemies enemy count on the current level at the beginning of the game.
+     * @param grenades amount of grenades available to clear the current level.
      */
-    public void init(int highScore, int starScale, int enemies) {
+    public void init(int highScore, int badgeScale, int enemies, int grenades) {
         this.highScore = highScore;
-        this.starScale = (starScale > 0) ? starScale : 1;
+        this.badgeScale = (badgeScale > 0) ? badgeScale : 1;
         this.enemyCount = enemies;
+        this.grenades = new Grenades(grenades);
     }
 
     /**
@@ -59,12 +100,16 @@ public class GameState {
         score = 0;
     }
 
+    public Grenades getGrenades() {
+        return this.grenades;
+    }
+
     /**
-     * Get current amount of stars.
-     * @return
+     * Get number of achieved badges.
+     * @return number of badges between 0..3,
      */
-    public int getStars() {
-        return MathUtils.clamp(score / starScale, 0, 3);
+    public int getBadges() {
+        return MathUtils.clamp(score / badgeScale, 0, 3);
     }
 
     /**
@@ -77,16 +122,22 @@ public class GameState {
 
     /**
      * Update statuses.
-     * @return true if game continues, false if game is end
+     * @return true if game continues, false if game is end.
      */
     public boolean update() {
         if (enemyCount <= 0) {
-            if (score > highScore) {
-                highScore = score;
-            }
+            return false;
+        }
+        if (grenades.getCount() == 0) {
             return false;
         }
         return true;
+    }
+
+    public void countFinalScore() {
+        if (score > highScore) {
+            highScore = score;
+        }
     }
 
     @Override

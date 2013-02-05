@@ -238,6 +238,18 @@ public class Hans extends Actor implements InputProcessor {
         }
     }
 
+    @Override
+    public float getX() {
+        Vector2 pos = hbody.body.getPosition();
+        return pos.x * G.BOX_TO_WORLD - hbody.bodyOrigin.x;
+    }
+
+    @Override
+    public float getY() {
+        Vector2 pos = hbody.body.getPosition();
+        return pos.y * G.BOX_TO_WORLD - hbody.bodyOrigin.y;
+    }
+
     public void setPalmJoint(Body obj) {
         this.objPalm = obj;
 

@@ -27,14 +27,14 @@ public class GameStateTest {
 
     @Test
     public void testInit() {
-        gameState.init(100, 1, 1);
+        gameState.init(100, 1, 1, 10);
         assertThat(gameState.getScore(), equalTo(0));
         assertThat(gameState.getHighScore(), equalTo(100));
     }
 
     @Test
     public void testClear() {
-        gameState.init(500, 100, 1);
+        gameState.init(500, 100, 1, 10);
         gameState.addPoints(1000, false);
         gameState.clear();
         assertThat(gameState.getScore(), equalTo(0));
@@ -51,7 +51,7 @@ public class GameStateTest {
 
     @Test
     public void clearScore() {
-        gameState.init(100, 1, 1);
+        gameState.init(100, 1, 1, 10);
         gameState.addPoints(400, false);
         gameState.clearScore();
         assertThat(gameState.getHighScore(), equalTo(100));
@@ -59,27 +59,52 @@ public class GameStateTest {
     }
 
     @Test
-    public void testGetStars() {
-        gameState.init(0, 100, 1);
+    public void testGetGrenades() {
+        gameState.init(0, 0, 0, 10);
+        gameState.getGrenades().decrement();
+        assertThat("Test that amount of grenades if decremented.",
+                gameState.getGrenades().getCount(), equalTo(9));
+        assertThat(gameState.getGrenades().originalCount, equalTo(10));
+
+        for (int i = 0; i < 15; i++) {
+            gameState.getGrenades().decrement();
+        }
+        assertThat("Test that amount of grenades is zero.",
+                gameState.getGrenades().getCount(), equalTo(0));
+    }
+
+    @Test
+    public void testGetBadges() {
+        gameState.init(0, 100, 1, 10);
         gameState.addPoints(90, false);
-        assertThat(gameState.getStars(), equalTo(0));
+        assertThat(gameState.getBadges(), equalTo(0));
         gameState.addPoints(10, false);
-        assertThat(gameState.getStars(), equalTo(1));
+        assertThat(gameState.getBadges(), equalTo(1));
         gameState.addPoints(5000, false);
-        assertThat(gameState.getStars(), equalTo(3));
+        assertThat(gameState.getBadges(), equalTo(3));
     }
 
     @Test
     public void testGetHighScore() {
-        gameState.init(500, 100, 1);
+        gameState.init(500, 100, 1, 10);
         assertThat(gameState.getHighScore(), equalTo(500));
     }
 
     @Test
-    public void testGameEnds() {
-        gameState.init(0, 1, 1);
+    public void testGameEndsEnemies() {
+        gameState.init(0, 1, 1, 10);
         assertThat(gameState.update(), equalTo(true));
         gameState.addPoints(10, true);
+        assertThat(gameState.update(), equalTo(false));
+    }
+
+    @Test
+    public void testGameEndsGrenades() {
+        gameState.init(0, 1, 1, 10);
+        assertThat(gameState.update(), equalTo(true));
+        for (int i = 0; i < 15; i++) {
+            gameState.getGrenades().decrement();
+        }
         assertThat(gameState.update(), equalTo(false));
     }
 }

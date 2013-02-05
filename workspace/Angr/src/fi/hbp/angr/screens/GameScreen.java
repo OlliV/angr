@@ -9,7 +9,7 @@ import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.GdxGame;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.hud.Hud;
-import fi.hbp.angr.hud.HudScoreCounter;
+import fi.hbp.angr.hud.HudGameStateDisplay;
 import fi.hbp.angr.models.levels.Level;
 import fi.hbp.angr.stage.GameStage;
 
@@ -64,6 +64,8 @@ public class GameScreen implements Screen, Preloadable {
     @Override
     public void resize(int width, int height) {
         // TODO Auto-generated method stub
+        stage.setViewport(width * 2, height * 2, true);
+        hud.resize(width, height);
     }
 
     @Override
@@ -78,8 +80,8 @@ public class GameScreen implements Screen, Preloadable {
         inputMultiplexer.addProcessor(stage);
 
         /* Create score counter for HUD */
-        HudScoreCounter score;
-        score = new HudScoreCounter(stage.getGameState());
+        HudGameStateDisplay score;
+        score = new HudGameStateDisplay(stage.getGameState());
         hud.addActor(score);
 
         // Create and add map/level actor
@@ -90,7 +92,7 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void hide() {
-        // TODO Auto-generated method stub
+        this.unload();
     }
 
     @Override

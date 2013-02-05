@@ -15,7 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
 import fi.hbp.angr.Preloadable;
+import fi.hbp.angr.actors.SlingshotActor;
 import fi.hbp.angr.logic.GameState;
+import fi.hbp.angr.models.Hans;
 
 /**
  * Abstract Level class.
@@ -23,6 +25,12 @@ import fi.hbp.angr.logic.GameState;
 public abstract class Level extends Actor implements Preloadable {
     private final String levelName;
     private Sprite sprite;
+    protected GameState gs;
+    protected BodyFactory bf;
+
+    private final float grenadeSpawnDelay = 5.0f;
+    protected Hans hans;
+    private float grenadeSpawnCounter = 0.0f;
 
     /**
      * Constructor for Level
@@ -49,7 +57,22 @@ public abstract class Level extends Actor implements Preloadable {
      * @param bf Body factory for creating the map body and sprite.
      * @param mapFd
      */
-    protected void show(BodyFactory bf, FixtureDef mapFd) {
+    protected void show(FixtureDef mapFd, float hansX, float hansY) {
+        if (bf == null) {
+            Gdx.app.error("Level", "Body factory not set.");
+            Gdx.app.exit();
+            while (true);
+        }
+
+        /* Create map terrain */
+        createTerrain(mapFd);
+
+        /* Spawn player */
+        hans = (Hans)bf.spawnHans(hansX, hansY, 0);
+        spawnGrenade();
+    }
+
+    private void createTerrain(FixtureDef mapFd) {
         BodyEditorLoader bel = new BodyEditorLoader(
                 Gdx.files.internal("levels.json"));
 
@@ -72,8 +95,8 @@ public abstract class Level extends Actor implements Preloadable {
     }
 
     /**
-     * Get level highscore
-     * @return higscore
+     * Get level highscore.
+     * @return higscore.
      */
     public int getHighScore() {
         return 100;
@@ -81,7 +104,7 @@ public abstract class Level extends Actor implements Preloadable {
     }
 
     /**
-     * Set level highscore
+     * Set level highscore.
      * @param score
      */
     public void setHighScore(int score) {
@@ -91,6 +114,29 @@ public abstract class Level extends Actor implements Preloadable {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         sprite.draw(batch);
+        updateHans();
+    }
+
+    private void updateHans() {
+
+        if (hans.isPalmJointActive() == false) {
+            GameState.Grenades grenades = gs.getGrenades();
+            if (grenades.getCount() > 0) {
+                grenadeSpawnCounter += Gdx.graphics.getDeltaTime();
+                if (grenadeSpawnCounter >= grenadeSpawnDelay) {
+                    grenades.decrement();
+                    if (grenades.getCount() > 0)
+                        spawnGrenade();
+                    grenadeSpawnCounter = 0.0f;
+                }
+            }
+        }
+    }
+
+    private void spawnGrenade() {
+        hans.setPalmJoint(((SlingshotActor)bf.spawnGrenade(
+                hans.getX() + 50.0f,
+                hans.getY() + 30.0f, 0)).getBody());
     }
 
     @Override

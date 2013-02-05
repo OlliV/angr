@@ -12,16 +12,16 @@ import fi.hbp.angr.logic.GameState;
 /**
  * HudScoreCounter used to show current game score status.
  */
-public class HudScoreCounter implements HudActor {
+public class HudGameStateDisplay implements HudActor {
     private BitmapFont font;
     private final GameState gameState;
 
     /**
-     * Constructor for HudScoreCounter.
+     * Constructor for HudScoreGameStateDisplay.
      * @param gameState gameState object where from current score status can be
      * polled.
      */
-    public HudScoreCounter(GameState gameState) {
+    public HudGameStateDisplay(GameState gameState) {
         this.gameState = gameState;
 
         /* Load assets */
@@ -36,6 +36,13 @@ public class HudScoreCounter implements HudActor {
 
     @Override
     public void draw(SpriteBatch batch) {
-        font.draw(batch, gameState.toString(), Gdx.graphics.getWidth() - font.getSpaceWidth() * 15, Gdx.graphics.getHeight() - 20);
+        font.draw(batch, "Score: " + gameState.getScore(),
+                (float)Gdx.graphics.getWidth() - font.getSpaceWidth() * 15.0f,
+                (float)Gdx.graphics.getHeight() - 20.0f);
+
+        GameState.Grenades grenades = gameState.getGrenades();
+        font.draw(batch, "Grenades: " + grenades.getCount() + "/" + grenades.originalCount,
+                15.0f,
+                (float)Gdx.graphics.getHeight() - 20.0f);
     }
 }
