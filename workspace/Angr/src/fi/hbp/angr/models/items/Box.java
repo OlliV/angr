@@ -74,8 +74,7 @@ public class Box extends Actor implements Destructible {
 
     /**
      * Class constructor.
-     * @param world the game physics simulation world (of Box2d).
-     * @param itdes the item destruction object.
+     * @param stage the game stage.
      * @param bel a body editor loader object.
      * @param as preloaded assets for this class.
      * @param x spawn coordinate.

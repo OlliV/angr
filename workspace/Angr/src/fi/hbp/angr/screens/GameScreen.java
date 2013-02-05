@@ -24,7 +24,7 @@ public class GameScreen implements Screen, Preloadable {
 
     /**
      * Start the game
-     * @param level first level to be loaded.
+     * @param game the GdxGame.
      */
     public GameScreen(GdxGame game) {
         this.game = game;

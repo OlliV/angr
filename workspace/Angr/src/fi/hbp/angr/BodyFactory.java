@@ -37,9 +37,7 @@ public class BodyFactory {
 
     /**
      * Constructor for body factory.
-     * @param stage game stage.
-     * @param world game world (Box2D physics world).
-     * @param itdes item destruction object to allow game objects to destroy them selves safely.
+     * @param stage the game stage.
      * @param inputMultiplexer input multiplexer for adding new input processor.
      */
     public BodyFactory(GameStage stage, InputMultiplexer inputMultiplexer) {

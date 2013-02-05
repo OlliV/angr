@@ -82,8 +82,6 @@ public class Grenade extends SlingshotActor implements Destructible {
     /**
      * Class constructor.
      * @param stage the game stage.
-     * @param world the game physics simulation world (of Box2d).
-     * @param itdes the item destruction object.
      * @param bel a body editor loader object.
      * @param as preloaded assets for this class.
      * @param x spawn coordinate.

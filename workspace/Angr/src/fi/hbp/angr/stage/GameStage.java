@@ -57,10 +57,9 @@ public class GameStage extends Stage {
     private boolean endOfGame = false;
 
     /**
-     * Constructor for GameStage
+     * Constructor for GameStage.
      * @param width width of the game stage viewport in pixels
      * @param height height of the game stage viewport in pixels
-     * @param world Box2D physics world
      */
     public GameStage(float width, float height) {
         super(width, height, false);

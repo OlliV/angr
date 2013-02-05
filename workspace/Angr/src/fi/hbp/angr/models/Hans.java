@@ -146,7 +146,6 @@ public class Hans extends Actor implements InputProcessor {
     /**
      * Class constructor.
      * @param stage the game stage.
-     * @param world the game physics simulation world (of Box2d).
      * @param bel a Body editor loader object.
      * @param hac preloaded assets for this class.
      * @param x spawn coordinate.

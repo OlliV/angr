@@ -37,7 +37,7 @@ public abstract class DamageModel {
 
     /**
      * Collision force
-     * @param Force Force value in Box2D scale.
+     * @param force value of force in Box2D scale.
      */
     public abstract void hit(float force);
 
