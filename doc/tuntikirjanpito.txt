@@ -44,3 +44,4 @@ Tuntikirjanpito
 			- Kranaattilaskuri
 			- Hans siirretty Level:n alle
 2013-02-05	1.0 h	- Level failed/cleared
+2013-02-05	1.0 h	- Laskuri + ääni pelin päätyttyä
