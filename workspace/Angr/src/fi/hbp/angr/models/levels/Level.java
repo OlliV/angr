@@ -58,8 +58,8 @@ public abstract class Level extends Actor implements Preloadable {
      * @param mapFd
      */
     protected void show(FixtureDef mapFd, float hansX, float hansY) {
-        if (bf == null) {
-            Gdx.app.error("Level", "Body factory not set.");
+        if (bf == null || gs == null) {
+            Gdx.app.error("Level", "Body factory or game state not set.");
             Gdx.app.exit();
             while (true);
         }
