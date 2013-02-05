@@ -1,6 +1,7 @@
 package fi.hbp.angr;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -9,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class UpCounterTest {
+    UpCounter counter;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
@@ -27,23 +29,32 @@ public class UpCounterTest {
     }
 
     @Test
-    public void testUpCounter() {
-        fail("Not yet implemented");
+    public void testUpdatePositive() {
+        counter = new UpCounter(100, 1f, false);
+        counter.update(1f);
+        counter.update(1f);
+        assertThat("Counts correcly for positive value.", counter.getValue(), equalTo(10));
     }
 
     @Test
-    public void testUpdate() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testGetValue() {
-        fail("Not yet implemented");
+    public void testUpdateNegative() {
+        counter = new UpCounter(-100, 1f, false);
+        counter.update(1f);
+        counter.update(1f);
+        assertThat("Counts correctly for negative value.", counter.getValue(), equalTo(-10));
     }
 
     @Test
     public void testIsStopped() {
-        fail("Not yet implemented");
+        counter = new UpCounter(5, 1f, false);
+        assertThat(counter.isStopped(), equalTo(false));
+
+        counter.update(1f);
+        counter.update(1f);
+        counter.update(1f); /* Current implementation doesn't really need five updates
+                             * as its internal step is five! */
+
+        assertThat(counter.isStopped(), equalTo(true));
     }
 
 }

@@ -7,8 +7,9 @@ import com.badlogic.gdx.audio.Sound;
  * Up counter class for score animations
  */
 public class UpCounter {
-    private int value;
+    private final int value;
     private int currentValue;
+    private final int dValue;
     private final float delayEnd;
     private float delayCounter = 0;
     private boolean stopped = false;
@@ -23,6 +24,8 @@ public class UpCounter {
      */
     public UpCounter(int value, float interval, boolean sounds) {
         this.value = value;
+        this.dValue = (value > 0) ? 5 : -5;
+
         this.delayEnd = interval;
         this.sounds = sounds;
 
@@ -46,8 +49,8 @@ public class UpCounter {
         if (delayCounter >= delayEnd) {
             delayCounter = 0;
 
-            currentValue += 5;
-            if (currentValue >= value) {
+            currentValue += dValue;
+            if ((value >= 0 && currentValue >= value) || (value < 0 && currentValue <= value)) {
                 currentValue = value;
                 stopped = true;
             }

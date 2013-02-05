@@ -56,13 +56,49 @@ public class GameStateTest {
     }
 
     @Test
-    public void testGetBadges() {
-        gameState.init(0, 100, 1, 10);
-        gameState.addPoints(90, false);
+    public void testGetBadgesZero() {
+        gameState.init(0, 100, 1, 1);
+        gameState.addPoints(200, false);
+        gameState.countFinalScore();
+
         assertThat(gameState.getBadges(), equalTo(0));
-        gameState.addPoints(10, false);
+    }
+
+    @Test
+    public void testGetBadgesZeroB() {
+        gameState.init(0, 100, 0, 0);
+        gameState.addPoints(90, false);
+        gameState.countFinalScore();
+
+        assertThat(gameState.getBadges(), equalTo(0));
+    }
+
+    @Test
+    public void testGetBadgesOne() {
+        gameState.init(0, 100, 0, 0);
+        gameState.addPoints(100, false);
+        gameState.countFinalScore();
+
         assertThat(gameState.getBadges(), equalTo(1));
+    }
+
+    @Test
+    public void testGetBadgesTwo() {
+        gameState.init(0, 100, 0, 0);
+        gameState.addPoints(200, false);
+        gameState.countFinalScore();
+
+        assertThat(gameState.getBadges(), equalTo(2));
+    }
+
+    @Test
+    public void testGetBadgesThree() {
+        gameState.init(0, 100, 1, 0);
+        gameState.addPoints(90, true);
+        gameState.addPoints(10, false);
         gameState.addPoints(5000, false);
+        gameState.countFinalScore();
+
         assertThat(gameState.getBadges(), equalTo(3));
     }
 
