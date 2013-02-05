@@ -45,3 +45,5 @@ Tuntikirjanpito
 			- Hans siirretty Level:n alle
 2013-02-05	1.0 h	- Level failed/cleared
 2013-02-05	1.0 h	- Laskuri + ääni pelin päätyttyä
+2013-02-05	3.0 h	- Dokumentaation päivittelyä
+			- Sekvenssikaaviot törkeästi kesken :(
