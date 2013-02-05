@@ -100,7 +100,9 @@ public class GameState {
      * @return number of badges between 0..3,
      */
     public int getBadges() {
-        return MathUtils.clamp(score / badgeScale, 0, 3);
+        if (enemyCount == 0)
+            return MathUtils.clamp(score / badgeScale, 0, 3);
+        return 0;
     }
 
     /**

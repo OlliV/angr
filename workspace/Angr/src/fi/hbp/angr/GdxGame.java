@@ -4,23 +4,23 @@ import com.badlogic.gdx.Game;
 
 import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.models.levels.TestLevel;
-import fi.hbp.angr.screens.GameEndScreen;
 import fi.hbp.angr.screens.GameScreen;
+import fi.hbp.angr.screens.summary.SummaryScreen;
 
 public class GdxGame extends Game {
     private GameScreen gameScreen;
-    private GameEndScreen gameEnd;
+    private SummaryScreen gameEnd;
 
     @Override
     public void create() {
         gameScreen = new GameScreen(this);
         gameScreen.loadLevel(new TestLevel());
 
-        gameEnd = new GameEndScreen();
+        gameEnd = new SummaryScreen();
     }
 
     public void endOfGame(GameState gs) {
-        gameEnd.setGameState(gs);
+        gameEnd.calcFinalScore(gs);
         setScreen(gameEnd);
     }
 

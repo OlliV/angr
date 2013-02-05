@@ -3,6 +3,9 @@ package fi.hbp.angr;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
+/**
+ * Up counter class for score animations
+ */
 public class UpCounter {
     private int value;
     private int currentValue;
@@ -12,9 +15,15 @@ public class UpCounter {
     private final boolean sounds;
     private static Sound clickSound;
 
-    public UpCounter(int value, float delay, boolean sounds) {
+    /**
+     * Constructor for up counter.
+     * @param value target value.
+     * @param interval time between ticks.
+     * @param sounds enable sounds.
+     */
+    public UpCounter(int value, float interval, boolean sounds) {
         this.value = value;
-        this.delayEnd = delay;
+        this.delayEnd = interval;
         this.sounds = sounds;
 
         if (sounds && clickSound == null) {
@@ -22,6 +31,10 @@ public class UpCounter {
         }
     }
 
+    /**
+     * Update counter state.
+     * @param dt delta time.
+     */
     public void update(float dt) {
         if (stopped)
             return;
@@ -41,10 +54,18 @@ public class UpCounter {
         }
     }
 
+    /**
+     * Get current value of the counter.
+     * @return current value.
+     */
     public int getValue() {
         return currentValue;
     }
 
+    /**
+     * Is this counter stopped.
+     * @return true if counter is stopped; false otherwise.
+     */
     public boolean isStopped() {
         return stopped;
     }

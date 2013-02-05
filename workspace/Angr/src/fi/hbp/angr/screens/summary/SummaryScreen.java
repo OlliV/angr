@@ -1,4 +1,4 @@
-package fi.hbp.angr.screens;
+package fi.hbp.angr.screens.summary;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,12 +14,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
+import fi.hbp.angr.UpCounter;
 import fi.hbp.angr.logic.GameState;
 
 /**
- * Screen that is shown when game ends to win or game over.
+ * Screen that is shown when the game ends due to either win or game over.
  */
-public class GameEndScreen implements Screen {
+public class SummaryScreen implements Screen {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Texture grenadierTexture;
@@ -28,13 +29,17 @@ public class GameEndScreen implements Screen {
     private TextureRegion[] badges = new TextureRegion[3];
     private BitmapFont font;
 
-    private GameState gs;
-
     private boolean levelCleared;
     private String levelClearedText;
     private String scoreText;
+    private UpCounter bareScoreCnt;
+    private UpCounter additionalPointsCnt;
+    private int badgeLevel;
 
-    public GameEndScreen() {
+    /**
+     * Constructor for SummaryScreen class.
+     */
+    public SummaryScreen() {
         /* Load assets */
         FileHandle fontFile = Gdx.files.internal("fonts/BistroBlock.ttf");
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
@@ -45,10 +50,6 @@ public class GameEndScreen implements Screen {
         font.setScale(1.0f);
     }
 
-    public void setGameState(GameState gs) {
-        this.gs = gs;
-    }
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -57,36 +58,60 @@ public class GameEndScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        if (gs != null) {
+        if (levelClearedText != null) {
             grenadierSprite.draw(batch);
             drawStats();
         } else {
-            font.draw(batch, "ERROR: GameState not set!", 0.0f, 0.0f);
+            font.draw(batch, "ERROR: Final score not calculated!", 0.0f, 0.0f);
         }
         batch.end();
     }
 
+    /**
+     * Draw score counters and badges
+     */
     private void drawStats() {
         /* Level cleared text */
         font.draw(batch, levelClearedText,
-                -(gs.toString().length() * font.getSpaceWidth()) / 2.0f,
+                -(levelClearedText.length() * font.getSpaceWidth()) / 2.0f,
                 font.getXHeight() + 250.0f);
 
-        /* Score */
-        font.draw(batch, scoreText,
-                -(gs.toString().length() * font.getSpaceWidth()) / 2.0f,
-                font.getXHeight() + 150.0f);
+        drawScore();
+        drawBadges();
+    }
 
-        showBadges(batch, gs.getBadges());
+    /**
+     * Draw score counters
+     */
+    private void drawScore() {
+        if (!bareScoreCnt.isStopped()) {
+            bareScoreCnt.update(Gdx.graphics.getDeltaTime());
+
+            String str = "" + bareScoreCnt.getValue();
+            font.draw(batch, str,
+                    -(str.length() * font.getSpaceWidth()) / 2.0f,
+                    font.getXHeight() + 150.0f);
+        } else if (!additionalPointsCnt.isStopped()) {
+            additionalPointsCnt.update(Gdx.graphics.getDeltaTime());
+
+            String str = bareScoreCnt.getValue() + " + " + additionalPointsCnt.getValue();
+            font.draw(batch, str,
+                    -(str.length() * font.getSpaceWidth()) / 2.0f,
+                    font.getXHeight() + 150.0f);
+        } else {
+            String str = bareScoreCnt.getValue() + " + " + additionalPointsCnt.getValue() + scoreText;
+            font.draw(batch, str,
+                -(str.length() * font.getSpaceWidth()) / 2.0f,
+                font.getXHeight() + 150.0f);
+        }
     }
 
     /**
      * Show achieved badges.
-     * @param batch
-     * @param lvl
+     * @param lvl badge level.
      */
-    private void showBadges(SpriteBatch batch, int lvl) {
-        switch(lvl) {
+    private void drawBadges() {
+        switch(badgeLevel) {
         case 3:
             batch.draw(badges[2], (float)badges[2].getRegionWidth(), 0.0f);
         case 2:
@@ -112,10 +137,12 @@ public class GameEndScreen implements Screen {
 
         loadGrenadierSprite(width, height);
         loadBadges();
-        calcFinalScore();
     }
 
-    public void calcFinalScore() {
+    /**
+     * Calculate final score.
+     */
+    public void calcFinalScore(GameState gs) {
         int bareScore;
         int additionalPoints;
 
@@ -128,7 +155,12 @@ public class GameEndScreen implements Screen {
         } else {
             levelClearedText = "Level failed!";
         }
-        scoreText = bareScore + " + " + additionalPoints + " = " + gs.getScore();
+
+        bareScoreCnt = new UpCounter(bareScore, 0.01f, true);
+        additionalPointsCnt = new UpCounter(additionalPoints, 0.01f, true);
+        scoreText = " = " + gs.getScore();
+
+        badgeLevel = gs.getBadges();
     }
 
     /**
@@ -169,26 +201,17 @@ public class GameEndScreen implements Screen {
 
     @Override
     public void hide() {
-        /* No need for old game state anymore */
-        gs = null;
     }
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void resume() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
-
     }
-
 }
