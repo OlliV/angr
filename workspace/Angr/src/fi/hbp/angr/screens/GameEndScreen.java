@@ -30,6 +30,10 @@ public class GameEndScreen implements Screen {
 
     private GameState gs;
 
+    private boolean levelCleared;
+    private String levelClearedText;
+    private String scoreText;
+
     public GameEndScreen() {
         /* Load assets */
         FileHandle fontFile = Gdx.files.internal("fonts/BistroBlock.ttf");
@@ -63,12 +67,16 @@ public class GameEndScreen implements Screen {
     }
 
     private void drawStats() {
+        /* Level cleared text */
+        font.draw(batch, levelClearedText,
+                -(gs.toString().length() * font.getSpaceWidth()) / 2.0f,
+                font.getXHeight() + 250.0f);
+
         /* Score */
-        font.draw(batch, gs.toString(),
+        font.draw(batch, scoreText,
                 -(gs.toString().length() * font.getSpaceWidth()) / 2.0f,
                 font.getXHeight() + 150.0f);
 
-        /* "Stars" */
         showBadges(batch, gs.getBadges());
     }
 
@@ -104,6 +112,23 @@ public class GameEndScreen implements Screen {
 
         loadGrenadierSprite(width, height);
         loadBadges();
+        calcFinalScore();
+    }
+
+    public void calcFinalScore() {
+        int bareScore;
+        int additionalPoints;
+
+        bareScore = gs.getScore();
+        levelCleared = gs.countFinalScore();
+        additionalPoints = gs.getScore() - bareScore;
+
+        if (levelCleared) {
+            levelClearedText = "Level cleared!";
+        } else {
+            levelClearedText = "Level failed!";
+        }
+        scoreText = bareScore + " + " + additionalPoints + " = " + gs.getScore();
     }
 
     /**

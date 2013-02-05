@@ -50,6 +50,7 @@ public class GameState {
     private int badgeScale = 1;
     private int enemyCount = 0;
     private Grenades grenades = new Grenades(0);
+    private boolean gameFinalized = false;
 
     /**
      * Initialize game state object.
@@ -59,6 +60,9 @@ public class GameState {
      * @param grenades amount of grenades available to clear the current level.
      */
     public void init(int highScore, int badgeScale, int enemies, int grenades) {
+        if (gameFinalized == true)
+            return;
+
         this.highScore = highScore;
         this.badgeScale = (badgeScale > 0) ? badgeScale : 1;
         this.enemyCount = enemies;
@@ -71,18 +75,12 @@ public class GameState {
      * @param enemyDestroyed was enemy destroyed when points were achieved?
      */
     public void addPoints(int value, boolean enemyDestroyed) {
+        if (gameFinalized)
+            return;
+
         score += value;
         if (enemyDestroyed)
             enemyCount--;
-    }
-
-    /**
-     * Clears all score counters.
-     */
-    public void clear() {
-        score = 0;
-        highScore = 0;
-        enemyCount = 0;
     }
 
     /**
@@ -91,13 +89,6 @@ public class GameState {
      */
     public int getScore() {
         return score;
-    }
-
-    /**
-     * Clears the score counter.
-     */
-    public void clearScore() {
-        score = 0;
     }
 
     public Grenades getGrenades() {
@@ -125,19 +116,34 @@ public class GameState {
      * @return true if game continues, false if game is end.
      */
     public boolean update() {
-        if (enemyCount <= 0) {
+        if (gameFinalized)
             return false;
-        }
-        if (grenades.getCount() == 0) {
+
+        if (enemyCount <= 0)
             return false;
-        }
+
+        if (grenades.getCount() == 0)
+            return false;
+
         return true;
     }
 
-    public void countFinalScore() {
-        if (score > highScore) {
-            highScore = score;
+    /**
+     * Count final score and return level cleared status.
+     * @return true if player cleared the level.
+     */
+    public boolean countFinalScore() {
+        if (gameFinalized == false) {
+            gameFinalized = true;
+
+            score += grenades.getCount() * 50;
+
+            if (score > highScore) {
+                highScore = score;
+            }
         }
+
+        return enemyCount == 0;
     }
 
     @Override

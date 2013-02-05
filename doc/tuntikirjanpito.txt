@@ -40,6 +40,7 @@ Tuntikirjanpito
 			- Refaktorointia ja oliorakenteen viilailua
 			- Screenien hallinnan muutoksia
 			- Pelin loppuscreeni ja badget
-2013-02-05	3.0h	- Refaktorointia
+2013-02-05	3.0 h	- Refaktorointia
 			- Kranaattilaskuri
 			- Hans siirretty Level:n alle
+2013-02-05	1.0 h	- Level failed/cleared

@@ -33,29 +33,11 @@ public class GameStateTest {
     }
 
     @Test
-    public void testClear() {
-        gameState.init(500, 100, 1, 10);
-        gameState.addPoints(1000, false);
-        gameState.clear();
-        assertThat(gameState.getScore(), equalTo(0));
-        assertThat(gameState.getHighScore(), equalTo(0));
-    }
-
-    @Test
     public void testGetScore() {
         gameState.addPoints(100, false);
         assertThat(gameState.getScore(), equalTo(100));
         gameState.addPoints(150, false);
         assertThat(gameState.getScore(), equalTo(250));
-    }
-
-    @Test
-    public void clearScore() {
-        gameState.init(100, 1, 1, 10);
-        gameState.addPoints(400, false);
-        gameState.clearScore();
-        assertThat(gameState.getHighScore(), equalTo(100));
-        assertThat(gameState.getScore(), equalTo(0));
     }
 
     @Test
@@ -82,6 +64,38 @@ public class GameStateTest {
         assertThat(gameState.getBadges(), equalTo(1));
         gameState.addPoints(5000, false);
         assertThat(gameState.getBadges(), equalTo(3));
+    }
+
+    @Test
+    public void testGameFinalized() {
+        gameState.init(100, 10, 10, 5);
+        gameState.countFinalScore();
+        gameState.init(400, 40, 50, 10);
+        assertThat(gameState.getGrenades().getCount(), equalTo(5));
+    }
+
+    @Test
+    public void testGameFinalizedNotCleared() {
+        boolean end;
+
+        gameState.init(100, 10, 10, 5);
+        end = gameState.countFinalScore();
+        assertThat("Test that game was not cleared.", end, equalTo(false));
+    }
+
+    @Test
+    public void testGameFinalizedCleared() {
+        boolean end;
+
+        gameState.init(100, 10, 10, 5);
+
+        for (int i = 0; i < 10; i++) {
+            gameState.addPoints(1, true);
+            gameState.getGrenades().decrement();
+        }
+
+        end = gameState.countFinalScore();
+        assertThat("Test that game was cleared.", end, equalTo(true));
     }
 
     @Test

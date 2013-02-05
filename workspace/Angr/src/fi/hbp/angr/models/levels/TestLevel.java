@@ -38,7 +38,7 @@ public class TestLevel extends Level {
     public void show(BodyFactory bf, GameState gs) {
         this.bf = bf;
         this.gs = gs;
-        gs.init(getHighScore(), 200, 10, 10);
+        gs.init(getHighScore(), 400, 10, 10);
 
         FixtureDef fd = new FixtureDef();
         fd.density = 0.6f;
