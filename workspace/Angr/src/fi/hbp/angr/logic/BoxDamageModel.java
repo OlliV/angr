@@ -1,4 +1,5 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr.logic;
+
 
 /**
  * Box damage model.

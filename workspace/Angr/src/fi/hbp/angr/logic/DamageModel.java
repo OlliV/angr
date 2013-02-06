@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr.logic;
 
 /**
  * Damage model abstract class for game objects/items.

@@ -7,9 +7,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import fi.hbp.angr.models.Hans;
-import fi.hbp.angr.models.items.Box;
-import fi.hbp.angr.models.items.Grenade;
+import fi.hbp.angr.models.actors.Box;
+import fi.hbp.angr.models.actors.Grenade;
+import fi.hbp.angr.models.actors.Hans;
 import fi.hbp.angr.stage.GameStage;
 
 /**

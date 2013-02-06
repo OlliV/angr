@@ -2,7 +2,7 @@ package fi.hbp.angr;
 
 
 /**
- * A PID controller class
+ * A PID controller class.
  */
 public class PID {
     private float integral = 0;
@@ -48,6 +48,10 @@ public class PID {
         previous_error = error;
     }
 
+    /**
+     * Get current output value.
+     * @return output value of this PID controller.
+     */
     public float getOutput() {
         return output;
     }

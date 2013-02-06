@@ -23,6 +23,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.GdxNativesLoader;
 
+import fi.hbp.angr.logic.DamageModel;
 import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.logic.ModelContactListener;
 import fi.hbp.angr.logic.TestDamageModelForce;

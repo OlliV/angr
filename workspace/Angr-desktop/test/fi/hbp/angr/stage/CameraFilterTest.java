@@ -1,4 +1,4 @@
-package fi.hbp.angr;
+package fi.hbp.angr.stage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.closeTo;

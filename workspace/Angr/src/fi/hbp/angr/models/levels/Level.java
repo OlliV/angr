@@ -15,12 +15,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import fi.hbp.angr.BodyFactory;
 import fi.hbp.angr.G;
 import fi.hbp.angr.Preloadable;
-import fi.hbp.angr.actors.SlingshotActor;
 import fi.hbp.angr.logic.GameState;
-import fi.hbp.angr.models.Hans;
+import fi.hbp.angr.models.SlingshotActor;
+import fi.hbp.angr.models.actors.Hans;
 
 /**
  * Abstract Level class.
+ *
+ * All game levels should inherit this class.
  */
 public abstract class Level extends Actor implements Preloadable {
     private final String levelName;
@@ -33,7 +35,7 @@ public abstract class Level extends Actor implements Preloadable {
     private float grenadeSpawnCounter = 0.0f;
 
     /**
-     * Constructor for Level
+     * Constructor for Level class.
      * @param levelName Texture filename without extension.
      */
     public Level(String levelName) {
@@ -50,14 +52,31 @@ public abstract class Level extends Actor implements Preloadable {
         G.getAssetManager().unload("data/" + levelName + ".png");
     }
 
-    public abstract void show(BodyFactory bf, GameState gs);
+    /**
+     * This method is called when initiating this level.
+     * @param bf a body factory.
+     * @param gs a game state.
+     */
+    protected abstract void doOnShow();
+
+    /**
+     * This method is called when the game screen is initialized.
+     * @param bf
+     * @param gs
+     */
+    public final void show(BodyFactory bf, GameState gs) {
+        this.bf = bf;
+        this.gs = gs;
+        doOnShow();
+    }
 
     /**
      * Internal show method that should be called by public show method
-     * @param bf Body factory for creating the map body and sprite.
-     * @param mapFd
+     * @param mapFd fixture definition for terrain body.
+     * @param hansX x coordinate for Hans.
+     * @param hansY y coordinate for Hans.
      */
-    protected void show(FixtureDef mapFd, float hansX, float hansY) {
+    protected void showMap(FixtureDef mapFd, float hansX, float hansY) {
         if (bf == null || gs == null) {
             Gdx.app.error("Level", "Body factory or game state not set.");
             Gdx.app.exit();
@@ -72,6 +91,10 @@ public abstract class Level extends Actor implements Preloadable {
         spawnGrenade();
     }
 
+    /**
+     * Initialize terrain.
+     * @param mapFd map fixture definition.
+     */
     private void createTerrain(FixtureDef mapFd) {
         BodyEditorLoader bel = new BodyEditorLoader(
                 Gdx.files.internal("levels.json"));
@@ -117,6 +140,9 @@ public abstract class Level extends Actor implements Preloadable {
         updateHans();
     }
 
+    /**
+     * Check if grenade has been used and spawn a new one if needed.
+     */
     private void updateHans() {
 
         if (hans.isPalmJointActive() == false) {
@@ -133,6 +159,9 @@ public abstract class Level extends Actor implements Preloadable {
         }
     }
 
+    /**
+     * Spawn a new grenade.
+     */
     private void spawnGrenade() {
         hans.setPalmJoint(((SlingshotActor)bf.spawnGrenade(
                 hans.getX() + 50.0f,

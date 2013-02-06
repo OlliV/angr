@@ -1,6 +1,6 @@
 package fi.hbp.angr.logic;
 
-import fi.hbp.angr.models.DamageModel;
+import fi.hbp.angr.logic.DamageModel;
 
 public class TestDamageModel extends DamageModel {
     @Override

@@ -57,4 +57,15 @@ public class UpCounterTest {
         assertThat(counter.isStopped(), equalTo(true));
     }
 
+    @Test
+    public void testZeroValue() {
+        counter = new UpCounter(0, 1f, false);
+        assertThat(counter.isStopped(), equalTo(false));
+        counter.update(1f);
+        counter.update(1f);
+        counter.update(1f);
+
+        assertThat(counter.getValue(), equalTo(0));
+        assertThat(counter.isStopped(), equalTo(true));
+    }
 }

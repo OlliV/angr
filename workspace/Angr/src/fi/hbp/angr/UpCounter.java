@@ -24,7 +24,7 @@ public class UpCounter {
      */
     public UpCounter(int value, float interval, boolean sounds) {
         this.value = value;
-        this.dValue = (value > 0) ? 5 : -5;
+        this.dValue = (value >= 0) ? 5 : -5;
 
         this.delayEnd = interval;
         this.sounds = sounds;

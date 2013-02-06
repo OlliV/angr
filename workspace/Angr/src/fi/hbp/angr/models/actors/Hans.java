@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr.models.actors;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
+import fi.hbp.angr.models.CollisionFilterMasks;
 import fi.hbp.angr.stage.GameStage;
 
 /**

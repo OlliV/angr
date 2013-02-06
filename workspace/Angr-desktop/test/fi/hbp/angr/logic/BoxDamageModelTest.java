@@ -1,4 +1,4 @@
-package fi.hbp.angr.models;
+package fi.hbp.angr.logic;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,6 +9,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import fi.hbp.angr.logic.BoxDamageModel;
 
 public class BoxDamageModelTest {
     BoxDamageModel dm;

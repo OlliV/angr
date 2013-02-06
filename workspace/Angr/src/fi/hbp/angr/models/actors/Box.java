@@ -1,4 +1,4 @@
-package fi.hbp.angr.models.items;
+package fi.hbp.angr.models.actors;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
@@ -21,9 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
 import fi.hbp.angr.ItemDestruction;
-import fi.hbp.angr.models.BoxDamageModel;
+import fi.hbp.angr.logic.BoxDamageModel;
+import fi.hbp.angr.logic.DamageModel;
 import fi.hbp.angr.models.CollisionFilterMasks;
-import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
 import fi.hbp.angr.stage.GameStage;
 

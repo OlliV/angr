@@ -20,7 +20,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.GdxNativesLoader;
 
-import fi.hbp.angr.models.DamageModel;
 import fi.hbp.angr.models.Destructible;
 
 

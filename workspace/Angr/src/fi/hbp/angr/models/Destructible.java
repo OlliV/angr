@@ -2,6 +2,8 @@ package fi.hbp.angr.models;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
+import fi.hbp.angr.logic.DamageModel;
+
 
 /**
  * Interface for destructible models/items.
