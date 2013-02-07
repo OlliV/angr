@@ -39,7 +39,7 @@ public class TestLevel extends Level {
     public void doOnShow() {
         /* Initialize game state                 */
         gs.init(getHighScore(), /* High score    */
-                600,            /* Badge scaling */
+                550,            /* Badge scaling */
                 10,             /* Enemy count   */
                 10);            /* Grenade count */
 

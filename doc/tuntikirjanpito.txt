@@ -47,3 +47,6 @@ Tuntikirjanpito
 2013-02-05	1.0 h	- Laskuri + ääni pelin päätyttyä
 2013-02-05	3.0 h	- Dokumentaation päivittelyä
 			- Sekvenssikaaviot törkeästi kesken :(
+2013-02-06	1.5 h	- Lisää javaDoc-kommentteja
+			- Refaktorointia
+			- Bugikorjaus UpCounteriin
