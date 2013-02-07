@@ -54,15 +54,13 @@ public abstract class Level extends Actor implements Preloadable {
 
     /**
      * This method is called when initiating this level.
-     * @param bf a body factory.
-     * @param gs a game state.
      */
     protected abstract void doOnShow();
 
     /**
      * This method is called when the game screen is initialized.
-     * @param bf
-     * @param gs
+     * @param bf a body factory.
+     * @param gs a game state object.
      */
     public final void show(BodyFactory bf, GameState gs) {
         this.bf = bf;
