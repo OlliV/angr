@@ -42,14 +42,30 @@ public abstract class Level extends Actor implements Preloadable {
         this.levelName = levelName;
     }
 
-    @Override
-    public void preload() {
-        G.getAssetManager().load("data/" + levelName + ".png", Texture.class);
-    }
+    /**
+     * Automatically called preload method.
+     *
+     * Prefer use of AssetManager.load().
+     */
+    protected abstract void doOnPreload();
 
     @Override
-    public void unload() {
+    public final void preload() {
+        G.getAssetManager().load("data/" + levelName + ".png", Texture.class);
+        doOnPreload();
+    }
+
+    /**
+     * Automatically called unload method.
+     *
+     * Prefer use of AssetManager.unload().
+     */
+    protected abstract void doOnUnload();
+
+    @Override
+    public final void unload() {
         G.getAssetManager().unload("data/" + levelName + ".png");
+        doOnUnload();
     }
 
     /**
@@ -132,12 +148,6 @@ public abstract class Level extends Actor implements Preloadable {
         // TODO Set high score.
     }
 
-    @Override
-    public void draw(SpriteBatch batch, float parentAlpha) {
-        sprite.draw(batch);
-        updateHans();
-    }
-
     /**
      * Check if grenade has been used and spawn a new one if needed.
      */
@@ -164,6 +174,12 @@ public abstract class Level extends Actor implements Preloadable {
         hans.setPalmJoint(((SlingshotActor)bf.spawnGrenade(
                 hans.getX() + 50.0f,
                 hans.getY() + 30.0f, 0)).getBody());
+    }
+
+    @Override
+    public void draw(SpriteBatch batch, float parentAlpha) {
+        sprite.draw(batch);
+        updateHans();
     }
 
     @Override

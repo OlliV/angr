@@ -1,7 +1,6 @@
 package fi.hbp.angr.models.levels;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import fi.hbp.angr.G;
@@ -23,14 +22,12 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void preload() {
-        super.preload();
+    public void doOnPreload() {
         G.getAssetManager().load(MUSIC_PATH, Music.class);
     }
 
     @Override
-    public void unload() {
-        super.unload();
+    public void doOnUnload() {
         music.stop();
         G.getAssetManager().unload(MUSIC_PATH);
     }
@@ -66,14 +63,5 @@ public class TestLevel extends Level {
         for (int i = 0; i < 10; i++) {
             bf.spawnBox(1000 + i * 300, 400, 0);
         }
-
-        /*for (int i = 0; i < 5; i++) {
-            bf.spawnGrenade(1000 + i * 450, 500, 90);
-        }*/
-    }
-
-    @Override
-    public void draw(SpriteBatch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
     }
 }
