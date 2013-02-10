@@ -14,7 +14,7 @@ public class BoxDamageModel extends DamageModel {
 
     @Override
     public void hit(float force) {
-        if (force > 15) {
+        if (force > 12.0f) {
             this.health -= force / 100f;
         }
 
