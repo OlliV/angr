@@ -29,7 +29,7 @@ public class ScreenLoader {
     }
 
     /**
-     * Start preloading assets
+     * Fills preload queue.
      */
     public void start() {
         l.lock();
@@ -44,14 +44,22 @@ public class ScreenLoader {
     }
 
     /**
-     * Swap to the preloaded screen
+     * Updates the AssetManager, keeping it loading any assets in the preload queue.
+     * @return true if all loading is finished.
+     */
+    public boolean update() {
+        return G.getAssetManager().update();
+    }
+
+    /**
+     * Swap to the preloaded screen.
      */
     public void swap() {
         l.lock();
         try {
             if (loaded == false) {
                 Gdx.app.error("ScreenLoader",
-                        "swap() was called before preload was completed.");
+                        "swap() was called before preload was started.");
                 Gdx.app.exit();
             }
             G.getAssetManager().finishLoading();

@@ -12,8 +12,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
 
-import fi.hbp.angr.G;
-
 /**
  * Splash screen/Loading screen.
  *
@@ -35,8 +33,8 @@ public class SplashScreen extends Timer.Task implements Screen {
      * @param g Main game.
      * @param gs Screen to be shown after this splash screen.
      * @param delay Minimum time used to show this splash screen.
-     * Actual timing may vary depending on the time needed for preloading
-     * all the assets of the following screen.
+     * Actual delay may vary depending on the time needed for preloading
+     * all assets of the next screen (gs).
      */
     public SplashScreen(Game g, Screen gs, float delay) {
         this.delay = delay;
@@ -53,7 +51,7 @@ public class SplashScreen extends Timer.Task implements Screen {
         sprite.draw(batch);
         batch.end();
 
-        G.getAssetManager().update();
+        loader.update();
     }
 
     @Override
