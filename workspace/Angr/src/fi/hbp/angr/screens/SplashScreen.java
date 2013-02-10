@@ -30,9 +30,9 @@ public class SplashScreen extends Timer.Task implements Screen {
 
     /**
      *
-     * @param g Main game.
-     * @param gs Screen to be shown after this splash screen.
-     * @param delay Minimum time used to show this splash screen.
+     * @param g main game object.
+     * @param gs screen to be shown after this splash screen.
+     * @param delay minimum delay between show and swap to the next screen.
      * Actual delay may vary depending on the time needed for preloading
      * all assets of the next screen (gs).
      */

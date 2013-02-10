@@ -23,6 +23,11 @@ public class ScreenLoader {
     private Lock l = new ReentrantLock();
     private boolean loaded = false;
 
+    /**
+     * Constructor for ScreenLoader.
+     * @param game main game object.
+     * @param screen screen to be loaded.
+     */
     public ScreenLoader(Game game, Screen screen) {
         this.game = game;
         this.screen = screen;
