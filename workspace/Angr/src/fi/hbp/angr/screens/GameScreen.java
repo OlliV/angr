@@ -23,7 +23,7 @@ public class GameScreen implements Screen, Preloadable {
     private Hud hud = new Hud();
 
     /**
-     * Start the game
+     * Start the game.
      * @param game the GdxGame.
      */
     public GameScreen(GdxGame game) {
@@ -32,8 +32,8 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void preload() {
-        level.preload();
         BodyFactory.preload();
+        level.preload();
     }
 
     @Override
@@ -41,6 +41,10 @@ public class GameScreen implements Screen, Preloadable {
         level.unload();
     }
 
+    /**
+     * Load next level.
+     * @param level next level to be loaded.
+     */
     public void loadLevel(Level level) {
         this.level = level;
         Screen splash = new SplashScreen(game, this, 0.2f);
@@ -81,9 +85,10 @@ public class GameScreen implements Screen, Preloadable {
         /* Create score counter for HUD */
         HudGameStateDisplay score;
         score = new HudGameStateDisplay(stage.getGameState());
+        hud.clear();
         hud.addActor(score);
 
-        // Create and add map/level actor
+        /* Create and add map/level actor */
         BodyFactory bf = new BodyFactory(stage, inputMultiplexer);
         level.show(bf, stage.getGameState());
         stage.addActor(level);

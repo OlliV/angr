@@ -50,3 +50,6 @@ Tuntikirjanpito
 2013-02-06	1.5 h	- Lisää javaDoc-kommentteja
 			- Refaktorointia
 			- Bugikorjaus UpCounteriin
+2013-02-11	5.0 h	- Sekvenssikaavion viimeistely
+			- Bugien korjailua
+			- Restart level -painike pelin jälkeen

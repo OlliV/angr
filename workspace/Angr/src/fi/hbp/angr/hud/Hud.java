@@ -36,6 +36,14 @@ public class Hud {
     }
 
     /**
+     * Removes all of the elements from the HUD actor list.
+     * The list will be empty after this call returns.
+     */
+    public void clear() {
+        actors.clear();
+    }
+
+    /**
      * Draw this HUD.
      */
     public void draw() {

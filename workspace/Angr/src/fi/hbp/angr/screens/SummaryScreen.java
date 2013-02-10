@@ -14,14 +14,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
+import fi.hbp.angr.GdxGame;
 import fi.hbp.angr.UpCounter;
 import fi.hbp.angr.logic.GameState;
+import fi.hbp.angr.models.levels.TestLevel;
 
 /**
  * Screen that is shown when the game ends due to either win or game over.
  * TODO UI Buttons
  */
-public class SummaryScreen implements Screen {
+public class SummaryScreen implements Screen, ButtonAction {
+    private final GdxGame game;
+
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Texture grenadierTexture;
@@ -29,6 +33,7 @@ public class SummaryScreen implements Screen {
     private Texture badgeTexture;
     private TextureRegion[] badges = new TextureRegion[3];
     private BitmapFont font;
+    private Button button;
 
     private boolean levelCleared;
     private String levelClearedText;
@@ -36,11 +41,14 @@ public class SummaryScreen implements Screen {
     private UpCounter bareScoreCnt;
     private UpCounter additionalPointsCnt;
     private int badgeLevel;
+    private String buttonText = "Restart level";
 
     /**
      * Constructor for SummaryScreen class.
      */
-    public SummaryScreen() {
+    public SummaryScreen(GdxGame game) {
+        this.game = game;
+
         /* Load assets */
         FileHandle fontFile = Gdx.files.internal("fonts/BistroBlock.ttf");
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
@@ -65,6 +73,11 @@ public class SummaryScreen implements Screen {
         } else {
             font.draw(batch, "ERROR: Final score not calculated!", 0.0f, 0.0f);
         }
+
+        float btn_x = -(float)(Gdx.graphics.getWidth() / 2) + 20f;
+        float btn_y = -(float)(Gdx.graphics.getHeight() / 2) + 40f;
+        button.draw(batch, buttonText, btn_x, btn_y);
+
         batch.end();
     }
 
@@ -134,6 +147,8 @@ public class SummaryScreen implements Screen {
 
         camera = new OrthographicCamera(width, height);
         batch = new SpriteBatch();
+
+        button = new Button(camera, font, this, 0);
 
         loadGrenadierSprite(width, height);
         loadBadges();
@@ -213,5 +228,12 @@ public class SummaryScreen implements Screen {
 
     @Override
     public void dispose() {
+    }
+
+    @Override
+    public void buttonAction(int id) {
+        if (id == 0) {
+            game.nextLevel(new TestLevel());
+        }
     }
 }

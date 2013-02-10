@@ -23,17 +23,24 @@ public class BodyFactory {
     protected AssetContainer asBox = new AssetContainer();
     protected Hans.HansAssetContainer hac = new Hans.HansAssetContainer();
 
+    private static boolean preloaded = false;
+
     /**
      * Add assets of this class to a preload list.
-     * TODO Should the map/level tell what assets it will need?
      */
     public static void preload() {
-        Grenade.preload();
-        Box.preload();
-        Hans.preload();
+        if (!preloaded) {
+            Grenade.preload();
+            Box.preload();
+            Hans.preload();
+
+            preloaded = true;
+        }
     }
 
-    /* TODO Add a function to unload unneeded assets */
+    /* TODO Should the map/level tell what assets it will need? */
+
+    /* TODO Add a function to unload unneeded assets? */
 
     /**
      * Constructor for body factory.

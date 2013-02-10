@@ -138,7 +138,7 @@ public class GameState {
         if (gameFinalized == false) {
             gameFinalized = true;
 
-            score += grenades.getCount() * 50;
+            score += grenades.getCount() * 150;
 
             if (score > highScore) {
                 highScore = score;
