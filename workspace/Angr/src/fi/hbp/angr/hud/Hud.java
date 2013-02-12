@@ -18,6 +18,17 @@ public class Hud {
     private ArrayList<HudActor> actors = new ArrayList<HudActor>();
 
     /**
+     * HudActor that can be drawn by a Hud object.
+     */
+    public interface HudActor {
+        /**
+         * Draw this HudActor now.
+         * @param batch sprite batch to be used for drawing.
+         */
+        public void draw(SpriteBatch batch);
+    }
+
+    /**
      * Constructor for Hud.
      */
     public Hud() {

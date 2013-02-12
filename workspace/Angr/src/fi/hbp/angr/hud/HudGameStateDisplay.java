@@ -12,7 +12,7 @@ import fi.hbp.angr.logic.GameState;
 /**
  * HudScoreCounter used to show current game score status.
  */
-public class HudGameStateDisplay implements HudActor {
+public class HudGameStateDisplay implements Hud.HudActor {
     private BitmapFont font;
     private final GameState gameState;
 
