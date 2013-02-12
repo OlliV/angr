@@ -65,25 +65,70 @@ public class Hans extends Actor implements InputProcessor {
         public Sprite sprite;
     }
 
+    /**
+     * Name of this model.
+     */
     private static final String MODEL_NAME = "hans";
+    /**
+     * File path to the body texture.
+     */
     private static final String HANS_BODY_TEXTURE = "data/" + MODEL_NAME + "_body.png";
+    /**
+     * File path to the upper part of hand.
+     */
     private static final String HANS_HAND_U_TEXTURE = "data/" + MODEL_NAME + "_hand_u.png";
+    /**
+     * File path to the lower part of hand.
+     */
     private static final String HANS_HAND_L_TEXTURE = "data/" + MODEL_NAME + "_hand_l.png";
 
+    /**
+     * Model data for body of Hans.
+     */
     private final _ModelData hbody;
+    /**
+     * Model data for upper part of hand.
+     */
     private final _ModelData hand_u;
+    /**
+     * Model data for lower part of hand.
+     */
     private final _ModelData hand_l;
+    /**
+     * Model data array. This is used for rendering.
+     */
     private final _ModelData[] modelArray;
 
     /* Palm joint related */
+    /**
+     * Object jointed into hand.
+     */
     private Body objPalm;
+    /**
+     * Joint used between hand and hand of Hans.
+     */
     private Joint palmJoint;
 
     /* Input processing/Controls */
+    /**
+     * Game stage.
+     */
     private final GameStage stage;
+    /**
+     * Test point for testing contact with mouse.
+     */
     private final Vector3 testPoint = new Vector3();
+    /**
+     * Ground body.
+     */
     private final Body groundBody;
+    /**
+     * Hit body.
+     */
     private Body hitBody = null;
+    /**
+     * true if currently dragging; otherwise false.
+     */
     private boolean dragging;
 
     /**

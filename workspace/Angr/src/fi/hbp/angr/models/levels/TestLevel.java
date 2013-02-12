@@ -10,8 +10,13 @@ import fi.hbp.angr.models.CollisionFilterMasks;
  * Test map/level.
  */
 public class TestLevel extends Level {
+    /**
+     * Music file path.
+     */
     private static final String MUSIC_PATH = "data/march.mp3";
-
+    /**
+     * Game music.
+     */
     private Music music;
 
     /**

@@ -31,15 +31,45 @@ import fi.hbp.angr.stage.GameStage;
  * A box for level decoration.
  */
 public class Box extends Actor implements Destructible {
+    /**
+     * Name of this model.
+     */
     private static final String MODEL_NAME = "box";
+    /**
+     * Texture file path.
+     */
     private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
+    /**
+     * Item destruction list.
+     */
     private final ItemDestruction itdes;
+    /**
+     * Body of this actor.
+     */
     private final Body body;
+    /**
+     * Origin of this actor.
+     */
     private final Vector2 modelOrigin;
+    /**
+     * Sprite of this actor.
+     */
     private final Sprite sprite;
+    /**
+     * Damage model for this desctructible actor.
+     */
     private final DamageModel damageModel = new BoxDamageModel();
+    /**
+     * Font for drawing debug information.
+     */
     private final BitmapFont font = new BitmapFont();
+    /**
+     * Particle effect used as a destruction animation of this actor.
+     */
     private final ParticleEffect particleEffect;
+    /**
+     * true if this actor is destroyed; otherwise false.
+     */
     private boolean destroyed;
 
     /**

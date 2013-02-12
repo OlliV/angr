@@ -19,13 +19,30 @@ import com.badlogic.gdx.utils.Timer;
  * while showing its own graphics.
  */
 public class SplashScreen extends Timer.Task implements Screen {
+    /**
+     * Camera for projection.
+     */
     private OrthographicCamera camera;
+    /**
+     * Sprite batch.
+     */
     private SpriteBatch batch;
-    private Texture texture;
+    /**
+     * Splash screen sprite.
+     */
     private Sprite sprite;
 
+    /**
+     * Delay of this splash screen.
+     */
     private final float delay;
+    /**
+     * Splash screen timer.
+     */
     private final Timer splashTimer = new Timer();
+    /**
+     * Screen loader for preloading next screen.
+     */
     private ScreenLoader loader;
 
     /**
@@ -63,6 +80,8 @@ public class SplashScreen extends Timer.Task implements Screen {
      */
     @Override
     public void show() {
+        Texture texture;
+
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
 
@@ -101,7 +120,6 @@ public class SplashScreen extends Timer.Task implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        texture.dispose();
     }
 
     @Override

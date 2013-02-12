@@ -25,13 +25,35 @@ import fi.hbp.angr.models.actors.Hans;
  * All game levels should inherit this class.
  */
 public abstract class Level extends Actor implements Preloadable {
+    /**
+     * Level name.
+     */
     private final String levelName;
+    /**
+     * Terrain sprite for of the level.
+     */
     private Sprite sprite;
+    /**
+     * Game state object.
+     */
     protected GameState gs;
+    /**
+     * Body factor for creating level actors.
+     */
     protected BodyFactory bf;
 
-    private final float grenadeSpawnDelay = 5.0f;
+    /**
+     * Actor of player model Hans.
+     */
     protected Hans hans;
+    /* TODO Use timer instead of this implementation? */
+    /**
+     * Grenade spawn delay.
+     */
+    private final float grenadeSpawnDelay = 5.0f;
+    /**
+     * Counter used to count grenade spawn delay.
+     */
     private float grenadeSpawnCounter = 0.0f;
 
     /**

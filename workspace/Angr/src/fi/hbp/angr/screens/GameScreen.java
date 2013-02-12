@@ -17,9 +17,21 @@ import fi.hbp.angr.stage.GameStage;
  * Screen used to show the actual game contents.
  */
 public class GameScreen implements Screen, Preloadable {
+    /**
+     * GdxGame reference.
+     */
     private final GdxGame game;
+    /**
+     * Game stage where game is played.
+     */
     private GameStage stage;
+    /**
+     * Current level.
+     */
     private Level level;
+    /**
+     * HUD shown on screen.
+     */
     private final Hud hud = new Hud();
 
     /**

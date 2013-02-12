@@ -24,23 +24,65 @@ import fi.hbp.angr.models.levels.TestLevel;
  * TODO UI Buttons
  */
 public class SummaryScreen implements Screen, Button.ButtonAction {
+    /**
+     * GdxGame.
+     */
     private final GdxGame game;
 
+    /**
+     * Camera for projection.
+     */
     private OrthographicCamera camera;
+    /**
+     * Sprite batch for drawing.
+     */
     private SpriteBatch batch;
-    private Texture grenadierTexture;
+    /**
+     * Sprite of grenadier.
+     */
     private Sprite grenadierSprite;
-    private Texture badgeTexture;
+    /**
+     * Textures for badges.
+     */
     private TextureRegion[] badges = new TextureRegion[3];
+    /**
+     * Font for drawing text and score.
+     */
     private BitmapFont font;
+    /**
+     * Restart level/Next level button.
+     */
     private Button button;
 
+    /**
+     * Level cleared.
+     * true if level was cleared.
+     */
     private boolean levelCleared;
+    /**
+     * Level cleared or level failed text.
+     */
     private String levelClearedText;
+    /**
+     * Score text.
+     */
     private String scoreText;
+    /**
+     * Counter for score without additional points.
+     */
     private UpCounter bareScoreCnt;
+    /**
+     * Additional points counter.
+     */
     private UpCounter additionalPointsCnt;
+    /**
+     * Badges 0..3
+     */
     private int badgeLevel;
+    /**
+     * Button text.
+     * "Restart level" or "Next level".
+     */
     private String buttonText = "Restart level";
 
     /**
@@ -184,6 +226,8 @@ public class SummaryScreen implements Screen, Button.ButtonAction {
      * @param height is screen height.
      */
     private void loadGrenadierSprite(float width, float height) {
+        Texture grenadierTexture;
+
         grenadierTexture = new Texture(Gdx.files.internal("data/grenadier.png"));
         grenadierTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
@@ -201,6 +245,8 @@ public class SummaryScreen implements Screen, Button.ButtonAction {
      * Load badge texture regions.
      */
     private void loadBadges() {
+        Texture badgeTexture;
+
         badgeTexture = new Texture(Gdx.files.internal("data/badges.png"));
 
         badges[0] = new TextureRegion(badgeTexture,

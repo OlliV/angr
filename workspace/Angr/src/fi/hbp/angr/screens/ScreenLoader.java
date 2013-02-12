@@ -18,9 +18,23 @@ import fi.hbp.angr.Preloadable;
  * assets needed.
  */
 public class ScreenLoader {
+    /**
+     * Game.
+     */
     private final Game game;
+    /**
+     * Screen that will be preloaded and then switched to.
+     */
     private final Screen screen;
+    /**
+     * Reentrant lock.
+     */
     private final Lock l = new ReentrantLock();
+    /**
+     * Loading status.
+     * true if preloading has been started.
+     * This doesn't actually tell whether preloading is ready or not.
+     */
     private boolean loaded = false;
 
     /**

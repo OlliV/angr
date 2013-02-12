@@ -15,12 +15,32 @@ import com.badlogic.gdx.math.Vector3;
  *
  */
 public class Button {
+    /**
+     * Screen camera.
+     *
+     * Camera reference is needed for project between screen and openGL world.
+     */
     private final Camera camera;
+    /**
+     * Font for drawing this button.
+     */
     private BitmapFont font;
+    /**
+     * Action class that will be called if this button is touched.
+     */
     private final ButtonAction action;
+    /**
+     * ID of this button.
+     */
     private final int id;
 
+    /**
+     * Test vector used for bounds calculation.
+     */
     private final Vector3 t1 = new Vector3();
+    /**
+     * Test vector used for bounds calculation.
+     */
     private final Vector3 t2 = new Vector3();
 
     /**
@@ -107,5 +127,13 @@ public class Button {
         }
 
         return false;
+    }
+
+    /**
+     * Get ID of this button.
+     * @return
+     */
+    public int getID() {
+        return id;
     }
 }
