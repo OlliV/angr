@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Timer;
 
 import fi.hbp.angr.G;
 import fi.hbp.angr.ItemDestruction;
@@ -57,6 +58,23 @@ public class GameStage extends Stage {
     private boolean endOfGame = false;
 
     /**
+     * This class is used to provide a short delay between physics modeling
+     * and damage modeling to allow smooth initialization of physics world
+     * as some bodies are spawned in air and this we don't want to cause any
+     * initial dama to the bodies.
+     */
+    private class SetModelContactListener extends Timer.Task {
+        @Override
+        public void run() {
+            ModelContactListener mcl = new ModelContactListener(gameState);
+
+            /* "The listener is owned by you and must remain in scope", this is
+             * bullshit on Java and can be safely ignored. */
+            world.setContactListener(mcl);
+        }
+    }
+
+    /**
      * Constructor for GameStage.
      * @param width width of the game stage viewport in pixels
      * @param height height of the game stage viewport in pixels
@@ -71,8 +89,13 @@ public class GameStage extends Stage {
         world.setWarmStarting(true);
         itemDestructor = new ItemDestructionList();
 
-        ModelContactListener mcl = new ModelContactListener(gameState);
-        world.setContactListener(mcl);
+        /* Timer is used to implement a short delay between start of
+         * physics modeling and damage modeling to allow bodies hit the ground
+         * without any damage. */
+        Timer.Task timTsk = new SetModelContactListener();
+        Timer tim = new Timer();
+        tim.scheduleTask(timTsk, 1.7f); /* sec */
+        tim.start();
 
         if (G.DEBUG) {
             renderer = new Box2DDebugRenderer(true, true, true, true, true);
