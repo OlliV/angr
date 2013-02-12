@@ -46,6 +46,8 @@ public class TestLevel extends Level {
         fd.friction = 0.7f;
         fd.restitution = 0.3f;
         fd.filter.categoryBits = CollisionFilterMasks.GROUND;
+
+        /* Show map/terrain */
         super.showMap(fd, 555, 375);
 
         /* Testing *****/
