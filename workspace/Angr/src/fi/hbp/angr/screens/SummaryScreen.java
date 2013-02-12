@@ -23,7 +23,7 @@ import fi.hbp.angr.models.levels.TestLevel;
  * Screen that is shown when the game ends due to either win or game over.
  * TODO UI Buttons
  */
-public class SummaryScreen implements Screen, ButtonAction {
+public class SummaryScreen implements Screen, Button.ButtonAction {
     private final GdxGame game;
 
     private OrthographicCamera camera;

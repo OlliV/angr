@@ -24,6 +24,18 @@ public class Button {
     private Vector3 t2 = new Vector3();
 
     /**
+     * UI Button Action Interface.
+     */
+    public interface ButtonAction {
+        /**
+         * Button action method that is called once if any
+         * button is pressed.
+         * @param id button id.
+         */
+        void buttonAction(int id);
+    }
+
+    /**
      * Constructor for UI button.
      * @param camera camera object used for projection.
      * @param font font that is used to draw this button.
