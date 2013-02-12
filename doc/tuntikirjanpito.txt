@@ -58,3 +58,4 @@ Tuntikirjanpito
 			- Devausta
 2013-02-12	1.0 h	- camFilter.pdf dokumentaatio
 2013-02-12	3.0 h	- Dokumentointia ja viilailua
+2013-02-12	2.0 h	- Lisää javadoc kommentteja
