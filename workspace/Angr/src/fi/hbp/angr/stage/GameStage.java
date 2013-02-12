@@ -28,7 +28,7 @@ import fi.hbp.angr.models.Destructible;
  */
 public class GameStage extends Stage {
     private final World world;
-    ItemDestructionList itemDestructor;
+    private ItemDestructionList itemDestructor;
     private final GameState gameState = new GameState();
 
     /* Debug */
@@ -239,7 +239,7 @@ public class GameStage extends Stage {
      * @return Clamped value of x axis position.
      */
     private float clampX(float x) {
-        return MathUtils.clamp(x, this.getWidth()/2, this.getWidth()*2);
+        return MathUtils.clamp(x, this.getWidth() / 2, this.getWidth() * 2);
     }
 
     /**
@@ -248,21 +248,37 @@ public class GameStage extends Stage {
      * @return Clamped value of y axis position.
      */
     private float clampY(float y) {
-        return MathUtils.clamp(y, this.getHeight()/2, this.getHeight()*1);
+        return MathUtils.clamp(y, this.getHeight() / 2, this.getHeight() * 1);
     }
 
+    /**
+     * Get the Box2D world.
+     * @return World object.
+     */
     public World getWorld() {
         return world;
     }
 
+    /**
+     * Get item destruction list.
+     * @return ItemDestruction object.
+     */
     public ItemDestruction getItemDestructionList() {
         return itemDestructor;
     }
 
+    /**
+     * Get game state object.
+     * @return GameState object.
+     */
     public GameState getGameState() {
         return gameState;
     }
 
+    /**
+     * Returns true if game has been ended.
+     * @return true if game has been ended.
+     */
     public boolean hasGameEnded() {
         return this.endOfGame;
     }
