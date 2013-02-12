@@ -82,10 +82,13 @@ public class GameStage extends Stage {
     public GameStage(float width, float height) {
         super(width, height, false);
         world = new World(new Vector2(0.0f, -9.8f), true);
-        /* TODO It seems that there is some strange static data inside world
-         * which doesn't get cleared even after this stage and world declared
-         * here are disposed. This seems to cause strange (gravitational?)
-         * forces when new world is created and disposed few times. */
+        /* TODO It seems that there is some strange static data inside the
+         * world which doesn't get cleared even after this stage and world
+         * declared here are disposed. This seems to cause strange
+         * (gravitational?) forces when new world is created and disposed
+         * few times.
+         *
+         *  This could be also a result of varying fps during start up. */
         world.setWarmStarting(true);
         itemDestructor = new ItemDestructionList();
 

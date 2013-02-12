@@ -53,6 +53,7 @@ Tuntikirjanpito
 2013-02-10	5.0 h	- Sekvenssikaavion viimeistely
 			- Bugien korjailua
 			- Restart level -painike pelin jälkeen
-2013-02-12	1.5 h	- Ajastin fysiikkamallinnuksen ja vauriomallinnuksen
+2013-02-12	2.5 h	- Ajastin fysiikkamallinnuksen ja vauriomallinnuksen
 			  välille.
 			- Devausta
+2013-02-12	1.0 h	- camFilter.pdf dokumentaatio
