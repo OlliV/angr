@@ -11,11 +11,11 @@ import com.badlogic.gdx.physics.box2d.QueryCallback;
  * Explosion model.
  */
 public class Explosion {
-    Body body;
+    private final Body body;
     private final float maxDistance;
     private final float maxForce;
-    private Vector2 bodyPos = new Vector2();
-    private Vector2 hitBodyPos = new Vector2();
+    private final Vector2 bodyPos = new Vector2();
+    private final Vector2 hitBodyPos = new Vector2();
 
     /**
      * Class constructor.
@@ -47,7 +47,7 @@ public class Explosion {
         BodyType origBdType = body.getType();
         body.setType(BodyType.StaticBody);
 
-        bodyPos = body.getPosition();
+        bodyPos.set(body.getPosition());
 
         body.getWorld().QueryAABB(callback,
                 bodyPos.x - maxDistance, bodyPos.y - maxDistance,
@@ -57,7 +57,7 @@ public class Explosion {
         body.setType(origBdType);
     }
 
-    QueryCallback callback = new QueryCallback() {
+    private QueryCallback callback = new QueryCallback() {
         @Override
         public boolean reportFixture (Fixture fixture) {
             float force;

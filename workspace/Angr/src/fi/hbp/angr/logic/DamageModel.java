@@ -7,14 +7,14 @@ public abstract class DamageModel {
     protected float health;
 
     /**
-     * Reset health to a default value
+     * Reset health to a default value.
      */
     public void resetHealth() {
         health = 1f;
     }
 
     /**
-     * Set object health
+     * Set object health.
      * @param health Health in scale 0..1
      */
     public void setHealth(float health) {
@@ -22,7 +22,7 @@ public abstract class DamageModel {
     }
 
     /**
-     * Get object health status
+     * Get object health status.
      * @return Object health in scale 0..1
      */
     public float getHealth() {
@@ -30,8 +30,8 @@ public abstract class DamageModel {
     }
 
     /**
-     * Enemy status
-     * @return true if this body is enemy
+     * Enemy status.
+     * @return true if this body is enemy.
      */
     public abstract boolean isEnemy();
 
@@ -42,8 +42,8 @@ public abstract class DamageModel {
     public abstract void hit(float force);
 
     /**
-     * Get points earned from destroying this model
-     * @return points
+     * Get points earned from destroying this model.
+     * @return points.
      */
     public abstract int getPoints();
 

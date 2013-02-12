@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import fi.hbp.angr.G;
 
 /**
- * Drawable HUD
+ * Drawable HUD.
  */
 public class Hud {
     private BitmapFont font = new BitmapFont();

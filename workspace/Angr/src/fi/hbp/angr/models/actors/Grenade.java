@@ -34,7 +34,7 @@ public class Grenade extends SlingshotActor implements Destructible {
     private final static String SOUND_FX_PATH = "data/grenade.wav";
     private final static float EXPLOSION_DELAY = 3.0f;
 
-    private ItemDestruction itdes;
+    private final ItemDestruction itdes;
 
     private final Vector2 modelOrigin;
     private final Sprite sprite;
@@ -43,7 +43,7 @@ public class Grenade extends SlingshotActor implements Destructible {
     private boolean bExplosionTimer = false;
     private float explosionTimer = 0;
     private boolean destroyed = false;
-    private Explosion explosion;
+    private final Explosion explosion;
     private static Sound explosionSound;
     private ParticleEffect particleEffect;
 

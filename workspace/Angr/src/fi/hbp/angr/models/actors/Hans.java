@@ -70,19 +70,19 @@ public class Hans extends Actor implements InputProcessor {
     private static final String HANS_HAND_U_TEXTURE = "data/" + MODEL_NAME + "_hand_u.png";
     private static final String HANS_HAND_L_TEXTURE = "data/" + MODEL_NAME + "_hand_l.png";
 
-    private _ModelData hbody = new _ModelData();
-    private _ModelData hand_u;
-    private _ModelData hand_l;
-    private _ModelData[] modelArray;
+    private final _ModelData hbody;
+    private final _ModelData hand_u;
+    private final _ModelData hand_l;
+    private final _ModelData[] modelArray;
 
     /* Palm joint related */
     private Body objPalm;
     private Joint palmJoint;
 
     /* Input processing/Controls */
-    private GameStage stage;
-    private Vector3 testPoint = new Vector3();
-    private Body groundBody;
+    private final GameStage stage;
+    private final Vector3 testPoint = new Vector3();
+    private final Body groundBody;
     private Body hitBody = null;
     private boolean dragging;
 

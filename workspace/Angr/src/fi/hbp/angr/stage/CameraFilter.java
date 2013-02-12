@@ -8,8 +8,8 @@ import fi.hbp.angr.PID;
  * Camera position filter.
  */
 public class CameraFilter {
-    private PID xpid;
-    private PID ypid;
+    private final PID xpid;
+    private final PID ypid;
 
     /**
      * Constructor for CameraFilter.

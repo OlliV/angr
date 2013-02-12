@@ -8,10 +8,17 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import fi.hbp.angr.models.Destructible;
 
+/**
+ * Model contact listener for damage modeling.
+ */
 public class ModelContactListener implements ContactListener
 {
-    protected GameState gameState;
+    protected final GameState gameState;
 
+    /**
+     * Contructor for ModelContactListerner.
+     * @param gameState game state object.
+     */
     public ModelContactListener(GameState gameState) {;
         this.gameState = gameState;
     }

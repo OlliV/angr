@@ -24,7 +24,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     /**
      * Game stage
      */
-    private Stage stage;
+    private final Stage stage;
 
     private float a_max;
     private float F_impulse;
@@ -36,15 +36,19 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     protected Body body;
 
     /**
-     * Slingshot state
+     * Slingshot state.
      */
     private boolean slingshotEnabled = true;
 
     /* Input processing/Controls */
     protected MouseJoint mouseJoint = null;
-    private Vector3 testPoint = new Vector3();
-    private Vector2 startPoint = new Vector2();
-    private Body groundBody;
+    private final Vector3 testPoint = new Vector3();
+    private final Vector2 startPoint = new Vector2();
+    /**
+     * Temporary target vector.
+     */
+    private final Vector2 target = new Vector2();
+    private final Body groundBody;
     private Body hitBody = null;
 
     /**
@@ -118,8 +122,6 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
         }
         return false;
     }
-    /** another temporary vector **/
-    Vector2 target = new Vector2();
 
     @Override
     public boolean touchDragged(int x, int y, int pointer) {

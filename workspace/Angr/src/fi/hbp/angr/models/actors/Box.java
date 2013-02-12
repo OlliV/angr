@@ -38,7 +38,7 @@ public class Box extends Actor implements Destructible {
     private final Vector2 modelOrigin;
     private final Sprite sprite;
     private final DamageModel damageModel = new BoxDamageModel();
-    private BitmapFont font = new BitmapFont();
+    private final BitmapFont font = new BitmapFont();
     private final ParticleEffect particleEffect;
     private boolean destroyed;
 

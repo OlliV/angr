@@ -20,7 +20,7 @@ import fi.hbp.angr.Preloadable;
 public class ScreenLoader {
     private final Game game;
     private final Screen screen;
-    private Lock l = new ReentrantLock();
+    private final Lock l = new ReentrantLock();
     private boolean loaded = false;
 
     /**

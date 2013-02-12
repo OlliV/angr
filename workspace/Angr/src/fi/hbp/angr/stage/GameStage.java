@@ -28,7 +28,7 @@ import fi.hbp.angr.models.Destructible;
  */
 public class GameStage extends Stage {
     private final World world;
-    private ItemDestructionList itemDestructor;
+    private final ItemDestructionList itemDestructor;
     private final GameState gameState = new GameState();
 
     /* Debug */

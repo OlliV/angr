@@ -15,13 +15,13 @@ import com.badlogic.gdx.math.Vector3;
  *
  */
 public class Button {
-    private Camera camera;
+    private final Camera camera;
     private BitmapFont font;
     private final ButtonAction action;
     private final int id;
 
-    private Vector3 t1 = new Vector3();
-    private Vector3 t2 = new Vector3();
+    private final Vector3 t1 = new Vector3();
+    private final Vector3 t2 = new Vector3();
 
     /**
      * UI Button Action Interface.
@@ -45,16 +45,6 @@ public class Button {
     public Button(Camera camera, BitmapFont font, ButtonAction action, int id) {
         this.camera = camera;
         this.font = font;
-        this.action = action;
-        this.id = id;
-    }
-
-    /**
-     * Constructor for mainly testing purposes.
-     * @param action action that is called if button is touched.
-     * @param id button identifier that is passed to the button action handler.
-     */
-    protected Button(ButtonAction action, int id) {
         this.action = action;
         this.id = id;
     }

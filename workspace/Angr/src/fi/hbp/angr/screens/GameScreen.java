@@ -20,7 +20,7 @@ public class GameScreen implements Screen, Preloadable {
     private final GdxGame game;
     private GameStage stage;
     private Level level;
-    private Hud hud = new Hud();
+    private final Hud hud = new Hud();
 
     /**
      * Start the game.

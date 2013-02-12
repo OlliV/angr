@@ -24,8 +24,8 @@ public class SplashScreen extends Timer.Task implements Screen {
     private Texture texture;
     private Sprite sprite;
 
-    private float delay;
-    private Timer splashTimer = new Timer();
+    private final float delay;
+    private final Timer splashTimer = new Timer();
     private ScreenLoader loader;
 
     /**
