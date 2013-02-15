@@ -59,7 +59,7 @@ public class GameScreen implements Screen, Preloadable {
      */
     public void loadLevel(Level level) {
         this.level = level;
-        Screen splash = new SplashScreen(game, this, 0.2f);
+        Screen splash = new SplashScreen(game, this, 0.5f);
         game.setScreen(splash);
     }
 
