@@ -384,7 +384,7 @@ public class Hans extends Actor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (palmJoint == null)
+        if (palmJoint == null || objPalm == null)
             return false;
 
         /* Translate the mouse coordinates to world coordinates */
