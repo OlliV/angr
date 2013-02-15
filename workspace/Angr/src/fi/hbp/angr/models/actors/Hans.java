@@ -215,7 +215,7 @@ public class Hans extends Actor implements InputProcessor {
         hand_u = createModelData(world, bel, hac.acHand_u, "hans_hand_u");
 
         /* Attach hand_l */
-        hac.acHand_l.bd.position.set(new Vector2((x +100) * G.WORLD_TO_BOX,
+        hac.acHand_l.bd.position.set(new Vector2((x + 100) * G.WORLD_TO_BOX,
                                                y * G.WORLD_TO_BOX));
         hand_l = createModelData(world, bel, hac.acHand_l, "hans_hand_l");
 

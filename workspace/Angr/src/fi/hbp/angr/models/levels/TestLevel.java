@@ -53,7 +53,7 @@ public class TestLevel extends Level {
         fd.filter.categoryBits = CollisionFilterMasks.GROUND;
 
         /* Show map/terrain */
-        super.showMap(fd, 555, 375);
+        super.showMap(fd, 555, 545);
 
         /* Testing *****/
         testCode();
