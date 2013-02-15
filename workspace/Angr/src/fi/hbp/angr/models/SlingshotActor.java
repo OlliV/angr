@@ -27,7 +27,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     private final Stage stage;
 
     /**
-     * Maximum acceleration.
+     * Maximum mouse joint acceleration.
      */
     private final float a_max;
     /**
@@ -60,9 +60,11 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
     private Body hitBody = null;
 
     /**
-     * Constructor for SlingShotActor
-     * @param stage Game stage
-     * @param world Game (physics) world
+     *  Constructor for SlingShotActor.
+     * @param stage game stage.
+     * @param world game (physics) world.
+     * @param a_max maximum mouse joint acceleration.
+     * @param F_impulse maximum force.
      */
     public SlingshotActor(Stage stage, World world, float a_max, float F_impulse) {
         this.stage = stage;
@@ -157,6 +159,7 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
             float fx = (startPoint.x - testPoint.x) * F_impulse;
             float fy = (startPoint.y - testPoint.y) * F_impulse;
             hitBody.applyLinearImpulse(new Vector2(fx, fy), hitBody.getPosition());
+
             slingshotRelease();
         }
         return false;

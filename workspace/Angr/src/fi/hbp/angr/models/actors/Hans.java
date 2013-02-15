@@ -131,6 +131,11 @@ public class Hans extends Actor implements InputProcessor {
      * true if currently dragging; otherwise false.
      */
     private boolean dragging;
+    /**
+     * When this is true the palm joint will break if
+     * break force is exceeded.
+     */
+    private boolean enableJointBreaking = false;
 
     /**
      * Preload static data
@@ -215,18 +220,18 @@ public class Hans extends Actor implements InputProcessor {
         hand_u = createModelData(world, bel, hac.acHand_u, "hans_hand_u");
 
         /* Attach hand_l */
-        hac.acHand_l.bd.position.set(new Vector2((x + 100) * G.WORLD_TO_BOX,
+        hac.acHand_l.bd.position.set(new Vector2((x + 50) * G.WORLD_TO_BOX,
                                                y * G.WORLD_TO_BOX));
         hand_l = createModelData(world, bel, hac.acHand_l, "hans_hand_l");
 
         /* Create array of models for easier rendering */
-        modelArray = new _ModelData[]{ hbody, hand_u, hand_l };
+        modelArray = new _ModelData[]{ hbody, hand_l, hand_u };
 
         /* Create joints */
         createHandJoint(world, hbody,  new Vector2(0f, 0f),
                                hand_u, new Vector2(0f, 0f),
                                -45.0f * MathUtils.degRad);
-        createHandJoint(world, hand_u, new Vector2(0.5f, 0f),
+        createHandJoint(world, hand_u, new Vector2(0.4f, 0f),
                                hand_l, new Vector2(0f, 0f),
                                90.0f * MathUtils.degRad);
 
@@ -282,6 +287,25 @@ public class Hans extends Actor implements InputProcessor {
             model.sprite.setRotation((float)(model.body.getAngle() * MathUtils.radiansToDegrees));
             model.sprite.draw(batch, parentAlpha);
         }
+
+        evalJointBreak();
+    }
+
+    /**
+     * Check if palm joint break force is exceed
+     */
+    private void evalJointBreak() {
+        if (palmJoint != null) {
+            Vector2 v = palmJoint.getReactionForce(1.0f);
+            float len = v.len();
+            if (len >= 0.45f && enableJointBreaking) {
+                hand_l.body.getWorld().destroyJoint(palmJoint);
+                palmJoint = null;
+                enableJointBreaking = false;
+            } else if (len <= 0.4f) {
+                enableJointBreaking = true;
+            }
+        }
     }
 
     @Override
@@ -305,7 +329,7 @@ public class Hans extends Actor implements InputProcessor {
         jointDef.maxMotorTorque = 0.5f;
         jointDef.motorSpeed = 0.0f;
         jointDef.enableMotor = true;
-        jointDef.localAnchorA.set(new Vector2(0.5f, 0.0f));
+        jointDef.localAnchorA.set(new Vector2(0.8f, 0.0f));
         jointDef.localAnchorB.set(new Vector2(0.0f, 0.0f));
 
         palmJoint = obj.getWorld().createJoint(jointDef);
@@ -396,11 +420,9 @@ public class Hans extends Actor implements InputProcessor {
 
     @Override
     public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
+        /* Object will be released soon. */
         if (dragging == true) {
-            /* Destroy the joint between palm of hand and object */
-            hand_l.body.getWorld().destroyJoint(palmJoint);
             objPalm = null;
-            palmJoint = null;
             dragging = false;
         }
         return false;

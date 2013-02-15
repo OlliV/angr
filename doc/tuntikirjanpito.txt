@@ -61,3 +61,5 @@ Tuntikirjanpito
 2013-02-12	2.0 h	- Lisää javadoc kommentteja
 2013-02-15	4.0 h	- Android ja OpenGL ES 2.0 -korjauksia
 2013-02-15	2.0 h	- Lopullinen tekstuuri pelaajalle
+2013-02-15	2.5 h	- Käden liitos kranaattiin korjattu luonnollisemman
+			  näköiseksi ja tuntuiseksi

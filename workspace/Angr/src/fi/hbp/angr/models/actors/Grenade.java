@@ -128,7 +128,7 @@ public class Grenade extends SlingshotActor implements Destructible {
      * @param angle spawn angle.
      */
     public Grenade(GameStage stage, BodyEditorLoader bel, AssetContainer as, float x, float y, float angle) {
-        super(stage, stage.getWorld(), 50.0f, 0.5f);
+        super(stage, stage.getWorld(), 70.0f, 2.1f);
         this.itdes = stage.getItemDestructionList();
 
         as.bd.position.set(new Vector2(x * G.WORLD_TO_BOX, y * G.WORLD_TO_BOX));
