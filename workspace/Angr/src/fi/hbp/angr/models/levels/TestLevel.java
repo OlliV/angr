@@ -23,7 +23,7 @@ public class TestLevel extends Level {
      * Constructor for this level.
      */
     public TestLevel() {
-        super("mappi");
+        super("mappi", 5);
     }
 
     @Override

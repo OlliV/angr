@@ -97,7 +97,7 @@ public class GameStage extends Stage {
          * without any damage. */
         Timer.Task timTsk = new SetModelContactListener();
         Timer tim = new Timer();
-        tim.scheduleTask(timTsk, 1.7f); /* sec */
+        tim.scheduleTask(timTsk, 3.0f); /* sec */
         tim.start();
 
         if (G.DEBUG) {

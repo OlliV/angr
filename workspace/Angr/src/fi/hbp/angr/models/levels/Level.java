@@ -32,7 +32,7 @@ public abstract class Level extends Actor implements Preloadable {
     /**
      * Terrain sprite for of the level.
      */
-    private Sprite sprite;
+    private Sprite[] sprite;
     /**
      * Game state object.
      */
@@ -55,13 +55,19 @@ public abstract class Level extends Actor implements Preloadable {
      * Counter used to count grenade spawn delay.
      */
     private float grenadeSpawnCounter = 0.0f;
+    /**
+     * Number of map slices.
+     */
+    private final int slices;
 
     /**
      * Constructor for Level class.
      * @param levelName Texture filename without extension.
      */
-    public Level(String levelName) {
+    public Level(String levelName, int slices) {
         this.levelName = levelName;
+        this.slices = slices;
+        sprite = new Sprite[slices];
     }
 
     /**
@@ -73,7 +79,9 @@ public abstract class Level extends Actor implements Preloadable {
 
     @Override
     public final void preload() {
-        G.getAssetManager().load("data/" + levelName + ".png", Texture.class);
+        for (int i = 0; i < slices; i++) {
+            G.getAssetManager().load("data/" + levelName + "_" + i + ".png", Texture.class);
+        }
         doOnPreload();
     }
 
@@ -86,7 +94,9 @@ public abstract class Level extends Actor implements Preloadable {
 
     @Override
     public final void unload() {
-        G.getAssetManager().unload("data/" + levelName + ".png");
+        for (int i = 0; i < slices; i++) {
+            G.getAssetManager().unload("data/" + levelName + "_" + i + ".png");
+        }
         doOnUnload();
     }
 
@@ -133,24 +143,27 @@ public abstract class Level extends Actor implements Preloadable {
      */
     private void createTerrain(FixtureDef mapFd) {
         BodyEditorLoader bel = new BodyEditorLoader(
-                Gdx.files.internal("levels.json"));
-
-        Texture texture = G.getAssetManager().get(
-                "data/" + levelName + ".png",
-                Texture.class);
+                Gdx.files.internal(levelName + ".json"));
 
         BodyDef bd = new BodyDef();
         bd.type = BodyType.StaticBody;
-        bd.position.set(0, 0);
 
-        sprite = new Sprite(texture);
-        sprite.setPosition(0, 0);
+        for (int i = 0; i < slices; i++) {
+            Texture texture = G.getAssetManager().get(
+                    "data/" + levelName + "_" + i + ".png",
+                    Texture.class);
 
-        Body body = bf.getWorld().createBody(bd);
-        bel.attachFixture(body,
-                          levelName,
-                          mapFd,
-                          sprite.getWidth() / G.BOX_TO_WORLD);
+            bd.position.set(i * 1000 * G.WORLD_TO_BOX, 0);
+
+            sprite[i] = new Sprite(texture);
+            sprite[i].setPosition(i * 1000, 0);
+
+            Body body = bf.getWorld().createBody(bd);
+            bel.attachFixture(body,
+                              String.valueOf(i),
+                              mapFd,
+                              sprite[i].getWidth() / G.BOX_TO_WORLD);
+        }
     }
 
     /**
@@ -200,7 +213,9 @@ public abstract class Level extends Actor implements Preloadable {
 
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
-        sprite.draw(batch);
+        for (int i = 0; i < slices; i++) {
+            sprite[i].draw(batch);
+        }
         updateHans();
     }
 

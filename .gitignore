@@ -28,3 +28,5 @@ local.properties
 libgdx-0.9.7.zip
 gdx-setup-ui.jar
 physics-body-editor/
+
+angr-keystore
