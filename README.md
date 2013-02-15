@@ -9,8 +9,9 @@ Build tools
 
 Javadoc
 -------
-http://hit.edu/hbp/angr/doc/
+- http://hit.edu/hbp/angr/doc/
 
 Binaries
 --------
-http://hit.edu/hbp/angr/angr.jar
+- http://hit.edu/hbp/angr/angr.jar
+- http://hit.edu/hbp/angr/Angr-android.apk
