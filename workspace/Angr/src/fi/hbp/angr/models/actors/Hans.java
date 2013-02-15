@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import fi.hbp.angr.AssetContainer;
 import fi.hbp.angr.G;
 import fi.hbp.angr.models.CollisionFilterMasks;
+import fi.hbp.angr.models.SlingshotActor;
 import fi.hbp.angr.stage.GameStage;
 
 /**
@@ -345,7 +346,9 @@ public class Hans extends Actor implements InputProcessor {
             /* If the hit point is inside the fixture of the body
              * we report it
              */
-            if (fixture.testPoint(testPoint.x, testPoint.y)) {
+            Vector2 v = fixture.getBody().getPosition();
+            if (fixture.testPoint(testPoint.x, testPoint.y) ||
+                    v.dst(testPoint.x, testPoint.y) < SlingshotActor.touchDst) {
                 hitBody = fixture.getBody();
                 if (hitBody.equals(objPalm)) {
                     return false;

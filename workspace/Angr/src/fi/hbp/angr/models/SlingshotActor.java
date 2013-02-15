@@ -26,14 +26,22 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
      */
     private final Stage stage;
 
-    private float a_max;
-    private float F_impulse;
+    /**
+     * Maximum acceleration.
+     */
+    private final float a_max;
+    /**
+     * Applied impulse force.
+     */
+    private final float F_impulse;
 
     /**
      * Body of the item
      * @note Body is not initialized by this abstract class
      */
     protected Body body;
+
+    public static final float touchDst = 10.0f;
 
     /**
      * Slingshot state.
@@ -73,7 +81,9 @@ public abstract class SlingshotActor extends Actor implements InputProcessor {
             /* If the hit point is inside the fixture of the body
             /* we report it
              */
-            if (fixture.testPoint(testPoint.x, testPoint.y)) {
+            Vector2 v = fixture.getBody().getPosition();
+            if (fixture.testPoint(testPoint.x, testPoint.y) ||
+                    v.dst(testPoint.x, testPoint.y) < touchDst) {
                 hitBody = fixture.getBody();
                 if (hitBody.equals(body)) {
                     return false;
