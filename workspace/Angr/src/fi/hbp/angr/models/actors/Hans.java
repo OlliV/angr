@@ -298,7 +298,7 @@ public class Hans extends Actor implements InputProcessor {
         if (palmJoint != null) {
             Vector2 v = palmJoint.getReactionForce(1.0f);
             float len = v.len();
-            if (len >= 0.45f && enableJointBreaking) {
+            if (len >= 0.55f && enableJointBreaking && !dragging) {
                 hand_l.body.getWorld().destroyJoint(palmJoint);
                 palmJoint = null;
                 enableJointBreaking = false;
