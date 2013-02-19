@@ -27,9 +27,8 @@ public class GameStateTest {
 
     @Test
     public void testInit() {
-        gameState.init(100, 1, 1, 10);
+        gameState.init(1, 1, 10);
         assertThat(gameState.getScore(), equalTo(0));
-        assertThat(gameState.getHighScore(), equalTo(100));
     }
 
     @Test
@@ -42,7 +41,7 @@ public class GameStateTest {
 
     @Test
     public void testGetGrenades() {
-        gameState.init(0, 0, 0, 10);
+        gameState.init(0, 0, 10);
         gameState.getGrenades().decrement();
         assertThat("Test that amount of grenades if decremented.",
                 gameState.getGrenades().getCount(), equalTo(9));
@@ -57,7 +56,7 @@ public class GameStateTest {
 
     @Test
     public void testGetBadgesZero() {
-        gameState.init(0, 100, 1, 1);
+        gameState.init(100, 1, 1);
         gameState.addPoints(200, false);
         gameState.countFinalScore();
 
@@ -66,7 +65,7 @@ public class GameStateTest {
 
     @Test
     public void testGetBadgesZeroB() {
-        gameState.init(0, 100, 0, 0);
+        gameState.init(100, 0, 0);
         gameState.addPoints(90, false);
         gameState.countFinalScore();
 
@@ -75,7 +74,7 @@ public class GameStateTest {
 
     @Test
     public void testGetBadgesOne() {
-        gameState.init(0, 100, 0, 0);
+        gameState.init(100, 0, 0);
         gameState.addPoints(100, false);
         gameState.countFinalScore();
 
@@ -84,7 +83,7 @@ public class GameStateTest {
 
     @Test
     public void testGetBadgesTwo() {
-        gameState.init(0, 100, 0, 0);
+        gameState.init(100, 0, 0);
         gameState.addPoints(200, false);
         gameState.countFinalScore();
 
@@ -93,7 +92,7 @@ public class GameStateTest {
 
     @Test
     public void testGetBadgesThree() {
-        gameState.init(0, 100, 1, 0);
+        gameState.init(100, 1, 0);
         gameState.addPoints(90, true);
         gameState.addPoints(10, false);
         gameState.addPoints(5000, false);
@@ -104,9 +103,9 @@ public class GameStateTest {
 
     @Test
     public void testGameFinalized() {
-        gameState.init(100, 10, 10, 5);
+        gameState.init(10, 10, 5);
         gameState.countFinalScore();
-        gameState.init(400, 40, 50, 10);
+        gameState.init(40, 50, 10);
         assertThat(gameState.getGrenades().getCount(), equalTo(5));
     }
 
@@ -114,7 +113,7 @@ public class GameStateTest {
     public void testGameFinalizedNotCleared() {
         boolean end;
 
-        gameState.init(100, 10, 10, 5);
+        gameState.init(10, 10, 5);
         end = gameState.countFinalScore();
         assertThat("Test that game was not cleared.", end, equalTo(false));
     }
@@ -123,7 +122,7 @@ public class GameStateTest {
     public void testGameFinalizedCleared() {
         boolean end;
 
-        gameState.init(100, 10, 10, 5);
+        gameState.init(10, 10, 5);
 
         for (int i = 0; i < 10; i++) {
             gameState.addPoints(1, true);
@@ -135,14 +134,8 @@ public class GameStateTest {
     }
 
     @Test
-    public void testGetHighScore() {
-        gameState.init(500, 100, 1, 10);
-        assertThat(gameState.getHighScore(), equalTo(500));
-    }
-
-    @Test
     public void testGameEndsEnemies() {
-        gameState.init(0, 1, 1, 10);
+        gameState.init(1, 1, 10);
         assertThat(gameState.update(), equalTo(true));
         gameState.addPoints(10, true);
         assertThat(gameState.update(), equalTo(false));
@@ -150,7 +143,7 @@ public class GameStateTest {
 
     @Test
     public void testGameEndsGrenades() {
-        gameState.init(0, 1, 1, 10);
+        gameState.init(1, 1, 10);
         assertThat(gameState.update(), equalTo(true));
         for (int i = 0; i < 15; i++) {
             gameState.getGrenades().decrement();

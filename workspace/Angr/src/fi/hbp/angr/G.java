@@ -42,4 +42,9 @@ public class G {
     public static AssetManager getAssetManager() {
         return assetManager;
     }
+
+    /**
+     * Game scoreboard
+     */
+    public static Scoreboard scoreboard = null;
 }

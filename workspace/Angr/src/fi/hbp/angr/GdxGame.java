@@ -1,23 +1,34 @@
 package fi.hbp.angr;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.models.levels.Level;
-import fi.hbp.angr.models.levels.TestLevel;
 import fi.hbp.angr.screens.GameScreen;
+import fi.hbp.angr.screens.MainMenuScreen;
 import fi.hbp.angr.screens.SummaryScreen;
 
 public class GdxGame extends Game {
+    /**
+     * Actual game is on this screen.
+     */
     private GameScreen gameScreen;
+    /**
+     * Game summary/score is shown on this screen.
+     */
     private SummaryScreen gameEnd;
 
     @Override
     public void create() {
-        gameScreen = new GameScreen(this);
-        gameScreen.loadLevel(new TestLevel());
+        if (G.scoreboard == null) {
+            Gdx.app.exit();
+        }
 
+        gameScreen = new GameScreen(this);
         gameEnd = new SummaryScreen(this);
+
+        setScreen(new MainMenuScreen(this));
     }
 
     /**

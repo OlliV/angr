@@ -80,7 +80,7 @@ public class Button {
         TextBounds bnd = font.draw(batch, text, x, y);
 
         t1.set(x, y, 0f);
-        float y2 = (y >= 0 ) ? y + font.getLineHeight() : y - font.getLineHeight();
+        float y2 = y - font.getLineHeight();
         t2.set(x + bnd.width, y2, 0f);
 
         camera.project(t1);

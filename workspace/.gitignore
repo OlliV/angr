@@ -26,3 +26,7 @@ local.properties
 .buildpath
 
 Angr/doc/
+
+# Swarm specific
+SwarmConnect/
+Angr-android/src/fi/hbp/angr/SwarmAppKey.java

@@ -167,23 +167,6 @@ public abstract class Level extends Actor implements Preloadable {
     }
 
     /**
-     * Get level highscore.
-     * @return higscore.
-     */
-    public int getHighScore() {
-        return 100;
-        // TODO get high score
-    }
-
-    /**
-     * Set level highscore.
-     * @param score
-     */
-    public void setHighScore(int score) {
-        // TODO Set high score.
-    }
-
-    /**
      * Check if grenade has been used and spawn a new one if needed.
      */
     private void updateHans() {

@@ -40,8 +40,7 @@ public class TestLevel extends Level {
     @Override
     public void doOnShow() {
         /* Initialize game state                 */
-        gs.init(getHighScore(), /* High score    */
-                550,            /* Badge scaling */
+        gs.init(550,            /* Badge scaling */
                 10,             /* Enemy count   */
                 10);            /* Grenade count */
 

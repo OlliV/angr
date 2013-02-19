@@ -46,7 +46,6 @@ public class GameState {
     }
 
     private int score = 0;
-    private int highScore = 0;
     private int badgeScale = 1;
     private int enemyCount = 0;
     private Grenades grenades = new Grenades(0);
@@ -54,16 +53,14 @@ public class GameState {
 
     /**
      * Initialize game state object.
-     * @param highScore high score on the current level.
      * @param badgeScale points needed to achieve one badge.
      * @param enemies enemy count on the current level at the beginning of the game.
      * @param grenades amount of grenades available to clear the current level.
      */
-    public void init(int highScore, int badgeScale, int enemies, int grenades) {
+    public void init(int badgeScale, int enemies, int grenades) {
         if (gameFinalized == true)
             return;
 
-        this.highScore = highScore;
         this.badgeScale = (badgeScale > 0) ? badgeScale : 1;
         this.enemyCount = enemies;
         this.grenades = new Grenades(grenades);
@@ -106,14 +103,6 @@ public class GameState {
     }
 
     /**
-     * Get HighScore value for the current level.
-     * @return high score value.
-     */
-    public int getHighScore() {
-        return highScore;
-    }
-
-    /**
      * Update statuses.
      * @return true if game continues, false if game is end.
      */
@@ -139,10 +128,6 @@ public class GameState {
             gameFinalized = true;
 
             score += grenades.getCount() * 150;
-
-            if (score > highScore) {
-                highScore = score;
-            }
         }
 
         return enemyCount == 0;

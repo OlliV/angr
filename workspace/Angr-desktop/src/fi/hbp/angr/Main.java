@@ -11,6 +11,7 @@ public class Main {
 		cfg.width = 1024;
 		cfg.height = 768;
 
+		G.scoreboard = new DesktopScoreboard();
 		new LwjglApplication(new GdxGame(), cfg);
 	}
 }
