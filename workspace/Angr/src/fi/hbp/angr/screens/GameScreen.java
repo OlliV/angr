@@ -123,7 +123,7 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void pause() {
-        // TODO Auto-generated method stub
+        game.showPauseScreen(this);
     }
 
     @Override

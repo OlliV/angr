@@ -66,3 +66,4 @@ Tuntikirjanpito
 			- Käden tekstuurit
 2013-02-20	4.0 h	- Swarm integraatio
 			- Valikoita
+2013-02-21	2.0 h	- Pause screen
