@@ -64,3 +64,5 @@ Tuntikirjanpito
 			- Käden liitos kranaattiin korjattu luonnollisemman
 			  näköiseksi ja tuntuiseksi
 			- Käden tekstuurit
+2013-02-20	4.0 h	- Swarm integraatio
+			- Valikoita

@@ -3,9 +3,13 @@ angr
 
 An Angry Birds clone.
 
-Build tools
------------
-- Full ADT
+Build tools and tasks
+---------------------
+- Desktop
+-- Eclipse
+- Android
+-- ADT bundle
+-- SwarmConnect copied to workspace directory
 
 Javadoc
 -------
