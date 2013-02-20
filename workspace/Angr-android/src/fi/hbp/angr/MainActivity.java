@@ -2,6 +2,7 @@ package fi.hbp.angr;
 
 import android.os.Bundle;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.swarmconnect.Swarm;
@@ -15,6 +16,9 @@ public class MainActivity extends AndroidApplication {
         cfg.useGL20 = true;
 
         initialize(new GdxGame(), cfg);
+        Gdx.input.setCatchMenuKey(true);
+        Gdx.input.setCatchBackKey(true);
+
         Swarm.setActive(this);
         G.scoreboard = new AndroidScoreboard();
     }

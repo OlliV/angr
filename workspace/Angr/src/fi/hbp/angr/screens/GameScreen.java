@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 
 import fi.hbp.angr.BodyFactory;
+import fi.hbp.angr.G;
 import fi.hbp.angr.GdxGame;
 import fi.hbp.angr.Preloadable;
 import fi.hbp.angr.hud.Hud;
@@ -75,6 +76,10 @@ public class GameScreen implements Screen, Preloadable {
         if (stage.hasGameEnded()) {
             game.endOfGame(stage.getGameState());
         }
+
+        if (Gdx.input.isKeyPressed(G.pauseButton) || Gdx.input.isKeyPressed(G.pauseButton1)) {
+            game.showPauseScreen(this);
+        }
     }
 
     @Override
@@ -84,7 +89,7 @@ public class GameScreen implements Screen, Preloadable {
     }
 
     @Override
-    public void show() {
+    public void create() {
         int xsize = Gdx.graphics.getWidth() * 2;
         int ysize = Gdx.graphics.getHeight() * 2;
         stage = new GameStage(xsize, ysize);
@@ -102,13 +107,18 @@ public class GameScreen implements Screen, Preloadable {
 
         /* Create and add map/level actor */
         BodyFactory bf = new BodyFactory(stage, inputMultiplexer);
-        level.show(bf, stage.getGameState());
+        level.levelCreate(bf, stage.getGameState());
         stage.addActor(level);
     }
 
     @Override
+    public void show() {
+        level.show();
+    }
+
+    @Override
     public void hide() {
-        this.unload();
+        level.hide();
     }
 
     @Override
@@ -123,6 +133,7 @@ public class GameScreen implements Screen, Preloadable {
 
     @Override
     public void dispose() {
+        this.unload();
         stage.dispose();
         this.unload();
     }

@@ -82,6 +82,9 @@ public class ScreenLoader {
                 Gdx.app.exit();
             }
             G.getAssetManager().finishLoading();
+            if (Preloadable.class.isInstance(screen)) {
+                ((Preloadable)screen).create();
+            }
             game.setScreen(screen);
         } finally {
             l.unlock();

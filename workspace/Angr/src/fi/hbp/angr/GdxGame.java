@@ -2,14 +2,20 @@ package fi.hbp.angr;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 
 import fi.hbp.angr.logic.GameState;
 import fi.hbp.angr.models.levels.Level;
 import fi.hbp.angr.screens.GameScreen;
 import fi.hbp.angr.screens.MainMenuScreen;
+import fi.hbp.angr.screens.PauseScreen;
 import fi.hbp.angr.screens.SummaryScreen;
 
 public class GdxGame extends Game {
+    /**
+     * Main menu.
+     */
+    private MainMenuScreen mainMenu;
     /**
      * Actual game is on this screen.
      */
@@ -18,6 +24,10 @@ public class GdxGame extends Game {
      * Game summary/score is shown on this screen.
      */
     private SummaryScreen gameEnd;
+    /**
+     * Pause screen.
+     */
+    private PauseScreen pauseScreen;
 
     @Override
     public void create() {
@@ -25,10 +35,19 @@ public class GdxGame extends Game {
             Gdx.app.exit();
         }
 
+        mainMenu = new MainMenuScreen(this);
         gameScreen = new GameScreen(this);
         gameEnd = new SummaryScreen(this);
+        pauseScreen = new PauseScreen(this);
 
-        setScreen(new MainMenuScreen(this));
+        setScreen(mainMenu);
+    }
+
+    /**
+     * Show main menu.
+     */
+    public void showMainMenu() {
+        setScreen(mainMenu);
     }
 
     /**
@@ -37,6 +56,15 @@ public class GdxGame extends Game {
      */
     public void nextLevel(Level level) {
         gameScreen.loadLevel(level);
+    }
+
+    /**
+     * Show pause screen.
+     * @param currentScreen currently showing screen for getting back.
+     */
+    public void showPauseScreen(Screen currentScreen) {
+        pauseScreen.setLastScreen(currentScreen);
+        setScreen(pauseScreen);
     }
 
     /**

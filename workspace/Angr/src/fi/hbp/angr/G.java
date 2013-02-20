@@ -1,5 +1,6 @@
 package fi.hbp.angr;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 
 /**
@@ -47,4 +48,10 @@ public class G {
      * Game scoreboard
      */
     public static Scoreboard scoreboard = null;
+
+    /**
+     * Game pause button
+     */
+    public static int pauseButton = Keys.P;
+    public static int pauseButton1 = Keys.BACK;
 }

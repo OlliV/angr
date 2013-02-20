@@ -15,6 +15,8 @@ public interface Preloadable {
      */
     public void preload();
 
+    public void create();
+
     /**
      * Unload assets.
      *

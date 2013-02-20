@@ -15,17 +15,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
-import fi.hbp.angr.GdxGame;
-
 /**
  * Abstract class for easy menu creation.
  */
 public abstract class AbstMenuScreen implements Screen {
-    /**
-     * GdxGame.
-     */
-    private final GdxGame game;
-
     /**
      * Camera for projection.
      */
@@ -46,9 +39,7 @@ public abstract class AbstMenuScreen implements Screen {
     /**
      * Constructor for SummaryScreen class.
      */
-    public AbstMenuScreen(GdxGame game) {
-        this.game = game;
-
+    public AbstMenuScreen() {
         /* Load assets */
         FileHandle fontFile = Gdx.files.internal("fonts/BistroBlock.ttf");
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
@@ -140,14 +131,6 @@ public abstract class AbstMenuScreen implements Screen {
      */
     public BitmapFont getFont() {
         return font;
-    }
-
-    /**
-     * Get GdxGame.
-     * @return gdxGame.
-     */
-    public GdxGame getGame() {
-        return game;
     }
 
     @Override

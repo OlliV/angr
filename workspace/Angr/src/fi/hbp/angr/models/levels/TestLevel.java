@@ -38,7 +38,7 @@ public class TestLevel extends Level {
     }
 
     @Override
-    public void doOnShow() {
+    public void doOnCreate() {
         /* Initialize game state                 */
         gs.init(550,            /* Badge scaling */
                 10,             /* Enemy count   */
@@ -69,5 +69,21 @@ public class TestLevel extends Level {
         for (int i = 0; i < 10; i++) {
             bf.spawnBox(1000 + i * 300, 400, 0);
         }
+    }
+
+    @Override
+    public void hide() {
+        music.pause();
+    }
+
+    @Override
+    public void show() {
+        music.play();
+    }
+
+    @Override
+    public void create() {
+        // TODO Auto-generated method stub
+
     }
 }

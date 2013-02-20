@@ -18,6 +18,10 @@ import fi.hbp.angr.models.levels.TestLevel;
  */
 public class SummaryScreen extends AbstMenuScreen implements Button.ButtonAction {
     /**
+     * GdxGame.
+     */
+    private final GdxGame game;
+    /**
      * Textures for badges.
      */
     private TextureRegion[] badges = new TextureRegion[3];
@@ -70,7 +74,7 @@ public class SummaryScreen extends AbstMenuScreen implements Button.ButtonAction
      * Constructor for SummaryScreen class.
      */
     public SummaryScreen(GdxGame game) {
-        super(game);
+        this.game = game;
     }
 
     @Override
@@ -206,9 +210,9 @@ public class SummaryScreen extends AbstMenuScreen implements Button.ButtonAction
     @Override
     public void buttonAction(int id) {
         if (id == 0) {
-            getGame().setScreen(new MainMenuScreen(getGame()));
+            game.showMainMenu();
         } else if (id == 1) {
-            getGame().nextLevel(new TestLevel());
+            game.nextLevel(new TestLevel());
         } else if (id == 2) {
             G.scoreboard.showHighScore();
         }

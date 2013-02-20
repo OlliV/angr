@@ -103,17 +103,17 @@ public abstract class Level extends Actor implements Preloadable {
     /**
      * This method is called when initiating this level.
      */
-    protected abstract void doOnShow();
+    protected abstract void doOnCreate();
 
     /**
      * This method is called when the game screen is initialized.
      * @param bf a body factory.
      * @param gs a game state object.
      */
-    public final void show(BodyFactory bf, GameState gs) {
+    public final void levelCreate(BodyFactory bf, GameState gs) {
         this.bf = bf;
         this.gs = gs;
-        doOnShow();
+        doOnCreate();
     }
 
     /**
@@ -201,6 +201,16 @@ public abstract class Level extends Actor implements Preloadable {
         }
         updateHans();
     }
+
+    /**
+     * Called when game screen is no longer the current screen for a Game.
+     */
+    public void hide() { }
+
+    /**
+     * Called when game screen becomes the current screen for a Game.
+     */
+    public void show() { }
 
     @Override
     public String toString() {
