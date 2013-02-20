@@ -13,8 +13,17 @@ import fi.hbp.angr.G;
  * Drawable HUD.
  */
 public class Hud {
+    /**
+     * Font for drawing HUD.
+     */
     private BitmapFont font = new BitmapFont();
+    /**
+     * Batch for drawing this HUD.
+     */
     private SpriteBatch hudBatch;
+    /**
+     * List of actors in this HUD.
+     */
     private ArrayList<HudActor> actors = new ArrayList<HudActor>();
 
     /**
@@ -76,4 +85,5 @@ public class Hud {
         /* There must be a clever way to transform the matrix instead of this. */
         hudBatch = new SpriteBatch();
     }
+
 }

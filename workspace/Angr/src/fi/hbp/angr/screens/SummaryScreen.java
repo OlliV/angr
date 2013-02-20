@@ -171,8 +171,8 @@ public class SummaryScreen extends AbstMenuScreen implements Button.ButtonAction
 
         if (levelCleared) {
             levelClearedText = "Level cleared!";
-            // Send scores to the scoreboard
-            G.scoreboard.submitScore(6519, gs.getScore(), badgeLevel);
+            // Send score to the scoreboard
+            G.scoreboard.submitScore(6519, gs.getScore(), gs.getBadges());
         } else {
             levelClearedText = "Level failed!";
         }
