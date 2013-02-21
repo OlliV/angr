@@ -72,6 +72,11 @@ public class TestLevel extends Level {
     }
 
     @Override
+    public float getLevelWidth() {
+        return 3800f;
+    }
+
+    @Override
     public void hide() {
         music.pause();
     }
@@ -83,7 +88,5 @@ public class TestLevel extends Level {
 
     @Override
     public void create() {
-        // TODO Auto-generated method stub
-
     }
 }

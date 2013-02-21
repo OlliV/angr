@@ -92,7 +92,7 @@ public class GameScreen implements Screen, Preloadable {
     public void create() {
         int xsize = Gdx.graphics.getWidth() * 2;
         int ysize = Gdx.graphics.getHeight() * 2;
-        stage = new GameStage(xsize, ysize);
+        stage = new GameStage(xsize, ysize, level.getLevelWidth());
 
         /* Create input multiplexer */
         InputMultiplexer inputMultiplexer = new InputMultiplexer();

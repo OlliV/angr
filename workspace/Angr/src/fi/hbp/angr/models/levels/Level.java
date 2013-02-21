@@ -203,6 +203,12 @@ public abstract class Level extends Actor implements Preloadable {
     }
 
     /**
+     * Get level width for x axis clamping.
+     * @return width of level in x axis.
+     */
+    public abstract float getLevelWidth();
+
+    /**
      * Called when game screen is no longer the current screen for a Game.
      */
     public void hide() { }

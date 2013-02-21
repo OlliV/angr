@@ -1,5 +1,6 @@
 package fi.hbp.angr.screens;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -90,7 +91,11 @@ public class SummaryScreen extends AbstMenuScreen implements Button.ButtonAction
 
         mainMenuButton.draw(batch, "Main menu", btn_x, btn_y + 50);
         levelButton.draw(batch, buttonText, btn_x, btn_y);
-        leaderboardButton.draw(batch, "Leaderboard", btn_x + 500, btn_y);
+
+        /* At the moment Leaderboard is only available for Android devices. */
+        if (Gdx.app.getType() == ApplicationType.Android) {
+            leaderboardButton.draw(batch, "Leaderboard", btn_x + 500, btn_y);
+        }
     }
 
     /**

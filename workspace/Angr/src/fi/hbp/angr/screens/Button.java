@@ -44,6 +44,11 @@ public class Button {
     private final Vector3 t2 = new Vector3();
 
     /**
+     * Button text.
+     */
+    private String text;
+
+    /**
      * UI Button Action Interface.
      */
     public interface ButtonAction {
@@ -63,16 +68,29 @@ public class Button {
      * @param id button identifier that is passed to the button action handler.
      */
     public Button(Camera camera, BitmapFont font, ButtonAction action, int id) {
+        this(camera, font, action, "Default", id);
+    }
+
+    /**
+     * Constructor for UI button.
+     * @param camera camera object used for projection.
+     * @param font font that is used to draw this button.
+     * @param action action that is called if button is touched.
+     * @param text button text.
+     * @param id button identifier that is passed to the button action handler.
+     */
+    public Button(Camera camera, BitmapFont font, ButtonAction action, String text, int id) {
         this.camera = camera;
         this.font = font;
         this.action = action;
+        this.text = text;
         this.id = id;
     }
 
     /**
-     *
+     * Draw this button with temporary text.
      * @param batch sprite batch to be used.
-     * @param text current button text.
+     * @param text current button text. (This doesn't update the internal button text.)
      * @param x coordinate.
      * @param y coordinate.
      */
@@ -92,6 +110,16 @@ public class Button {
         if(justTouched((int)t1.x, (int)t1.y, (int)t2.x, (int)t2.y)) {
             action.buttonAction(id);
         }
+    }
+
+    /**
+     * Draw this button.
+     * @param batch sprite batch to be used.
+     * @param x coordinate.
+     * @param y coordinate.
+     */
+    public void draw(SpriteBatch batch, float x, float y) {
+        draw(batch, this.text, x, y);
     }
 
     /**
@@ -127,6 +155,22 @@ public class Button {
         }
 
         return false;
+    }
+
+    /**
+     * Set button text.
+     * @param text new button text.
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    /**
+     * Get button text.
+     * @return current button text.
+     */
+    public String getText() {
+        return this.text;
     }
 
     /**

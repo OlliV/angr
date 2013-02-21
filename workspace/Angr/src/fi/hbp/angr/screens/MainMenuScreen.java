@@ -1,5 +1,8 @@
 package fi.hbp.angr.screens;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -13,9 +16,11 @@ public class MainMenuScreen extends AbstMenuScreen implements ButtonAction {
      * GdxGame.
      */
     private final GdxGame game;
-    private Button startButton;
-    private Button dashboardButton;
-    private Button exitButton;
+
+    /**
+     * List of buttons
+     */
+    private ArrayList<Button> buttons = new ArrayList<Button>();
 
     public MainMenuScreen(GdxGame game) {
        this.game = game;
@@ -23,16 +28,24 @@ public class MainMenuScreen extends AbstMenuScreen implements ButtonAction {
 
     @Override
     public void draw(SpriteBatch batch) {
-        startButton.draw(batch, "Start", 0, 0);
-        dashboardButton.draw(batch, "Dashboard", 0, -50);
-        exitButton.draw(batch, "Exit", 0, -100);
+        for (int i = 0; i < buttons.size(); i++) {
+            buttons.get(i).draw(batch, 0, i * -50);
+        }
     }
 
     @Override
     public void onShow() {
-        startButton = new Button(getCamera(), getFont(), this, 0);
-        dashboardButton = new Button(getCamera(), getFont(), this, 1);
-        exitButton = new Button(getCamera(), getFont(), this, 2);
+        buttons.clear();
+
+        buttons.add(new Button(getCamera(), getFont(), this, "Start", 0));
+
+        /* There is real scoreboard only for Android as desktop scoreboard is
+         * yet only a mock. */
+        if (Gdx.app.getType() == ApplicationType.Android) {
+            buttons.add(new Button(getCamera(), getFont(), this, "Scoreboard", 1));
+        }
+
+        buttons.add(new Button(getCamera(), getFont(), this, "Exit", 2));
     }
 
     @Override

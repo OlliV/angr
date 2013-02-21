@@ -30,6 +30,7 @@ public class GameStage extends Stage {
     private final World world;
     private final ItemDestructionList itemDestructor;
     private final GameState gameState = new GameState();
+    private final float levelWidth;
 
     /* Debug */
     private Box2DDebugRenderer renderer;
@@ -78,8 +79,9 @@ public class GameStage extends Stage {
      * Constructor for GameStage.
      * @param width width of the game stage viewport in pixels
      * @param height height of the game stage viewport in pixels
+     * @param levelWidth game world/level width
      */
-    public GameStage(float width, float height) {
+    public GameStage(float width, float height, float levelWidth) {
         super(width, height, false);
         world = new World(new Vector2(0.0f, -9.8f), true);
         /* TODO It seems that there is some strange static data inside the
@@ -91,6 +93,7 @@ public class GameStage extends Stage {
          *  This could be also a result of varying fps during start up. */
         world.setWarmStarting(true);
         itemDestructor = new ItemDestructionList();
+        this.levelWidth = levelWidth;
 
         /* Timer is used to implement a short delay between start of
          * physics modeling and damage modeling to allow bodies hit the ground
@@ -239,7 +242,7 @@ public class GameStage extends Stage {
      * @return Clamped value of x axis position.
      */
     private float clampX(float x) {
-        return MathUtils.clamp(x, this.getWidth() / 2, this.getWidth() * 2);
+        return MathUtils.clamp(x, this.getWidth() / 2, levelWidth);
     }
 
     /**

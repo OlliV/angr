@@ -45,10 +45,25 @@ public class GameState {
         }
     }
 
+    /**
+     * Game score.
+     */
     private int score = 0;
+    /**
+     * Badge scaling.
+     */
     private int badgeScale = 1;
+    /**
+     * Enemies left in this map.
+     */
     private int enemyCount = 0;
+    /**
+     * Grenade counter.
+     */
     private Grenades grenades = new Grenades(0);
+    /**
+     * All game stats calculated true/false.
+     */
     private boolean gameFinalized = false;
 
     /**
