@@ -70,3 +70,6 @@ Tuntikirjanpito
 2013-02-21	0.7 h	- x-akselin clamppaus level-kohtaisesti
 			- Poistettu scoreboard/leaderboard -napit
 			  desktop-versiosta
+2013-02-21	1.5 h	- pieniä korjauksia sinne tänne
+			  lähinnä pelattavuuteen
+			- javadocien fiksailua
