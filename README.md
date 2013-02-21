@@ -5,11 +5,12 @@ An Angry Birds clone.
 
 Build tools and tasks
 ---------------------
-- Desktop
--- Eclipse
-- Android
--- ADT bundle
--- SwarmConnect copied to workspace directory
+*Desktop*
+- Eclipse
+
+*Android*
+- ADT bundle
+- SwarmConnect copied to workspace directory
 
 Javadoc
 -------
