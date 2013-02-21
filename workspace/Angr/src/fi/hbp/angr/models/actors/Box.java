@@ -31,45 +31,25 @@ import fi.hbp.angr.stage.GameStage;
  * A box for level decoration.
  */
 public class Box extends Actor implements Destructible {
-    /**
-     * Name of this model.
-     */
+    /** Name of this model. */
     private static final String MODEL_NAME = "box";
-    /**
-     * Texture file path.
-     */
+    /** Texture file path. */
     private static final String TEXTURE_PATH = "data/" + MODEL_NAME + ".png";
-    /**
-     * Item destruction list.
-     */
+    /** Item destruction list. */
     private final ItemDestruction itdes;
-    /**
-     * Body of this actor.
-     */
+    /** Body of this actor. */
     private final Body body;
-    /**
-     * Origin of this actor.
-     */
+    /** Origin of this actor. */
     private final Vector2 modelOrigin;
-    /**
-     * Sprite of this actor.
-     */
+    /**  Sprite of this actor. */
     private final Sprite sprite;
-    /**
-     * Damage model for this desctructible actor.
-     */
+    /** Damage model for this desctructible actor. */
     private final DamageModel damageModel = new BoxDamageModel();
-    /**
-     * Font for drawing debug information.
-     */
-    private final BitmapFont font = new BitmapFont();
-    /**
-     * Particle effect used as a destruction animation of this actor.
-     */
+    /** Font for drawing debug information. */
+    private BitmapFont font;
+    /** Particle effect used as a destruction animation of this actor. */
     private final ParticleEffect particleEffect;
-    /**
-     * true if this actor is destroyed; otherwise false.
-     */
+    /** true if this actor is destroyed; otherwise false. */
     private boolean destroyed;
 
     /**
@@ -130,7 +110,10 @@ public class Box extends Actor implements Destructible {
         sprite.setRotation((float) Math.toDegrees(body.getAngle()));
 
         /* Debug */
-        font.setScale(4);
+        if (G.DEBUG) {
+            font = new BitmapFont();
+            font.setScale(4);
+        }
 
         particleEffect = new ParticleEffect();
         particleEffect.load(Gdx.files.internal("data/boxdestruction.p"),
@@ -183,9 +166,10 @@ public class Box extends Actor implements Destructible {
         filter.maskBits = CollisionFilterMasks.GROUND; /* But with ground */
         body.getFixtureList().get(0).setFilterData(filter);
 
+        /* TODO Current particle effect is bit lame. */
         particleEffect.reset();
-        particleEffect.setPosition(sprite.getX(),
-                                   sprite.getY());
+        particleEffect.setPosition(sprite.getX() + sprite.getWidth() / 2f,
+                                   sprite.getY() + sprite.getHeight() / 2f);
         particleEffect.start();
     }
 

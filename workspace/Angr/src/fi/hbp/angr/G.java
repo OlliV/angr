@@ -14,7 +14,7 @@ public class G {
      * enables debug camera functionality. Debug camera is enabled by
      * pressing d while in the game stage.
      */
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     /**
      * Global static assets manager
