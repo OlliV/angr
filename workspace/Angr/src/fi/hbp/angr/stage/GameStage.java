@@ -27,9 +27,21 @@ import fi.hbp.angr.models.Destructible;
  * Game stage
  */
 public class GameStage extends Stage {
+    /**
+     * Box2D physics world
+     */
     private final World world;
+    /**
+     * Item destruction list.
+     */
     private final ItemDestructionList itemDestructor;
+    /**
+     * Game state object.
+     */
     private final GameState gameState = new GameState();
+    /**
+     * Width of the current level for clamping.
+     */
     private final float levelWidth;
 
     /* Debug */

@@ -67,3 +67,6 @@ Tuntikirjanpito
 2013-02-20	4.0 h	- Swarm integraatio
 			- Valikoita
 2013-02-21	2.0 h	- Pause screen
+2013-02-21	0.7 h	- x-akselin clamppaus level-kohtaisesti
+			- Poistettu scoreboard/leaderboard -napit
+			  desktop-versiosta
