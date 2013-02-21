@@ -27,21 +27,13 @@ import fi.hbp.angr.models.Destructible;
  * Game stage
  */
 public class GameStage extends Stage {
-    /**
-     * Box2D physics world
-     */
+    /** Box2D physics world*/
     private final World world;
-    /**
-     * Item destruction list.
-     */
+    /** Item destruction list. */
     private final ItemDestructionList itemDestructor;
-    /**
-     * Game state object.
-     */
+    /** Game state object. */
     private final GameState gameState = new GameState();
-    /**
-     * Width of the current level for clamping.
-     */
+    /** Width of the current level for clamping. */
     private final float levelWidth;
 
     /* Debug */
@@ -63,18 +55,19 @@ public class GameStage extends Stage {
     private Body cameraFollowBody;
     private boolean destructibleCameraFollowBody = false;
 
-    /* Game state relate */
+    /* Game state related */
     /** Game state update interval */
     private final int gsUpdateInterval = 100;
     /** Game state update counter */
     private int gsCounter = gsUpdateInterval;
+    /** Game has ended. true if end of game; otherwise false. */
     private boolean endOfGame = false;
 
     /**
      * This class is used to provide a short delay between physics modeling
      * and damage modeling to allow smooth initialization of physics world
      * as some bodies are spawned in air and this we don't want to cause any
-     * initial dama to the bodies.
+     * initial damage to the bodies.
      */
     private class SetModelContactListener extends Timer.Task {
         @Override
