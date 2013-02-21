@@ -50,6 +50,8 @@ public class Hans extends Actor implements InputProcessor {
         public Vector2 bodyOrigin;
         /** Sprite. */
         public Sprite sprite;
+        /** Default angle used on spawn/reset. */
+        public float defAngle;
     }
 
     /** Name of this model. */
@@ -174,11 +176,13 @@ public class Hans extends Actor implements InputProcessor {
                                                y * G.WORLD_TO_BOX));
         hac.acHand_u.bd.angle = -45.0f * MathUtils.degRad;
         hand_u = createModelData(world, bel, hac.acHand_u, "hans_hand_u");
+        hand_u.defAngle = -45.0f * MathUtils.degRad;
 
         /* Attach hand_l */
         hac.acHand_l.bd.position.set(new Vector2((x + 50) * G.WORLD_TO_BOX,
                                                y * G.WORLD_TO_BOX));
         hand_l = createModelData(world, bel, hac.acHand_l, "hans_hand_l");
+        hand_l.defAngle = 10.0f * MathUtils.degRad;
 
         /* Create array of models for easier rendering */
         modelArray = new _ModelData[]{ hbody, hand_l, hand_u };
@@ -186,10 +190,10 @@ public class Hans extends Actor implements InputProcessor {
         /* Create joints */
         createHandJoint(world, hbody,  new Vector2(0f, 0f),
                                hand_u, new Vector2(0f, 0f),
-                               -45.0f * MathUtils.degRad);
+                               -45.0f * MathUtils.degRad);  /* ref angle */
         createHandJoint(world, hand_u, new Vector2(0.4f, 0f),
                                hand_l, new Vector2(0f, 0f),
-                               90.0f * MathUtils.degRad);
+                               90.0f * MathUtils.degRad);   /* ref angle */
 
         /* We also need an invisible zero size ground body
          * to which we can connect the mouse joint */
@@ -260,6 +264,19 @@ public class Hans extends Actor implements InputProcessor {
                 enableJointBreaking = false;
             }
         }
+    }
+
+    /**
+     * Reset hand position and angle.
+     */
+    public void resetHandPosition() {
+        Vector2 a;
+
+        a =hand_u.body.getPosition();
+        hand_u.body.setTransform(a, hand_u.defAngle);
+
+        a = hand_l.body.getPosition();
+        hand_l.body.setTransform(a, hand_l.defAngle);
     }
 
     @Override

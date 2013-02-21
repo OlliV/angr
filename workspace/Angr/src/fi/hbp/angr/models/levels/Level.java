@@ -25,39 +25,23 @@ import fi.hbp.angr.models.actors.Hans;
  * All game levels should inherit this class.
  */
 public abstract class Level extends Actor implements Preloadable {
-    /**
-     * Level name.
-     */
+    /** Level name. */
     private final String levelName;
-    /**
-     * Terrain sprite for of the level.
-     */
+    /** Terrain sprite for of the level. */
     private Sprite[] sprite;
-    /**
-     * Game state object.
-     */
+    /** Game state object. */
     protected GameState gs;
-    /**
-     * Body factor for creating level actors.
-     */
+    /** Body factor for creating level actors.*/
     protected BodyFactory bf;
 
-    /**
-     * Actor of player model Hans.
-     */
+    /** Actor of player model Hans. */
     protected Hans hans;
     /* TODO Use timer instead of this implementation? */
-    /**
-     * Grenade spawn delay.
-     */
+    /** Grenade spawn delay. */
     private final float grenadeSpawnDelay = 5.0f;
-    /**
-     * Counter used to count grenade spawn delay.
-     */
+    /** Counter used to count grenade spawn delay. */
     private float grenadeSpawnCounter = 0.0f;
-    /**
-     * Number of map slices.
-     */
+    /** Number of map slices. */
     private final int slices;
 
     /**
@@ -189,6 +173,7 @@ public abstract class Level extends Actor implements Preloadable {
      * Spawn a new grenade.
      */
     private void spawnGrenade() {
+        hans.resetHandPosition();
         hans.setPalmJoint(((SlingshotActor)bf.spawnGrenade(
                 hans.getX() + 50.0f,
                 hans.getY() + 30.0f, 0)).getBody());
