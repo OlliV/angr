@@ -8,11 +8,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
-/* TODO It could be nice and clean to have one static touch handler here
- * to remove small overhead caused by current design. */
-
 /**
- *
+ * Menu screen button class.
  */
 public class Button {
     /**
@@ -21,31 +18,19 @@ public class Button {
      * Camera reference is needed for project between screen and openGL world.
      */
     private final Camera camera;
-    /**
-     * Font for drawing this button.
-     */
+    /** Font for drawing this button. */
     private BitmapFont font;
-    /**
-     * Action class that will be called if this button is touched.
-     */
+    /** Action class that will be called if this button is touched. */
     private final ButtonAction action;
-    /**
-     * ID of this button.
-     */
+    /**  ID of this button. */
     private final int id;
 
-    /**
-     * Test vector used for bounds calculation.
-     */
+    /** Test vector used for bounds calculation. */
     private final Vector3 t1 = new Vector3();
-    /**
-     * Test vector used for bounds calculation.
-     */
+    /** Test vector used for bounds calculation. */
     private final Vector3 t2 = new Vector3();
 
-    /**
-     * Button text.
-     */
+    /** Button text. */
     private String text;
 
     /**
