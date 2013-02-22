@@ -3,8 +3,8 @@ Aiheen kuvaus ja rakenne
 
 + *Aihe:* Angry Birds -klooni
 
-Suppea versio
--------------
+Kuvaus
+------
 
 Pelin päähahmo on krenatööri joka heittää kranaatteja kohti pelialueella
 sijaitsevia vihollisia ja rakennelmia. Pelissä saa pisteitä pääasiassa
@@ -30,3 +30,22 @@ Pelaajan toiminnot
 + Toiminnot pelin aikana
 ++ kranaatin heittäminen
 ++ Pelin pysäyttäminen, jatkaminen ja keskeyttäminen
+
+
+Kehitettävää
+------------
+
+Pelistä puuttuu vielä varsinaiset viholliset ja kaikki "järkevä" tuhottava.
+Jotta peli olisi mielekäs pelissä olisi hyvä olla vaikka tykkejä ja jotain
+muuta 1700-luvun lopun sotatantereelle kuuluvaa välineistöä.
+
+Peli tarvitsisi useamman kentän mikäli pelaajan mielenkiintoa halutaan
+pitää yllä. Lisäksi peli tarvitsisi samasta syystä jotain muitakin
+ei niin historiallisesti tarkkoja räjähteitä. Näitä voisi jopa myydä
+Swarmin kautta tai ansaita pisteillä tms.
+
+Koodin puolesta kehitettävää on vielä mm. desktop-version pistetilastot.
+Lisäksi peliobjetien assetteja ei voida tällä hetkellä järkevästi poistaa
+muistista, koska ei tiedetä mitä seuraava kenttä tarvitsee. Tästä syystä
+tekstuurit ym. ovat tällä hetkellä jatkuvasti muistissa.
+
