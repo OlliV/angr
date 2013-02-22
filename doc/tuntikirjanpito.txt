@@ -73,3 +73,4 @@ Tuntikirjanpito
 2013-02-21	1.5 h	- pieniä korjauksia sinne tänne
 			  lähinnä pelattavuuteen
 			- javadocien fiksailua
+2013-02-22	1.0 h	- Dokumentointia
