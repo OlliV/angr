@@ -301,28 +301,27 @@ public class GameStage extends Stage {
         if(Gdx.app.getType().equals(ApplicationType.Android)) {
             return false;
         }
-        if (!G.DEBUG)
-            return false;
-
-        switch(keycode) {
-        case Keys.LEFT:
-            keyCommands.moveLeft = true;
-            break;
-        case Keys.RIGHT:
-            keyCommands.moveRight = true;
-            break;
-        case Keys.UP:
-            keyCommands.moveUp = true;
-            break;
-        case Keys.DOWN:
-            keyCommands.moveDown = true;
-            break;
-        case Keys.D:
-            keyCommands.enableDebugCamera = keyCommands.enableDebugCamera ? false : true;
-            break;
-        case Keys.E:
-            endOfGame = true;
-            break;
+        if (G.DEBUG) {
+            switch(keycode) {
+            case Keys.LEFT:
+                keyCommands.moveLeft = true;
+                break;
+            case Keys.RIGHT:
+                keyCommands.moveRight = true;
+                break;
+            case Keys.UP:
+                keyCommands.moveUp = true;
+                break;
+            case Keys.DOWN:
+                keyCommands.moveDown = true;
+                break;
+            case Keys.D:
+                keyCommands.enableDebugCamera = keyCommands.enableDebugCamera ? false : true;
+                break;
+            case Keys.E:
+                endOfGame = true;
+                break;
+            }
         }
         return false;
     }
