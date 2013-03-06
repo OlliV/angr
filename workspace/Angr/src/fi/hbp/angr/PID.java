@@ -5,8 +5,8 @@ package fi.hbp.angr;
  * A PID controller class.
  */
 public class PID {
-    private float integral = 0;
-    private float previous_error = 0;
+    private float integral = 0.0f;
+    private float previous_error = 0.0f;
     private float output;
 
     private final float kp;
@@ -31,8 +31,11 @@ public class PID {
      */
     public void reset(float output) {
         this.output = output;
-        integral = 0;
-        previous_error = 0;
+        if (ki > 0.0f)
+            integral = output / ki;
+        else
+            integral = output;
+        previous_error = 0.0f;
     }
 
     /**
